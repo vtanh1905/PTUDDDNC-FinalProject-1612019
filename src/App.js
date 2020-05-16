@@ -13,6 +13,9 @@ import VerifyPassword from './screens/Authentication/VerifyPassword'
 
 // Main
 import Home from './screens/Main/Home'
+import Download from './screens/Main/Download'
+import Browse from './screens/Main/Browse'
+import Search from './screens/Main/Search'
 
 // AccountManagement
 import AccountManagement from './screens/AccountManagement/AccountManagement'
@@ -50,27 +53,64 @@ const optionStackHaveAvatar = ({ navigation }) => ({
   )
 });
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+const Tab = createBottomTabNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      {/* <Stack.Navigator> */}
 
-        {/* Not Login */}
-        {/* <Stack.Screen name="Introduce" component={Introduce} options={{ headerShown: false }} />
+      {/* Not Login */}
+      {/* <Stack.Screen name="Introduce" component={Introduce} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={optionStackHaveButtonBack} />
         <Stack.Screen name="Register" component={Register} options={optionStackHaveButtonBack} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={optionStackHaveButtonBack} />
         <Stack.Screen name="VerifyPassword" component={VerifyPassword} options={optionStackHaveButtonBack} /> */}
 
-        {/* Logined */}
+      {/* Logined */}
 
 
 
-        <Stack.Screen name="Home" component={Home} options={optionStackHaveAvatar} />
+      {/* <Stack.Screen name="Home" component={Home} options={optionStackHaveAvatar} /> */}
 
-        <Stack.Screen name="Account Management" component={AccountManagement} options={optionStackHaveButtonBack} />
 
-      </Stack.Navigator>
+      {/* <Stack.Screen name="Account Management" component={AccountManagement} options={optionStackHaveButtonBack} /> */}
+
+      {/* </Stack.Navigator> */}
+
+      <Tab.Navigator
+
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = "md-home"
+            } else if (route.name === 'Download') {
+              iconName = 'md-cloud-download';
+            } else if (route.name === 'Browse') {
+              iconName = 'md-reorder';
+            } else if (route.name === 'Search') {
+              iconName = 'md-search';
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: '#2089DC',
+          inactiveTintColor: 'gray',
+        }}
+      >
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Download" component={Download} />
+        <Tab.Screen name="Browse" component={Browse} />
+        <Tab.Screen name="Search" component={Search} />
+      </Tab.Navigator>
 
     </NavigationContainer>
 
