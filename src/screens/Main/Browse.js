@@ -1,13 +1,16 @@
 import React from 'react'
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
+import ListTag from '../../components/ListView/ListTag'
+
+const dataTag = ["Javascript", "Java", "C#", "C++", "Pythod", "React native"]
 
 function Browse() {
-    return (
-        <View>
-            <Text>Browse</Text>
-        </View>
-    )
+  return (
+    <View>
+      <ListTag title="Popular Skill" data={dataTag} />
+    </View >
+  )
 }
 
 export default Browse
