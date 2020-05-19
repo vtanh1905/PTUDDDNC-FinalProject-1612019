@@ -12,9 +12,8 @@ function ListCourses(props) {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ height: dataCourses.length * 100 + 10 }}>
           {dataCourses.map((course, index) => (
-            <View style={{ height: 100 }}>
+            <View style={{ height: 100 }} key={index}>
               <ListItem
-                key={index}
                 leftAvatar={{
                   source: { uri: course.image },
                   rounded: false,

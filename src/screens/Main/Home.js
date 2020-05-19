@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native';
 
-import Card from '../../components/ListCard/CardCourse'
-import ListCourseHorizontal from '../../components/ListCard/ListCourseHorizontal'
+import Card from '../../components/ListView/CardCourse'
+import ListCourseHorizontal from '../../components/ListView/ListCourseHorizontal'
 
 const dataCourses = [
   {
