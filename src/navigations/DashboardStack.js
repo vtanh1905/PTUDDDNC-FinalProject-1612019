@@ -9,6 +9,9 @@ import BottonTabStack from './BottonTabStack'
 // AccountManagement
 import AccountManagement from '../screens/AccountManagement/AccountManagement'
 
+// Course
+import ListCourses from '../screens/Course/ListCourses'
+
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
@@ -53,6 +56,7 @@ function DashboardStack() {
     <Stack.Navigator headerMode={"screen"}>
       <Stack.Screen name="BOTTONTAB" component={BottonTabStack} options={optionStackHaveAvatar} />
       <Stack.Screen name="Account Management" component={AccountManagement} options={optionStackHaveButtonBack} />
+      <Stack.Screen name="ListCourses" component={ListCourses} options={{ title: '', ...optionStackHaveButtonBack }} />
     </Stack.Navigator>
 
   )
