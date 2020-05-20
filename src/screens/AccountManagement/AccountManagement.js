@@ -8,19 +8,23 @@ import { ListItem } from 'react-native-elements'
 const list = [
   {
     title: 'Profile',
-    icon: 'person'
+    icon: 'person',
+    screenNext: 'Profile'
   },
   {
     title: 'Setting',
-    icon: 'settings'
+    icon: 'settings',
+    screenNext: 'Setting'
   },
   {
     title: 'Logout',
-    icon: 'keyboard-return'
+    icon: 'keyboard-return',
+    screenNext: 'Login'
   },
 ]
 
-function AccountManagement() {
+function AccountManagement(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
       <View style={styles.containerAvatar}>
@@ -40,7 +44,7 @@ function AccountManagement() {
             leftIcon={{ name: item.icon }}
             bottomDivider
             chevron
-            onPress={() => { }}
+            onPress={() => { navigation.navigate(item.screenNext) }}
           />
         ))
       }

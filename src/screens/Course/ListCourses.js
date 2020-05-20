@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import ListCourseVertical from '../../components/ListCard/ListCourseVertical'
+import ListCourseVertical from '../../components/ListView/ListCourseVertical'
 
 const dataCourses = [
   {
@@ -56,7 +56,7 @@ const dataCourses = [
 function ListCourses() {
   return (
     <View>
-      <ListCourseVertical dataCourses={dataCourses} />
+      <ListCourseVertical title="Javascript Tutorial" dataCourses={dataCourses} />
     </View>
   )
 }

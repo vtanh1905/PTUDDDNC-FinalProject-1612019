@@ -10,23 +10,6 @@ import Search from '../screens/Main/Search'
 
 const Tab = createBottomTabNavigator();
 
-const optionStackHaveAvatar = ({ navigation }) => ({
-  headerTitleStyle: { alignSelf: 'center', paddingLeft: 55 },
-  headerRight: () => (
-    <View>
-      <TouchableOpacity style={{ paddingRight: 10 }} onPress={() => navigation.navigate("Account Management")} >
-        <Avatar
-          rounded
-          source={{
-            uri:
-              'https://hinhnendephd.com/wp-content/uploads/2019/10/anh-avatar-dep.jpg',
-          }}
-        />
-      </TouchableOpacity>
-    </View>
-  )
-});
-
 function BottonTabStack() {
   return (
     <Tab.Navigator
@@ -50,7 +33,7 @@ function BottonTabStack() {
       })}
       tabBarOptions={{
         activeTintColor: '#2089DC',
-        inactiveTintColor: 'gray',
+        inactiveTintColor: 'gray'
       }}
     >
       <Tab.Screen name="Home" component={Home} />

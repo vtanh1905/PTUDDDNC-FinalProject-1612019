@@ -5,16 +5,15 @@ import { ListItem } from 'react-native-elements';
 import { Rating } from 'react-native-elements';
 
 function ListCourses(props) {
-  const { dataCourses } = props;
+  const { title, dataCourses } = props;
   return (
     <View>
-      <Text style={{ fontWeight: "bold", padding: 10, fontSize: 25 }}>Javascript Tutorial</Text>
+      {title ? <Text style={{ fontWeight: "bold", padding: 10, fontSize: 25 }}>{title}</Text> : <></>}
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ height: dataCourses.length * 100 + 10 }}>
+        <View style={{ height: (dataCourses.length + 1) * 100 + 10 }}>
           {dataCourses.map((course, index) => (
-            <View style={{ height: 100 }}>
+            <View style={{ height: 100 }} key={index}>
               <ListItem
-                key={index}
                 leftAvatar={{
                   source: { uri: course.image },
                   rounded: false,
