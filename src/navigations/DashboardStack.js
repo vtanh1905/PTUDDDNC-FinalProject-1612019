@@ -8,6 +8,9 @@ import BottonTabStack from './BottonTabStack'
 
 // AccountManagement
 import AccountManagement from '../screens/AccountManagement/AccountManagement'
+import Profile from '../screens/AccountManagement/Profile'
+import Setting from '../screens/AccountManagement/Setting'
+
 
 // Course
 import ListCourses from '../screens/Course/ListCourses'
@@ -34,6 +37,7 @@ function getHeaderTitle(route) {
 }
 
 const optionStackHaveAvatar = ({ navigation, route }) => ({
+  headerShown: getHeaderTitle(route) !== 'Search',
   headerTitle: getHeaderTitle(route),
   headerTitleStyle: { alignSelf: 'center', paddingLeft: 55 },
   headerRight: () => (
@@ -57,6 +61,8 @@ function DashboardStack() {
       <Stack.Screen name="BOTTONTAB" component={BottonTabStack} options={optionStackHaveAvatar} />
       <Stack.Screen name="Account Management" component={AccountManagement} options={optionStackHaveButtonBack} />
       <Stack.Screen name="ListCourses" component={ListCourses} options={{ title: '', ...optionStackHaveButtonBack }} />
+      <Stack.Screen name="Profile" component={Profile} options={optionStackHaveButtonBack} />
+      <Stack.Screen name="Setting" component={Setting} options={optionStackHaveButtonBack} />
     </Stack.Navigator>
 
   )

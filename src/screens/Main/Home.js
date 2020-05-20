@@ -37,6 +37,9 @@ function Home(props) {
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <ListCourseHorizontal title="List Courses" dataCourses={dataCourses} onPressSeeAll={() => { navigation.navigate('ListCourses') }} />
+        <ListCourseHorizontal title="List Courses" dataCourses={dataCourses} onPressSeeAll={() => { navigation.navigate('ListCourses') }} />
+        <ListCourseHorizontal title="List Courses" dataCourses={dataCourses} onPressSeeAll={() => { navigation.navigate('ListCourses') }} />
+        <ListCourseHorizontal title="List Courses" dataCourses={dataCourses} onPressSeeAll={() => { navigation.navigate('ListCourses') }} />
       </ScrollView>
     </View>
   )

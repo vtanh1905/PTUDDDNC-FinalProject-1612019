@@ -56,7 +56,7 @@ const dataCourses = [
 function ListCourses() {
   return (
     <View>
-      <ListCourseVertical dataCourses={dataCourses} />
+      <ListCourseVertical title="Javascript Tutorial" dataCourses={dataCourses} />
     </View>
   )
 }

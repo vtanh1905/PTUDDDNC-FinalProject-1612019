@@ -11,8 +11,8 @@ function ListAuthor(props) {
       </View>
       <View style={styles.listTag}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-          {data.map((item) =>
-            <View style={{ paddingHorizontal: 5 }}>
+          {data.map((item, index) =>
+            <View style={{ paddingHorizontal: 5 }} key={index}>
               <Avatar
                 rounded
                 size={100}
