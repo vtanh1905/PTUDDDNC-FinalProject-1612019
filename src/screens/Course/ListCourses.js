@@ -53,10 +53,12 @@ const dataCourses = [
   }
 ]
 
-function ListCourses() {
+function ListCourses(props) {
+  const { navigation } = props;
+
   return (
     <View>
-      <ListCourseVertical title="Javascript Tutorial" dataCourses={dataCourses} />
+      <ListCourseVertical title="Javascript Tutorial" dataCourses={dataCourses} navigation={navigation} />
     </View>
   )
 }

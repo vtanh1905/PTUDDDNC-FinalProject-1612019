@@ -4,19 +4,19 @@ import { Badge } from 'react-native-paper';
 
 import CardCourse from './CardCourse'
 
-function ListCardCourse(props) {
-  const { title, dataCourses, onPressSeeAll } = props;
+function ListCourseHorizontal(props) {
+  const { title, dataCourses, navigation } = props;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={{ fontWeight: "bold" }}>{title}</Text>
-        <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={onPressSeeAll}>See all</Badge>
+        <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => navigation.navigate('ListCourses')}>See all</Badge>
       </View>
       <View style={styles.listCard}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
           {dataCourses.map((course, index) => (
             <View style={styles.card} key={index}>
-              <CardCourse image={course.image} title={course.title} subTitle={course.subTitle} rate={course.rate} />
+              <CardCourse image={course.image} title={course.title} subTitle={course.subTitle} rate={course.rate} navigation={navigation} />
             </View>
           ))}
         </ScrollView>
@@ -25,7 +25,7 @@ function ListCardCourse(props) {
   )
 }
 
-export default ListCardCourse
+export default ListCourseHorizontal
 
 const styles = StyleSheet.create({
   container: {

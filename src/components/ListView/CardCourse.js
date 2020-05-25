@@ -5,11 +5,11 @@ import { Card, Title } from 'react-native-paper';
 import { Rating } from 'react-native-elements';
 
 function CardCourse(props) {
-  const { image, title, subTitle, rate } = props;
+  const { image, title, subTitle, rate, navigation } = props;
 
   return (
     <View style={{ width: 210 }}>
-      <Card onPress={() => { console.log("CardCourse") }}>
+      <Card onPress={() => { navigation.navigate('CourseDetail') }}>
         <Card.Cover style={{ height: 100 }} source={{ uri: image }} />
         <Card.Content >
           <Title>{title}</Title>
