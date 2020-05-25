@@ -14,6 +14,7 @@ import Setting from '../screens/AccountManagement/Setting'
 
 // Course
 import ListCourses from '../screens/Course/ListCourses'
+import CourseDetail from '../screens/Course/CourseDetail'
 
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity, View } from 'react-native';
@@ -60,9 +61,10 @@ function DashboardStack() {
     <Stack.Navigator headerMode={"screen"}>
       <Stack.Screen name="BOTTONTAB" component={BottonTabStack} options={optionStackHaveAvatar} />
       <Stack.Screen name="Account Management" component={AccountManagement} options={optionStackHaveButtonBack} />
-      <Stack.Screen name="ListCourses" component={ListCourses} options={{ title: '', ...optionStackHaveButtonBack }} />
       <Stack.Screen name="Profile" component={Profile} options={optionStackHaveButtonBack} />
       <Stack.Screen name="Setting" component={Setting} options={optionStackHaveButtonBack} />
+      <Stack.Screen name="ListCourses" component={ListCourses} options={{ title: '', ...optionStackHaveButtonBack }} />
+      <Stack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, ...optionStackHaveButtonBack }} />
     </Stack.Navigator>
 
   )

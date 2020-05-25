@@ -5,7 +5,8 @@ import { ListItem } from 'react-native-elements';
 import { Rating } from 'react-native-elements';
 
 function ListCourses(props) {
-  const { title, dataCourses } = props;
+  const { title, dataCourses, navigation } = props;
+
   return (
     <View>
       {title ? <Text style={{ fontWeight: "bold", padding: 10, fontSize: 25 }}>{title}</Text> : <></>}
@@ -28,6 +29,7 @@ function ListCourses(props) {
                     </View>
                   </View>
                 )}
+                onPress={() => navigation.navigate('CourseDetail')}
               />
             </View>
           ))}
