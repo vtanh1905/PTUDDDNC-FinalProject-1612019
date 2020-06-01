@@ -13,6 +13,7 @@ const Tab = createBottomTabNavigator();
 function BottonTabStack() {
   return (
     <Tab.Navigator
+
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -33,7 +34,8 @@ function BottonTabStack() {
       })}
       tabBarOptions={{
         activeTintColor: '#2089DC',
-        inactiveTintColor: 'gray'
+        inactiveTintColor: 'gray',
+        keyboardHidesTabBar: true
       }}
     >
       <Tab.Screen name="Home" component={Home} />
