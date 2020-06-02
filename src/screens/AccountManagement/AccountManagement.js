@@ -19,7 +19,7 @@ const list = [
   {
     title: 'Logout',
     icon: 'keyboard-return',
-    screenNext: 'Login'
+    screenNext: 'Introduce'
   },
 ]
 

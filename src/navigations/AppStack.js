@@ -11,8 +11,8 @@ function AppStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator headerMode={"none"}>
-        <Stack.Screen name="DashboardStack" component={DashboardStack} />
         <Stack.Screen name="AUTHSTACK" component={AuthStack} />
+        <Stack.Screen name="DashboardStack" component={DashboardStack} />
       </Stack.Navigator>
     </NavigationContainer>
   )
