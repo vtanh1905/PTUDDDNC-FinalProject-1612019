@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // Main
 import Home from '../screens/Main/Home'
 import Download from '../screens/Main/Download'
+import Fauvorite from '../screens/Main/Fauvorite'
 import Browse from '../screens/Main/Browse'
 import Search from '../screens/Main/Search'
 
@@ -22,6 +23,8 @@ function BottonTabStack() {
             iconName = "md-home"
           } else if (route.name === 'Download') {
             iconName = 'md-cloud-download';
+          } else if (route.name === 'Fauvorite') {
+            iconName = 'ios-star';
           } else if (route.name === 'Browse') {
             iconName = 'md-reorder';
           } else if (route.name === 'Search') {
@@ -39,7 +42,8 @@ function BottonTabStack() {
       }}
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Download" component={Download} />
+      <Tab.Screen name="Fauvorite" component={Fauvorite} />
+      {/* <Tab.Screen name="Download" component={Download} /> */}
       <Tab.Screen name="Browse" component={Browse} />
       <Tab.Screen name="Search" component={Search} />
     </Tab.Navigator>

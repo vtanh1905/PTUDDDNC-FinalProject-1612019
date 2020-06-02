@@ -29,7 +29,7 @@ function Login(props) {
 
         <View style={styles.containerBotton}>
           <View>
-            <ButtonDefault title="Login" />
+            <ButtonDefault title="Login" onPress={() => navigation.navigate('DashboardStack')} />
             <ButtonClear title="Forgot Password" onPress={() => navigation.navigate('ForgotPassword')} />
           </View>
         </View>

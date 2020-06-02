@@ -56,7 +56,8 @@ const dataCourses = [
   }
 ]
 
-function Search() {
+function Search(props) {
+  const { navigation } = props;
   return (
     <View>
       <View style={styles.headerSearch}>
@@ -68,7 +69,7 @@ function Search() {
           autoFocus={true}
         />
       </View>
-      <ListCourseVertical title="" dataCourses={dataCourses} />
+      <ListCourseVertical title="" dataCourses={dataCourses} navigation={navigation} />
     </View>
   )
 }
