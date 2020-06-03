@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native';
 
-import ButtonDefault from '../../components/Button/ButtonDefault'
-import ButtonClear from '../../components/Button/ButtonClear'
+import ButtonDefault from 'components/Button/ButtonDefault'
+import ButtonClear from 'components/Button/ButtonClear'
 
 import { TextInput } from 'react-native-paper';
 

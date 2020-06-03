@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 
-import ButtonDefault from '../../components/Button/ButtonDefault'
+import ButtonDefault from 'components/Button/ButtonDefault'
 
 function Introduce(props) {
   const { navigation } = props;

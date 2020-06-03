@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"checkJs": false,
+		"baseUrl": ".",
+		"paths": {
+			"@src/*": [
+				"./*"
+			],
+			"assets/*": [
+				"./assets/*"
+			],
+			"components/*": [
+				"./components/*"
+			],
+			"navigations/*": [
+				"./navigations/*"
+			],
+			"screens/*": [
+				"./screens/*"
+			]
+		}
+	},
+	"exclude": [
+		"node_modules",
+		"public"
+	]
+}

@@ -8,10 +8,10 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import ButtonDefault from '../../components/Button/ButtonDefault'
-import BadgeIcon from '../../components/BadgeIcon'
-import TabView from '../../components/TabView'
-import ListLesson from '../../components/ListLesson'
+import ButtonDefault from 'components/Button/ButtonDefault'
+import BadgeIcon from 'components/BadgeIcon'
+import TabView from 'components/TabView'
+import ListLesson from 'components/ListLesson'
 import Transcript from './Transcript'
 
 function CourseDetail(props) {
