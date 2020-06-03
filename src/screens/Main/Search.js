@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 
 import { SearchBar } from 'react-native-elements';
 
-import ListCourseVertical from '../../components/ListView/ListCourseVertical'
+import ListCourseVertical from 'components/ListView/ListCourseVertical'
 
 const dataCourses = [
   {

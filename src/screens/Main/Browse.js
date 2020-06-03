@@ -1,11 +1,11 @@
 import React from 'react'
 import { View, Image, ScrollView } from 'react-native';
 
-import ListTag from '../../components/ListView/ListTag'
+import ListTag from 'components/ListView/ListTag'
 
-import ListAuthor from '../../components/ListView/ListAuthor'
+import ListAuthor from 'components/ListView/ListAuthor'
 
-import ListPath from '../../components/ListView/ListPath'
+import ListPath from 'components/ListView/ListPath'
 
 const dataTag = ["Javascript", "Java", "C#", "C++", "Pythod", "React native"]
 

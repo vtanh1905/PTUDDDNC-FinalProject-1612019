@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 
 import { Subheading, Title, Avatar, Divider } from 'react-native-paper';
 
-import ButtonDefault from '../../components/Button/ButtonDefault'
+import ButtonDefault from 'components/Button/ButtonDefault'
 
 function Profile() {
   return (

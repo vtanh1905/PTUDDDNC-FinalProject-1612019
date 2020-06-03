@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
-import ButtonDefault from '../../components/Button/ButtonDefault'
+import ButtonDefault from 'components/Button/ButtonDefault'
 function ForgotPassword(props) {
   const { navigation } = props;
   return (

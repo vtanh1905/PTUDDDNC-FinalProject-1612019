@@ -7,7 +7,7 @@ function Setting() {
     return (
         <View>
             <View style={styles.fieldView}>
-                <Subheading>Require Wifi for streamminh</Subheading >
+                <Subheading>Require Wifi for streamming</Subheading >
                 <Switch
                     value={true}
                 />
