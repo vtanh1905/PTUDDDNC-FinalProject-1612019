@@ -2,8 +2,8 @@ import React from 'react'
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import { Video } from 'expo-av'
 import VideoPlayer from 'expo-video-player'
-import { Badge, Divider } from 'react-native-paper';
-import { Rating } from 'react-native-elements';
+import { Badge, Divider, Chip } from 'react-native-paper';
+import { Rating, Avatar } from 'react-native-elements';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -15,7 +15,8 @@ import ListLesson from 'components/ListLesson'
 import Transcript from './Transcript'
 
 function CourseDetail(props) {
-  const { navigation } = props;
+  const { navigation, route } = props;
+  const { data } = route.params;
 
   return (
     <View style={styles.container}>
@@ -26,7 +27,7 @@ function CourseDetail(props) {
           showFullscreenButton={false}
 
           videoProps={{
-            shouldPlay: false,
+            shouldPlay: true,
             resizeMode: Video.RESIZE_MODE_STRETCH,
             source:
               require('../../assets/introduce.mp4')
@@ -40,14 +41,19 @@ function CourseDetail(props) {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
-          <Text style={{ fontSize: 27, fontWeight: "bold" }}>Javascript For Beginner</Text>
+          <Text style={{ fontSize: 27, fontWeight: "bold" }}>{data.title}</Text>
           <View style={{ paddingHorizontal: 3, flexDirection: "row", marginVertical: 5 }}>
-            <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15, fontSize: 12, marginRight: 5 }} >Author 1</Badge>
-            <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15, fontSize: 12, marginRight: 5 }} >Author 2</Badge>
+            <Chip avatar={<Avatar
+              rounded
+              size={100}
+              source={{
+                uri: data.author.imageURL,
+              }}
+            />}>{data.author.name}</Chip>
           </View>
           <View style={{ paddingHorizontal: 3, flexDirection: "row", marginVertical: 5, justifyContent: 'space-between' }}>
-            <Text>Basic - 4/9/2020</Text>
-            <Rating tintColor='#f2f2f2' imageSize={18} readonly startingValue={3} />
+            <Text>{data.subTitle}</Text>
+            <Rating tintColor='#f2f2f2' imageSize={18} readonly startingValue={data.rate} />
           </View>
           <Divider />
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
@@ -65,9 +71,9 @@ function CourseDetail(props) {
             />
           </View>
           <Divider />
-          <Text style={{ textAlign: 'justify', fontWeight: '600' }}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-        </Text>
+          <Text style={{ textAlign: 'justify', fontWeight: '600', paddingVertical: 15 }}>
+            {data.description}
+          </Text>
           <View style={{ width: '90%', alignSelf: 'center' }}>
             <ButtonDefault title='Take a learning check' />
           </View>
