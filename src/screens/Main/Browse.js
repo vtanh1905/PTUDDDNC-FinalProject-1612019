@@ -7,57 +7,7 @@ import ListAuthor from 'components/ListView/ListAuthor'
 
 import ListPath from 'components/ListView/ListPath'
 
-const dataTag = ["Javascript", "Java", "C#", "C++", "Pythod", "React native"]
-
-const dataAuthor = [
-  {
-    name: "John Cneter",
-    imageURL: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
-  },
-  {
-    name: "John Cneter",
-    imageURL: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
-  },
-  {
-    name: "John Cneter",
-    imageURL: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
-  },
-  {
-    name: "John Cneter",
-    imageURL: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
-  },
-  {
-    name: "John Cneter",
-    imageURL: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
-  },
-  {
-    name: "John Cneter",
-    imageURL: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
-  }
-]
-
-const dataCourses = [
-  {
-    title: "AWS Certified Machine Learning",
-    subTitle: "3 courses",
-    image: "https://picsum.photos/700",
-  },
-  {
-    title: "AWS Application Development",
-    subTitle: "7 courses",
-    image: "https://picsum.photos/700",
-  },
-  {
-    title: "Red Team Tools",
-    subTitle: "5 courses",
-    image: "https://picsum.photos/700",
-  },
-  {
-    title: "C# Unit Testing with xUnit",
-    subTitle: "12 courses",
-    image: "https://picsum.photos/700",
-  }
-]
+import { SKILLS, AUTHORS, PATHS } from '../../assets/data'
 
 function Browse(props) {
   const { navigation } = props;
@@ -74,15 +24,15 @@ function Browse(props) {
         </View>
 
         <View style={{ marginVertical: 15 }}>
-          <ListTag title="Popular Skill" data={dataTag} />
+          <ListTag title="Popular Skill" data={SKILLS} />
         </View>
 
         <View style={{ marginVertical: 15 }}>
-          <ListPath title="Paths" dataCourses={dataCourses} navigation={navigation} />
+          <ListPath title="Paths" data={PATHS} navigation={navigation} />
         </View>
 
         <View style={{ marginTop: 15 }}>
-          <ListAuthor title="Top Author" data={dataAuthor} />
+          <ListAuthor title="Top Author" data={AUTHORS} />
         </View>
       </View >
     </ScrollView>
