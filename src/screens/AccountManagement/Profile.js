@@ -5,6 +5,8 @@ import { Subheading, Title, Avatar, Divider } from 'react-native-paper';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
 
+import { USER } from '../../assets/data'
+
 function Profile() {
   return (
     <View style={styles.container}>
@@ -22,22 +24,22 @@ function Profile() {
       </View>
       <View style={styles.fieldView}>
         <Subheading>Full Name</Subheading>
-        <Title>Vũ Tuấn Anh</Title>
+        <Title>{USER.fullname}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>
         <Subheading>Birth Day</Subheading>
-        <Title>19/05/1998</Title>
+        <Title>{USER.dob}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>
         <Subheading>Email</Subheading>
-        <Title>vtanh1905@gmail.com</Title>
+        <Title>{USER.email}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>
         <Subheading>Phone</Subheading>
-        <Title>0966996874</Title>
+        <Title>{USER.phone}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>

@@ -2,11 +2,10 @@ import React from 'react'
 import { StyleSheet, View, ScrollView, Text } from 'react-native';
 import { Badge } from 'react-native-paper';
 
-import CardCourse from './CardCourse'
 import Path from './Path'
 
 function ListPath(props) {
-  const { title, dataCourses, navigation } = props;
+  const { title, data, navigation } = props;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -15,7 +14,7 @@ function ListPath(props) {
       </View>
       <View style={styles.listCard}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-          {dataCourses.map((course, index) => (
+          {data.map((course, index) => (
             <View style={styles.card} key={index}>
               <Path image={course.image} title={course.title} subTitle={course.subTitle} navigation={navigation} />
             </View>

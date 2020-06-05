@@ -1,14 +1,32 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react'
+import { StyleSheet, View, ToastAndroid } from 'react-native';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
 import ButtonClear from 'components/Button/ButtonClear'
 
 import { TextInput } from 'react-native-paper';
 
+import { USER } from '../../assets/data'
 
 function Login(props) {
   const { navigation } = props;
+  const [inputUserName, setInputUserName] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const handleLogin = () => {
+    if (inputUserName.toLowerCase() === USER.username.toLowerCase() && inputPassword === USER.password) {
+      navigation.navigate('DashboardStack');
+    } else {
+      ToastAndroid.showWithGravityAndOffset(
+        'Username or Password is not correct',
+        100,
+        ToastAndroid.BOTTOM,
+        0,
+        325
+      );
+    }
+
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.form}>
@@ -16,6 +34,8 @@ function Login(props) {
           <TextInput
             label='Username'
             theme={{ colors: { primary: "#2089DC" } }}
+            value={inputUserName}
+            onChangeText={text => setInputUserName(text)}
           />
         </View>
 
@@ -24,12 +44,14 @@ function Login(props) {
             label='Password'
             secureTextEntry={true}
             theme={{ colors: { primary: "#2089DC" } }}
+            value={inputPassword}
+            onChangeText={text => setInputPassword(text)}
           />
         </View>
 
         <View style={styles.containerBotton}>
           <View>
-            <ButtonDefault title="Login" onPress={() => navigation.navigate('DashboardStack')} />
+            <ButtonDefault title="Login" onPress={handleLogin} />
             <ButtonClear title="Forgot Password" onPress={() => navigation.navigate('ForgotPassword')} />
           </View>
         </View>

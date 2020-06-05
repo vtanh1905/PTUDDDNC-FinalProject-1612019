@@ -59,7 +59,7 @@ const dataCourses = [
 function Search(props) {
   const { navigation } = props;
   return (
-    <View>
+    <View style={{ paddingBottom: 180 }}>
       <View style={styles.headerSearch}>
         <SearchBar
           placeholder="Type Here..."
@@ -69,7 +69,7 @@ function Search(props) {
           autoFocus={true}
         />
       </View>
-      <ListCourseVertical title="" dataCourses={dataCourses} navigation={navigation} />
+      <ListCourseVertical title="" data={dataCourses} navigation={navigation} />
     </View>
   )
 }
