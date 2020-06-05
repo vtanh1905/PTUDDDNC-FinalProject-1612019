@@ -32,7 +32,7 @@ function ListCourses(props) {
                     </View>
                   </View>
                 )}
-                onPress={() => navigation.navigate('CourseDetail')}
+                onPress={() => navigation.navigate('CourseDetail', { data: course })}
               />
             </View>
           ))}

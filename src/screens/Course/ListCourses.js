@@ -5,8 +5,6 @@ import ListCourseVertical from 'components/ListView/ListCourseVertical'
 function ListCourses(props) {
   const { navigation, route } = props;
   const { title, data } = route.params;
-  console.log();
-
 
   return (
     <View style={{ paddingBottom: 90 }}>

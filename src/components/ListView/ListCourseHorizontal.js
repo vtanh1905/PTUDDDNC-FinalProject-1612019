@@ -16,7 +16,7 @@ function ListCourseHorizontal(props) {
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
           {data.map((course, index) => (
             <View style={styles.card} key={index}>
-              <CardCourse image={course.image} title={course.title} subTitle={course.subTitle} rate={course.rate} navigation={navigation} />
+              <CardCourse image={course.image} data={course} navigation={navigation} />
             </View>
           ))}
         </ScrollView>

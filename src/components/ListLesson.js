@@ -6,32 +6,32 @@ import { TouchableRipple } from 'react-native-paper';
 const list = [
   {
     name: '1.Introduce',
-    avatar_url: 'https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg',
+    avatar_url: 'https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png',
     subtitle: '8 minutes 30 second'
   },
   {
     name: '2.absVariable',
-    avatar_url: 'https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg',
+    avatar_url: 'https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png',
     subtitle: '6 minutes 30 second'
   },
   {
     name: '3.Introduce',
-    avatar_url: 'https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg',
+    avatar_url: 'https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png',
     subtitle: '15 minutes 39 second'
   },
   {
     name: '4.Function',
-    avatar_url: 'https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg',
+    avatar_url: 'https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png',
     subtitle: '6 minutes 00 second'
   },
   {
     name: '5.Class',
-    avatar_url: 'https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg',
+    avatar_url: 'https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png',
     subtitle: '7 minutes 30 second'
   },
   {
     name: '6.State and Props',
-    avatar_url: 'https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg',
+    avatar_url: 'https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png',
     subtitle: '6 minutes 30 second'
   },
 ]
