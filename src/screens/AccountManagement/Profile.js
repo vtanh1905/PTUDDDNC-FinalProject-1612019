@@ -7,7 +7,9 @@ import ButtonDefault from 'components/Button/ButtonDefault'
 
 import { USER } from '../../assets/data'
 
-function Profile() {
+function Profile(props) {
+  const { navigation } = props;
+
   return (
     <View style={styles.container}>
       {/* <View style={styles.containerAvatar}>
@@ -48,7 +50,7 @@ function Profile() {
       </View>
       <Divider />
       <View style={styles.fieldView}>
-        <ButtonDefault title="Change Password" />
+        <ButtonDefault title="Change Password" onPress={() => navigation.navigate('Change Password')} />
       </View>
     </View>
   )

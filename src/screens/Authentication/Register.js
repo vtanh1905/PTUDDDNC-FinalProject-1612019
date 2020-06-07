@@ -1,10 +1,33 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react'
+import { StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
+import Toast from 'components/Toast'
 
-function Register() {
+function Register(props) {
+  console.log(props);
+  const { navigation } = props;
+  const [inputUsername, setInputUsername] = useState("")
+  const [inputEmail, setInputEmail] = useState("")
+  const [inputPassword, setInputPassword] = useState("")
+  const [inputConfirmPassword, setInputConfirmPassword] = useState("")
+
+  const handleRegister = () => {
+    if (inputUsername === "" || inputEmail === "" || inputPassword === "" || inputConfirmPassword === "") {
+      Toast("Please fill your information!");
+      return
+    }
+
+    if (inputPassword !== inputConfirmPassword) {
+      Toast("Password and Confirm Password is not correctly!");
+      return
+    }
+
+    Toast("Register Successfully!");
+    navigation.navigate('Login');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.form}>
@@ -12,13 +35,17 @@ function Register() {
           <TextInput
             label='Username'
             theme={{ colors: { primary: "#2089DC" } }}
+            value={inputUsername}
+            onChangeText={text => setInputUsername(text)}
           />
         </View>
 
         <View style={{ marginBottom: 7 }}>
           <TextInput
-            label='Phone'
+            label='Email'
             theme={{ colors: { primary: "#2089DC" } }}
+            value={inputEmail}
+            onChangeText={text => setInputEmail(text)}
           />
         </View>
 
@@ -27,6 +54,8 @@ function Register() {
             label='Password'
             secureTextEntry={true}
             theme={{ colors: { primary: "#2089DC" } }}
+            value={inputPassword}
+            onChangeText={text => setInputPassword(text)}
           />
         </View>
 
@@ -35,11 +64,13 @@ function Register() {
             label='Confirm Password'
             secureTextEntry={true}
             theme={{ colors: { primary: "#2089DC" } }}
+            value={inputConfirmPassword}
+            onChangeText={text => setInputConfirmPassword(text)}
           />
         </View>
 
         <View>
-          <ButtonDefault title="Confirm" />
+          <ButtonDefault title="Confirm" onPress={handleRegister} />
         </View>
       </View>
     </View>
