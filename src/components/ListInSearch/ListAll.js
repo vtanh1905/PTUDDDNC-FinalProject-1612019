@@ -46,7 +46,7 @@ const list = [
 ]
 
 function ListAll(props) {
-  const { jumpTo } = props;
+  const { jumpTo, navigation } = props;
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -55,17 +55,17 @@ function ListAll(props) {
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>Courses</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("COURSES")}>See all</Badge>
         </View>
-        <ListCourses />
+        <ListCourses navigation={navigation} />
         <View style={styles.header}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>Paths</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("PATHS")}>See all</Badge>
         </View>
-        <ListPaths />
+        <ListPaths navigation={navigation} />
         <View style={styles.header}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>Authors</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("AUTHORS")}> See all</Badge>
         </View>
-        <ListAuthors />
+        <ListAuthors navigation={navigation} />
       </View>
     </ScrollView>
   )

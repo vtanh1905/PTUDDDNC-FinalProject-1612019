@@ -4,8 +4,6 @@ import { StyleSheet, View, Text } from 'react-native'
 import { ListItem } from 'react-native-elements';
 import { Rating } from 'react-native-elements';
 
-import CardCourse from '../ListView/CardCourse'
-
 const data = [
   {
     title: "The Complete JavaScript Course 2020: Build Real Projects!",
@@ -88,6 +86,7 @@ const data = [
 
 function ListCourses(props) {
   const { navigation } = props;
+
   return (
     <View>
       {data.map((course, index) => (

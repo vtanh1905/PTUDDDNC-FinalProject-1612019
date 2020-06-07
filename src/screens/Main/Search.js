@@ -78,23 +78,25 @@ function Search(props) {
           value={inputSearch}
         />
       </View>
-      {/* <ListCourseVertical title="" data={dataCourses} navigation={navigation} /> */}
-      <View style={{ flex: 1 }}>
-        <TabView
-          routes={[
-            { key: 'ALL', title: 'ALL' },
-            { key: 'COURSES', title: 'COURSE' },
-            { key: 'PATHS', title: 'PATH' },
-            { key: 'AUTHORS', title: 'AUTHOR' },
-          ]}
-          scenes={[
-            (jumpTo) => <ListAll jumpTo={jumpTo} />,
-            () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses /></ScrollView>,
-            () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths /></ScrollView>,
-            () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors /></ScrollView>
-          ]}
-        />
-      </View>
+      {inputSearch !== "" ?
+        <View style={{ flex: 1 }}>
+          <TabView
+            routes={[
+              { key: 'ALL', title: 'ALL' },
+              { key: 'COURSES', title: 'COURSE' },
+              { key: 'PATHS', title: 'PATH' },
+              { key: 'AUTHORS', title: 'AUTHOR' },
+            ]}
+            scenes={[
+              (jumpTo) => <ListAll jumpTo={jumpTo} navigation={navigation} />,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses navigation={navigation} /></ScrollView>,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths navigation={navigation} /></ScrollView>,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors navigation={navigation} /></ScrollView>
+            ]}
+          />
+        </View>
+        : <></>}
+
     </View>
   )
 }
