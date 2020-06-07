@@ -5,27 +5,14 @@ import { TabView as TabViewLibrary, SceneMap, TabBar } from 'react-native-tab-vi
 const initialLayout = { width: Dimensions.get('window').width };
 
 function TabView(props) {
-  const { routes, scenes, index, setIndex } = props;
-
+  const { routes, scenes } = props;
+  const [index, setIndex] = useState(0);
   const temp = {};
   routes.forEach((item, index) => {
     temp[item.key] = scenes[index];
-    // scenes[index] = scenes[index](setIndex)
   });
 
   const renderScene = SceneMap(temp);
-  // const renderScene = ({ route, jumpTo }) => {
-  //   if('ALL'){
-  //     return 
-  //   }
-  //   switch (route.key) {
-  //     case 'ALL':
-  //       return <MusicRoute jumpTo={jumpTo} />;
-  //     case 'albums':
-  //       return <AlbumsRoute jumpTo={jumpTo} />;
-  //   }
-  // };
-
   return (
     <TabViewLibrary
       navigationState={{ index, routes }}

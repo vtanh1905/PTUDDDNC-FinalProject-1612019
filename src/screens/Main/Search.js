@@ -64,7 +64,7 @@ import ListAuthors from 'components/ListInSearch/ListAuthors'
 function Search(props) {
   const { navigation } = props;
   const [inputSearch, setInputSearch] = useState("")
-  const [index, setIndex] = useState(0);
+
   return (
     <View style={{ flex: 1, backgroundColor: 'white', fontSize: 9 }}>
       <View style={styles.headerSearch}>
@@ -81,8 +81,6 @@ function Search(props) {
       {/* <ListCourseVertical title="" data={dataCourses} navigation={navigation} /> */}
       <View style={{ flex: 1 }}>
         <TabView
-          index={index}
-          setIndex={setIndex}
           routes={[
             { key: 'ALL', title: 'ALL' },
             { key: 'COURSES', title: 'COURSE' },
@@ -90,7 +88,7 @@ function Search(props) {
             { key: 'AUTHORS', title: 'AUTHOR' },
           ]}
           scenes={[
-            () => <ListAll setIndex={setIndex} />,
+            () => <ListAll />,
             () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses /></ScrollView>,
             () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths /></ScrollView>,
             () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors /></ScrollView>
