@@ -88,7 +88,7 @@ function Search(props) {
             { key: 'AUTHORS', title: 'AUTHOR' },
           ]}
           scenes={[
-            () => <ListAll />,
+            (jumpTo) => <ListAll jumpTo={jumpTo} />,
             () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses /></ScrollView>,
             () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths /></ScrollView>,
             () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors /></ScrollView>

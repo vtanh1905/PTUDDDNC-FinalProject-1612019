@@ -12,7 +12,13 @@ function TabView(props) {
     temp[item.key] = scenes[index];
   });
 
-  const renderScene = SceneMap(temp);
+  // const renderScene = SceneMap(temp);
+  const renderScene = ({ route, jumpTo }) => {
+    if (route.key === "ALL") {
+      return temp[route.key](jumpTo);
+    }
+    return temp[route.key]();
+  };
   return (
     <TabViewLibrary
       navigationState={{ index, routes }}
