@@ -1,9 +1,9 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native';
+import React, { useState } from 'react'
+import { View, StyleSheet, ScrollView } from 'react-native';
 
 import { SearchBar } from 'react-native-elements';
 
-import ListCourseVertical from 'components/ListView/ListCourseVertical'
+import TabView from 'components/TabView'
 
 const dataCourses = [
   {
@@ -56,10 +56,17 @@ const dataCourses = [
   }
 ]
 
+import ListAll from 'components/ListInSearch/ListAll'
+import ListCourses from 'components/ListInSearch/ListCourses'
+import ListPaths from 'components/ListInSearch/ListPaths'
+import ListAuthors from 'components/ListInSearch/ListAuthors'
+
 function Search(props) {
   const { navigation } = props;
+  const [inputSearch, setInputSearch] = useState("")
+  const [index, setIndex] = useState(0);
   return (
-    <View style={{ paddingBottom: 180 }}>
+    <View style={{ flex: 1, backgroundColor: 'white', fontSize: 9 }}>
       <View style={styles.headerSearch}>
         <SearchBar
           placeholder="Type Here..."
@@ -67,9 +74,29 @@ function Search(props) {
           round={true}
           clearIcon={false}
           autoFocus={true}
+          onChangeText={(text) => setInputSearch(text)}
+          value={inputSearch}
         />
       </View>
-      <ListCourseVertical title="" data={dataCourses} navigation={navigation} />
+      {/* <ListCourseVertical title="" data={dataCourses} navigation={navigation} /> */}
+      <View style={{ flex: 1 }}>
+        <TabView
+          index={index}
+          setIndex={setIndex}
+          routes={[
+            { key: 'ALL', title: 'ALL' },
+            { key: 'COURSES', title: 'COURSE' },
+            { key: 'PATHS', title: 'PATH' },
+            { key: 'AUTHORS', title: 'AUTHOR' },
+          ]}
+          scenes={[
+            () => <ListAll setIndex={setIndex} />,
+            () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses /></ScrollView>,
+            () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths /></ScrollView>,
+            () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors /></ScrollView>
+          ]}
+        />
+      </View>
     </View>
   )
 }

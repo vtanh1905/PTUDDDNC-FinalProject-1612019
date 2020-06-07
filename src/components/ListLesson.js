@@ -3,6 +3,8 @@ import { StyleSheet, View, Text } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import { TouchableRipple } from 'react-native-paper';
 
+import TabView from '../components/TabView'
+
 const list = [
   {
     name: '1.Introduce',
@@ -51,6 +53,7 @@ function ListLesson() {
           />
         ))
       }
+
     </View>
   )
 }
