@@ -1,12 +1,21 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState } from 'react';
 import { registerRootComponent } from 'expo';
 
 import AppStack from 'navigations/AppStack'
 
+import { ThemeProvider } from './contexts'
+
 export default function App() {
+  const [theme, setTheme] = useState({
+
+  })
+
+
   return (
-    <AppStack />
+    <ThemeProvider value={{}}>
+      <AppStack />
+    </ThemeProvider>
   );
 }
 

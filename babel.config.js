@@ -24,6 +24,7 @@ module.exports = function (api) {
             screens: './src/screens',
             navigations: './src/navigations',
             components: './src/components',
+            contexts: './src/contexts',
           },
         },
       ],
