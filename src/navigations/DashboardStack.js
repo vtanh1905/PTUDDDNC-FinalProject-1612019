@@ -23,7 +23,7 @@ import { Avatar } from 'react-native-elements';
 const optionStackHaveButtonBack = ({ navigation, route }) => ({
   headerTitleStyle: { alignSelf: 'center', paddingRight: 55 },
   headerLeft: () => (
-    <TouchableOpacity style={{ paddingLeft: 10 }} onPress={() => navigation.goBack()}>
+    <TouchableOpacity style={{ paddingLeft: 10, }} onPress={() => navigation.goBack()}>
       <IconAntDesign name="arrowleft" size={30} />
     </TouchableOpacity>
   )
@@ -58,7 +58,7 @@ const optionStackHaveAvatar = ({ navigation, route }) => ({
 
 function DashboardStack() {
   return (
-    <Stack.Navigator headerMode={"screen"}>
+    <Stack.Navigator headerMode={"screen"}  >
       <Stack.Screen name="BOTTONTAB" component={BottonTabStack} options={optionStackHaveAvatar} />
       <Stack.Screen name="Account Management" component={AccountManagement} options={optionStackHaveButtonBack} />
       <Stack.Screen name="Profile" component={Profile} options={optionStackHaveButtonBack} />

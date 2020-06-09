@@ -4,18 +4,16 @@ import { registerRootComponent } from 'expo';
 
 import AppStack from 'navigations/AppStack'
 
-import { ThemeProvider } from './contexts'
+import { ThemeLightProvider } from './contexts'
 
 export default function App() {
-  const [theme, setTheme] = useState({
-
-  })
+  const [isThemeLight, setIsThemeLight] = useState(true);
 
 
   return (
-    <ThemeProvider value={{}}>
+    <ThemeLightProvider value={{ isThemeLight, setIsThemeLight }}>
       <AppStack />
-    </ThemeProvider>
+    </ThemeLightProvider>
   );
 }
 
