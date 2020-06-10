@@ -5,7 +5,7 @@ import { TabView as TabViewLibrary, SceneMap, TabBar } from 'react-native-tab-vi
 const initialLayout = { width: Dimensions.get('window').width };
 
 function TabView(props) {
-  const { routes, scenes } = props;
+  const { routes, scenes, lightTheme } = props;
   const [index, setIndex] = useState(0);
   const temp = {};
   routes.forEach((item, index) => {
@@ -25,6 +25,7 @@ function TabView(props) {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={initialLayout}
+      style={{ backgroundColor: lightTheme ? 'white' : "#000000" }}
       renderTabBar={props => <TabBar
         {...props}
         indicatorStyle={{ backgroundColor: 'white' }}

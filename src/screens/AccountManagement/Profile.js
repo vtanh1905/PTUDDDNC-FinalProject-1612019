@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 import { Subheading, Title, Avatar, Divider } from 'react-native-paper';
@@ -6,9 +6,11 @@ import { Subheading, Title, Avatar, Divider } from 'react-native-paper';
 import ButtonDefault from 'components/Button/ButtonDefault'
 
 import { USER } from '../../assets/data'
+import ThemeContext from '../../contexts/ThemeContext'
 
 function Profile(props) {
   const { navigation } = props;
+  const { themeLight } = useContext(ThemeContext)
 
   return (
     <View style={styles.container}>
@@ -25,28 +27,28 @@ function Profile(props) {
 
       </View>
       <View style={styles.fieldView}>
-        <Subheading>Full Name</Subheading>
-        <Title>{USER.fullname}</Title>
+        <Subheading style={themeLight.styles.text}>Full Name</Subheading>
+        <Title style={themeLight.styles.text}>{USER.fullname}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>
-        <Subheading>Birth Day</Subheading>
-        <Title>{USER.dob}</Title>
+        <Subheading style={themeLight.styles.text}>Birth Day</Subheading>
+        <Title style={themeLight.styles.text}>{USER.dob}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>
-        <Subheading>Email</Subheading>
-        <Title>{USER.email}</Title>
+        <Subheading style={themeLight.styles.text}>Email</Subheading>
+        <Title style={themeLight.styles.text}>{USER.email}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>
-        <Subheading>Phone</Subheading>
-        <Title>{USER.phone}</Title>
+        <Subheading style={themeLight.styles.text}>Phone</Subheading>
+        <Title style={themeLight.styles.text}>{USER.phone}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>
-        <Subheading>Password</Subheading>
-        <Title>***********</Title>
+        <Subheading style={themeLight.styles.text}>Password</Subheading>
+        <Title style={themeLight.styles.text}>***********</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>

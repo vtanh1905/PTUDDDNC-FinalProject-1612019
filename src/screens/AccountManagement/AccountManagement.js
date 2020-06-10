@@ -44,9 +44,13 @@ function AccountManagement(props) {
           <ListItem
             key={i}
             title={item.title}
-            leftIcon={{ name: item.icon }}
+            leftIcon={{ name: item.icon, color: themeLight.isLightTheme ? "#000000" : "#FFFFFF" }}
             bottomDivider
             chevron
+            titleStyle={{ color: themeLight.isLightTheme ? "#000000" : "#FFFFFF" }}
+            linearGradientProps={!themeLight.isLightTheme ? {
+              colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
+            } : null}
             onPress={() => { navigation.navigate(item.screenNext) }}
           />
         ))

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Image, ScrollView } from 'react-native';
 
 import ListTag from 'components/ListView/ListTag'
@@ -8,9 +8,11 @@ import ListAuthor from 'components/ListView/ListAuthor'
 import ListPath from 'components/ListView/ListPath'
 
 import { SKILLS, AUTHORS, PATHS } from '../../assets/data'
+import ThemeContext from '../../contexts/ThemeContext'
 
 function Browse(props) {
   const { navigation } = props;
+  const { themeLight } = useContext(ThemeContext)
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -24,15 +26,15 @@ function Browse(props) {
         </View>
 
         <View style={{ marginVertical: 15 }}>
-          <ListTag title="Popular Skill" data={SKILLS} lightTheme={false} />
+          <ListTag title="Popular Skill" data={SKILLS} lightTheme={themeLight.isLightTheme} />
         </View>
 
         <View style={{ marginVertical: 15 }}>
-          <ListPath title="Paths" data={PATHS} navigation={navigation} lightTheme={false} />
+          <ListPath title="Paths" data={PATHS} navigation={navigation} lightTheme={themeLight.isLightTheme} />
         </View>
 
         <View style={{ marginTop: 15 }}>
-          <ListAuthor title="Top Author" data={AUTHORS} lightTheme={false} />
+          <ListAuthor title="Top Author" data={AUTHORS} lightTheme={themeLight.isLightTheme} />
         </View>
       </View >
     </ScrollView>

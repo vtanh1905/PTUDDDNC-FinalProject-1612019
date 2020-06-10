@@ -25,7 +25,8 @@ function AppStack() {
 
   return (
     <NavigationContainer theme={themeLight.isLightTheme ? DefaultTheme : MyDarkTheme}>
-      {!themeLight.isLightTheme ? <StatusBar backgroundColor={themeLight.styles.background2.backgroundColor} barStyle={'light-content'} /> : <></>}
+      {/* {!themeLight.isLightTheme ? <StatusBar backgroundColor={themeLight.styles.background2.backgroundColor} barStyle={'light-content'} /> : <></>} */}
+      <StatusBar backgroundColor={themeLight.isLightTheme ? '#FFFFFF' : 'rgb(60, 63, 68)'} barStyle={themeLight.isLightTheme ? 'dark-content' : 'light-content'} />
       <Stack.Navigator headerMode={"none"}>
         <Stack.Screen name="DashboardStack" component={DashboardStack} />
         <Stack.Screen name="AUTHSTACK" component={AuthStack} />

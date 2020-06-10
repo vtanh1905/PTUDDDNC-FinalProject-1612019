@@ -70,7 +70,6 @@ function Search(props) {
   return (
     <View style={{ flex: 1, fontSize: 9, ...themeLight.styles.background1 }}>
       <View style={{
-        paddingTop: themeLight.isLightTheme ? 30 : 0,
         marginTop: -1,
         backgroundColor: "#dae2ea"
       }}>
