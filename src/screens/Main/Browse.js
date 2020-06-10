@@ -24,15 +24,15 @@ function Browse(props) {
         </View>
 
         <View style={{ marginVertical: 15 }}>
-          <ListTag title="Popular Skill" data={SKILLS} />
+          <ListTag title="Popular Skill" data={SKILLS} lightTheme={false} />
         </View>
 
         <View style={{ marginVertical: 15 }}>
-          <ListPath title="Paths" data={PATHS} navigation={navigation} />
+          <ListPath title="Paths" data={PATHS} navigation={navigation} lightTheme={false} />
         </View>
 
         <View style={{ marginTop: 15 }}>
-          <ListAuthor title="Top Author" data={AUTHORS} />
+          <ListAuthor title="Top Author" data={AUTHORS} lightTheme={false} />
         </View>
       </View >
     </ScrollView>

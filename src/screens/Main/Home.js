@@ -19,8 +19,8 @@ function Home(props) {
         <Text style={{ textAlign: 'justify', fontWeight: '600', fontSize: 14, paddingHorizontal: 10, paddingBottom: 30, ...themeLight.styles.text }}>
           With Study Online, you can build and apply skills in top technologies. You have free access to Skill IQ, Role IQ, a limited library of courses and a weekly rotation of new courses.
         </Text>
-        <ListCourseHorizontal title={LISTCOURSES[0].title} data={LISTCOURSES[0].courses} navigation={navigation} lightTheme={false} />
-        <ListCourseHorizontal title={LISTCOURSES[1].title} data={LISTCOURSES[1].courses} navigation={navigation} lightTheme={false} />
+        <ListCourseHorizontal title={LISTCOURSES[0].title} data={LISTCOURSES[0].courses} navigation={navigation} lightTheme={themeLight.isLightTheme} />
+        <ListCourseHorizontal title={LISTCOURSES[1].title} data={LISTCOURSES[1].courses} navigation={navigation} lightTheme={themeLight.isLightTheme} />
       </ScrollView>
     </View>
   )

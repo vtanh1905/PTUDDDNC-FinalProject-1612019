@@ -5,11 +5,11 @@ import { ListItem } from 'react-native-elements';
 import { Rating } from 'react-native-elements';
 
 function ListCourses(props) {
-  const { title, data, navigation } = props;
+  const { title, data, lightTheme, navigation } = props;
 
   return (
     <View>
-      {title ? <Text style={{ fontWeight: "bold", padding: 10, fontSize: 25 }}>{title}</Text> : <></>}
+      {title ? <Text style={{ fontWeight: "bold", padding: 10, fontSize: 25, color: lightTheme ? "#000000" : "#FFFFFF" }}>{title}</Text> : <></>}
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           {data.map((course, index) => (
@@ -19,20 +19,22 @@ function ListCourses(props) {
                   source: { uri: course.image },
                   rounded: false,
                 }}
+                titleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
                 title={course.title}
-                // title={((course.title).length > 50) ?
-                //   (((course.title).substring(0, 50 - 3)) + '...') :
-                //   course.title}
+                linearGradientProps={{
+                  colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
+                }}
                 bottomDivider
                 subtitle={(
                   <View>
-                    <Text>{course.subTitle}</Text>
+                    <Text style={{ color: lightTheme ? "#000000" : "#FFFFFF" }}>{course.subTitle}</Text>
                     <View style={{ alignItems: "flex-start" }}>
-                      <Rating imageSize={20} readonly startingValue={course.rate} />
+                      <Rating type='custom' tintColor={lightTheme ? "white" : "rgb(60, 63, 68)"} imageSize={20} readonly startingValue={course.rate} />
                     </View>
                   </View>
                 )}
                 onPress={() => navigation.navigate('CourseDetail', { data: course })}
+
               />
             </View>
           ))}

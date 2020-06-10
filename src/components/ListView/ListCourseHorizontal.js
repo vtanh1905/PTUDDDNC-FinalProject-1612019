@@ -5,18 +5,18 @@ import { Badge } from 'react-native-paper';
 import CardCourse from './CardCourse'
 
 function ListCourseHorizontal(props) {
-  const { title, data, navigation } = props;
+  const { title, data, lightTheme, navigation } = props;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ fontWeight: "bold" }}>{title}</Text>
+        <Text style={{ fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>{title}</Text>
         <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => navigation.navigate('ListCourses', { title, data })}>See all</Badge>
       </View>
       <View style={styles.listCard}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
           {data.map((course, index) => (
             <View style={styles.card} key={index}>
-              <CardCourse image={course.image} data={course} navigation={navigation} />
+              <CardCourse image={course.image} data={course} navigation={navigation} lightTheme={lightTheme} />
             </View>
           ))}
         </ScrollView>
