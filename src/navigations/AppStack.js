@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from "react-native";
@@ -7,22 +7,25 @@ const Stack = createStackNavigator();
 
 import AuthStack from './AuthStack'
 import DashboardStack from './DashboardStack'
+import ThemeContext from '../contexts/ThemeContext'
 
 const MyDarkTheme = {
   ...DarkTheme,
   colors: {
     primary: '#000000',
     background: 'rgb(2, 2, 2)',
-    card: 'rgb(24, 27, 32)',
+    card: 'rgb(60, 63, 68)',
     text: '#FFFFFF',
     border: 'rgb(199, 199, 204)',
   },
 };
 
 function AppStack() {
+  const { themeLight } = useContext(ThemeContext)
+
   return (
-    <NavigationContainer theme={MyDarkTheme}>
-      <StatusBar backgroundColor="rgb(24, 27, 32)" barStyle={'light-content'} />
+    <NavigationContainer theme={themeLight.isLightTheme ? DefaultTheme : MyDarkTheme}>
+      {!themeLight.isLightTheme ? <StatusBar backgroundColor={themeLight.styles.background2.backgroundColor} barStyle={'light-content'} /> : <></>}
       <Stack.Navigator headerMode={"none"}>
         <Stack.Screen name="DashboardStack" component={DashboardStack} />
         <Stack.Screen name="AUTHSTACK" component={AuthStack} />

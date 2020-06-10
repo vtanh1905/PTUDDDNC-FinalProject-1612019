@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native';
 
 import { SearchBar } from 'react-native-elements';
 
 import TabView from 'components/TabView'
+import ThemeContext from '../../contexts/ThemeContext'
 
 const dataCourses = [
   {
@@ -64,13 +65,18 @@ import ListAuthors from 'components/ListInSearch/ListAuthors'
 function Search(props) {
   const { navigation } = props;
   const [inputSearch, setInputSearch] = useState("")
+  const { themeLight } = useContext(ThemeContext)
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'white', fontSize: 9 }}>
-      <View style={styles.headerSearch}>
+    <View style={{ flex: 1, fontSize: 9, ...themeLight.styles.background1 }}>
+      <View style={{
+        paddingTop: themeLight.isLightTheme ? 30 : 0,
+        marginTop: -1,
+        backgroundColor: "#dae2ea"
+      }}>
         <SearchBar
           placeholder="Type Here..."
-          lightTheme={true}
+          lightTheme={themeLight.isLightTheme}
           round={true}
           clearIcon={false}
           autoFocus={true}
@@ -103,9 +109,8 @@ function Search(props) {
 
 export default Search
 
-const styles = StyleSheet.create({
-  headerSearch: {
-    paddingTop: 30,
-    backgroundColor: "#dae2ea"
-  },
-})
+// const styles = StyleSheet.create({
+//   headerSearch: {
+
+//   },
+// })

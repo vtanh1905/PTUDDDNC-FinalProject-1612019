@@ -1,1 +1,1 @@
-export * from "./ThemeLightContext"
+export * from "./ThemeContext"

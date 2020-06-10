@@ -4,16 +4,20 @@ import { registerRootComponent } from 'expo';
 
 import AppStack from 'navigations/AppStack'
 
-import { ThemeLightProvider } from './contexts'
+import { ThemeContextProvider } from './contexts'
+import { THEME_LIGHT, THEME_DARK } from './styles'
 
 export default function App() {
-  const [isThemeLight, setIsThemeLight] = useState(true);
+  const [themeLight, setThemeLight] = useState({
+    isLightTheme: false,
+    styles: THEME_DARK
+  });
 
 
   return (
-    <ThemeLightProvider value={{ isThemeLight, setIsThemeLight }}>
+    <ThemeContextProvider value={{ themeLight, setThemeLight }}>
       <AppStack />
-    </ThemeLightProvider>
+    </ThemeContextProvider>
   );
 }
 
