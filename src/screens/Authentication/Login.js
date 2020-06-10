@@ -10,11 +10,11 @@ import { TextInput } from 'react-native-paper';
 import { USER } from '../../assets/data'
 
 
-
 function Login(props) {
   const { navigation } = props;
   const [inputUserName, setInputUserName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
+
   const handleLogin = () => {
     if (inputUserName.toLowerCase() === USER.username.toLowerCase() && inputPassword === USER.password) {
       setInputUserName("");

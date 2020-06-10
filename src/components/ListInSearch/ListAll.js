@@ -46,26 +46,26 @@ const list = [
 ]
 
 function ListAll(props) {
-  const { jumpTo, navigation } = props;
+  const { jumpTo, navigation, lightTheme } = props;
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View>
         <View style={styles.header}>
-          <Text style={{ fontWeight: "bold", fontSize: 20 }}>Courses</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 20, color: lightTheme ? "#000000" : "#FFFFFF" }}>Courses</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("COURSES")}>See all</Badge>
         </View>
-        <ListCourses navigation={navigation} />
+        <ListCourses navigation={navigation} lightTheme={lightTheme} />
         <View style={styles.header}>
-          <Text style={{ fontWeight: "bold", fontSize: 20 }}>Paths</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 20, color: lightTheme ? "#000000" : "#FFFFFF" }}>Paths</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("PATHS")}>See all</Badge>
         </View>
-        <ListPaths navigation={navigation} />
+        <ListPaths navigation={navigation} lightTheme={lightTheme} />
         <View style={styles.header}>
-          <Text style={{ fontWeight: "bold", fontSize: 20 }}>Authors</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 20, color: lightTheme ? "#000000" : "#FFFFFF" }}>Authors</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("AUTHORS")}> See all</Badge>
         </View>
-        <ListAuthors navigation={navigation} />
+        <ListAuthors navigation={navigation} lightTheme={lightTheme} />
       </View>
     </ScrollView>
   )

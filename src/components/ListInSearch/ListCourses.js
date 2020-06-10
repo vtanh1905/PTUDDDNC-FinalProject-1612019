@@ -85,7 +85,7 @@ const data = [
 ]
 
 function ListCourses(props) {
-  const { navigation } = props;
+  const { navigation, lightTheme } = props;
 
   return (
     <View>
@@ -97,15 +97,16 @@ function ListCourses(props) {
               rounded: false,
             }}
             title={course.title}
-            // title={((course.title).length > 50) ?
-            //   (((course.title).substring(0, 50 - 3)) + '...') :
-            //   course.title}
+            titleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
+            linearGradientProps={!lightTheme ? {
+              colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
+            } : null}
             bottomDivider
             subtitle={(
               <View>
-                <Text>{course.subTitle}</Text>
+                <Text style={{ color: lightTheme ? "#000000" : "#FFFFFF" }}>{course.subTitle}</Text>
                 <View style={{ alignItems: "flex-start" }}>
-                  <Rating imageSize={20} readonly startingValue={course.rate} />
+                  <Rating type='custom' tintColor={lightTheme ? "white" : "rgb(60, 63, 68)"} imageSize={20} readonly startingValue={course.rate} />
                 </View>
               </View>
             )}

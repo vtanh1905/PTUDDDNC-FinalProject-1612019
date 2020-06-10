@@ -21,9 +21,9 @@ function ListCourses(props) {
                 }}
                 titleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
                 title={course.title}
-                linearGradientProps={{
+                linearGradientProps={!lightTheme ? {
                   colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
-                }}
+                } : null}
                 bottomDivider
                 subtitle={(
                   <View>

@@ -94,10 +94,10 @@ function Search(props) {
               { key: 'AUTHORS', title: 'AUTHOR' },
             ]}
             scenes={[
-              (jumpTo) => <ListAll jumpTo={jumpTo} navigation={navigation} />,
-              () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses navigation={navigation} /></ScrollView>,
-              () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths navigation={navigation} /></ScrollView>,
-              () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors navigation={navigation} /></ScrollView>
+              (jumpTo) => <ListAll jumpTo={jumpTo} navigation={navigation} lightTheme={themeLight.isLightTheme} />,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>
             ]}
           />
         </View>

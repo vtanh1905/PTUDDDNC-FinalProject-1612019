@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-
+import ThemeContext from '../../contexts/ThemeContext'
 import ButtonDefault from 'components/Button/ButtonDefault'
 
 function Introduce(props) {
   const { navigation } = props;
+  const { themeLight } = useContext(ThemeContext)
+
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
         <Image style={styles.stretch} source={require("../../assets/logo.png")} />
-        <Text style={styles.title}>Study Online</Text>
+        <Text style={{ ...styles.title, ...themeLight.styles.text }}>Study Online</Text>
       </View>
       <View style={styles.buttons}>
         <View style={styles.button}>
