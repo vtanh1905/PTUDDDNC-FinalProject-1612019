@@ -9,8 +9,8 @@ import { THEME_LIGHT, THEME_DARK } from './styles'
 
 export default function App() {
   const [themeLight, setThemeLight] = useState({
-    isLightTheme: false,
-    styles: THEME_DARK
+    isLightTheme: true,
+    styles: THEME_LIGHT
   });
 
 
