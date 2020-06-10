@@ -86,6 +86,7 @@ function Search(props) {
       {inputSearch !== "" ?
         <View style={{ flex: 1 }}>
           <TabView
+            lightTheme={themeLight.isLightTheme}
             routes={[
               { key: 'ALL', title: 'ALL' },
               { key: 'COURSES', title: 'COURSE' },
