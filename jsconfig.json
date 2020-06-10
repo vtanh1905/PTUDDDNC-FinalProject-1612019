@@ -17,6 +17,9 @@
 			],
 			"screens/*": [
 				"./screens/*"
+			],
+			"contexts": [
+				"./contexts/*"
 			]
 		}
 	},

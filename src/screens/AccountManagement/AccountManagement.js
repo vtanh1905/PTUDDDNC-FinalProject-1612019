@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, StyleSheet, Text } from 'react-native';
 import { Avatar, Divider } from 'react-native-paper';
 
-
 import { ListItem } from 'react-native-elements'
+
+import ThemeContext from '../../contexts/ThemeContext'
 
 const list = [
   {
@@ -25,12 +26,14 @@ const list = [
 
 function AccountManagement(props) {
   const { navigation } = props;
+  const { themeLight } = useContext(ThemeContext)
+
   return (
     <View style={styles.container}>
       <View style={styles.containerAvatar}>
         <Avatar.Image size={100} source={{ uri: 'https://hinhnendephd.com/wp-content/uploads/2019/10/anh-avatar-dep.jpg' }} />
         <View style={styles.containerUsername}>
-          <Text style={styles.username}>Anh Vu</Text>
+          <Text style={{ ...styles.username, ...themeLight.styles.text }}>Anh Vu</Text>
         </View>
       </View>
       <View>
@@ -41,9 +44,13 @@ function AccountManagement(props) {
           <ListItem
             key={i}
             title={item.title}
-            leftIcon={{ name: item.icon }}
+            leftIcon={{ name: item.icon, color: themeLight.isLightTheme ? "#000000" : "#FFFFFF" }}
             bottomDivider
             chevron
+            titleStyle={{ color: themeLight.isLightTheme ? "#000000" : "#FFFFFF" }}
+            linearGradientProps={!themeLight.isLightTheme ? {
+              colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
+            } : null}
             onPress={() => { navigation.navigate(item.screenNext) }}
           />
         ))

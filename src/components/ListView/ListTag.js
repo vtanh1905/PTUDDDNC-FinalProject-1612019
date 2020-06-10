@@ -3,11 +3,12 @@ import { StyleSheet, View, ScrollView, Text } from 'react-native';
 import { Badge } from 'react-native-paper';
 
 function ListTag(props) {
-  const { title, data } = props;
+  const { title, lightTheme, data } = props;
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ fontWeight: "bold" }}>{title}</Text>
+        <Text style={{ fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>{title}</Text>
       </View>
       <View style={styles.listTag}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >

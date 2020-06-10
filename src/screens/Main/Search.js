@@ -1,9 +1,10 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react'
+import { View, StyleSheet, ScrollView } from 'react-native';
 
 import { SearchBar } from 'react-native-elements';
 
-import ListCourseVertical from 'components/ListView/ListCourseVertical'
+import TabView from 'components/TabView'
+import ThemeContext from '../../contexts/ThemeContext'
 
 const dataCourses = [
   {
@@ -56,29 +57,60 @@ const dataCourses = [
   }
 ]
 
+import ListAll from 'components/ListInSearch/ListAll'
+import ListCourses from 'components/ListInSearch/ListCourses'
+import ListPaths from 'components/ListInSearch/ListPaths'
+import ListAuthors from 'components/ListInSearch/ListAuthors'
+
 function Search(props) {
   const { navigation } = props;
+  const [inputSearch, setInputSearch] = useState("")
+  const { themeLight } = useContext(ThemeContext)
+
   return (
-    <View style={{ paddingBottom: 180 }}>
-      <View style={styles.headerSearch}>
+    <View style={{ flex: 1, fontSize: 9, ...themeLight.styles.background1 }}>
+      <View style={{
+        marginTop: -1,
+        backgroundColor: "#dae2ea"
+      }}>
         <SearchBar
           placeholder="Type Here..."
-          lightTheme={true}
+          lightTheme={themeLight.isLightTheme}
           round={true}
           clearIcon={false}
           autoFocus={true}
+          onChangeText={(text) => setInputSearch(text)}
+          value={inputSearch}
         />
       </View>
-      <ListCourseVertical title="" data={dataCourses} navigation={navigation} />
+      {inputSearch !== "" ?
+        <View style={{ flex: 1 }}>
+          <TabView
+            lightTheme={themeLight.isLightTheme}
+            routes={[
+              { key: 'ALL', title: 'ALL' },
+              { key: 'COURSES', title: 'COURSE' },
+              { key: 'PATHS', title: 'PATH' },
+              { key: 'AUTHORS', title: 'AUTHOR' },
+            ]}
+            scenes={[
+              (jumpTo) => <ListAll jumpTo={jumpTo} navigation={navigation} lightTheme={themeLight.isLightTheme} />,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>
+            ]}
+          />
+        </View>
+        : <></>}
+
     </View>
   )
 }
 
 export default Search
 
-const styles = StyleSheet.create({
-  headerSearch: {
-    paddingTop: 30,
-    backgroundColor: "#dae2ea"
-  },
-})
+// const styles = StyleSheet.create({
+//   headerSearch: {
+
+//   },
+// })

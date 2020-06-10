@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 
-const Stack = createStackNavigator();
+import ThemeContext from '../contexts/ThemeContext'
 
+const Stack = createStackNavigator();
 // Tab Navigation
 import BottonTabStack from './BottonTabStack'
 
@@ -10,7 +11,7 @@ import BottonTabStack from './BottonTabStack'
 import AccountManagement from '../screens/AccountManagement/AccountManagement'
 import Profile from '../screens/AccountManagement/Profile'
 import Setting from '../screens/AccountManagement/Setting'
-
+import ChangePassword from '../screens/AccountManagement/ChangePassword'
 
 // Course
 import ListCourses from '../screens/Course/ListCourses'
@@ -20,11 +21,11 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 
-const optionStackHaveButtonBack = ({ navigation, route }) => ({
+const optionStackHaveButtonBack = ({ navigation, route }, lightTheme) => ({
   headerTitleStyle: { alignSelf: 'center', paddingRight: 55 },
   headerLeft: () => (
     <TouchableOpacity style={{ paddingLeft: 10 }} onPress={() => navigation.goBack()}>
-      <IconAntDesign name="arrowleft" size={30} />
+      <IconAntDesign name="arrowleft" size={30} color={lightTheme ? "#000000" : "#FFFFFF"} />
     </TouchableOpacity>
   )
 });
@@ -57,14 +58,17 @@ const optionStackHaveAvatar = ({ navigation, route }) => ({
 });
 
 function DashboardStack() {
+  const { themeLight } = useContext(ThemeContext)
+
   return (
-    <Stack.Navigator headerMode={"screen"}>
+    <Stack.Navigator headerMode={"screen"}  >
       <Stack.Screen name="BOTTONTAB" component={BottonTabStack} options={optionStackHaveAvatar} />
-      <Stack.Screen name="Account Management" component={AccountManagement} options={optionStackHaveButtonBack} />
-      <Stack.Screen name="Profile" component={Profile} options={optionStackHaveButtonBack} />
-      <Stack.Screen name="Setting" component={Setting} options={optionStackHaveButtonBack} />
-      <Stack.Screen name="ListCourses" component={ListCourses} options={{ title: '', ...optionStackHaveButtonBack }} />
-      <Stack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, ...optionStackHaveButtonBack }} />
+      <Stack.Screen name="Account Management" component={AccountManagement} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
+      <Stack.Screen name="Profile" component={Profile} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
+      <Stack.Screen name="Change Password" component={ChangePassword} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
+      <Stack.Screen name="Setting" component={Setting} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
+      <Stack.Screen name="ListCourses" component={ListCourses} options={{ title: '', ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
+      <Stack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
     </Stack.Navigator>
 
   )

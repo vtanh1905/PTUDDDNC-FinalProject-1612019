@@ -12,50 +12,56 @@ export const SKILLS = ["Angular", "Javascript", "C#", "Java", "Data Analysis", "
 export const AUTHORS = [
   {
     name: "John Cneter",
-    imageURL: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+    imageURL: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+    countCourses: 32
   },
   {
     name: "San",
-    imageURL: "https://static.showit.co/800/Vh16SsMsQTGqj7qDG6J7vw/63035/headshots_actors-6.jpg"
+    imageURL: "https://static.showit.co/800/Vh16SsMsQTGqj7qDG6J7vw/63035/headshots_actors-6.jpg",
+    countCourses: 55
   },
   {
     name: "Gallery",
-    imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT2_YUm9dXZ9h-WgYwUqe32VpPN8Ok4H0oQ79EqTU43dN5Epu-8&usqp=CAU"
+    imageURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT2_YUm9dXZ9h-WgYwUqe32VpPN8Ok4H0oQ79EqTU43dN5Epu-8&usqp=CAU",
+    countCourses: 4
   },
   {
     name: "Anna",
-    imageURL: "https://images.fastcompany.net/image/upload/w_596,c_limit,q_auto:best,f_auto/wp-cms/uploads/2019/02/5-create-fake-people-in-2-seconds-on-this-insane-site.jpg"
+    imageURL: "https://images.fastcompany.net/image/upload/w_596,c_limit,q_auto:best,f_auto/wp-cms/uploads/2019/02/5-create-fake-people-in-2-seconds-on-this-insane-site.jpg",
+    countCourses: 22
   },
   {
     name: "Rayn",
-    imageURL: "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-4.jpg"
+    imageURL: "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-4.jpg",
+    countCourses: 11
   },
   {
     name: "Lyta",
-    imageURL: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
+    imageURL: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+    countCourses: 9
   }
 ]
 
 export const PATHS = [
   {
-    title: "AWS Certified Machine Learning",
+    title: "Bringing Data Science into the Business",
     subTitle: "3 courses",
-    image: "https://picsum.photos/700",
+    image: "https://pluralsight2.imgix.net/paths/images/group-policy-administration-ee0dacafe8.png?w=500",
   },
   {
     title: "AWS Application Development",
     subTitle: "7 courses",
-    image: "https://picsum.photos/700",
+    image: "https://pluralsight2.imgix.net/paths/images/aws-certified-devops-engineer-25d912e3da.png?w=500",
   },
   {
     title: "Red Team Tools",
     subTitle: "5 courses",
-    image: "https://picsum.photos/700",
+    image: "https://pluralsight2.imgix.net/paths/images/comptia-security-plus-5d8ab8e621.png?w=500",
   },
   {
     title: "C# Unit Testing with xUnit",
     subTitle: "12 courses",
-    image: "https://picsum.photos/700",
+    image: "https://pluralsight2.imgix.net/paths/images/csharp-e7b8fcd4ce.png?w=500",
   }
 ]
 

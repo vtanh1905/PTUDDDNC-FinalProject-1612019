@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import { Video } from 'expo-av'
 import VideoPlayer from 'expo-video-player'
@@ -13,14 +13,16 @@ import BadgeIcon from 'components/BadgeIcon'
 import TabView from 'components/TabView'
 import ListLesson from 'components/ListLesson'
 import Transcript from './Transcript'
+import ThemeContext from '../../contexts/ThemeContext'
 
 function CourseDetail(props) {
   const { navigation, route } = props;
   const { data } = route.params;
+  const { themeLight } = useContext(ThemeContext)
 
   return (
     <View style={styles.container}>
-      <IconFontAwesome name="chevron-down" size={20} style={{ color: 'white', position: 'absolute', top: 46, left: 23, zIndex: 99 }} onPress={() => navigation.goBack()} />
+      <IconFontAwesome name="chevron-down" size={20} style={{ color: 'white', position: 'absolute', top: 16, left: 23, zIndex: 99 }} onPress={() => navigation.goBack()} />
       <View>
         <VideoPlayer
           height={225}
@@ -41,7 +43,7 @@ function CourseDetail(props) {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
-          <Text style={{ fontSize: 27, fontWeight: "bold" }}>{data.title}</Text>
+          <Text style={{ fontSize: 27, fontWeight: "bold", ...themeLight.styles.text }}>{data.title}</Text>
           <View style={{ paddingHorizontal: 3, flexDirection: "row", marginVertical: 5 }}>
             <Chip avatar={<Avatar
               rounded
@@ -51,9 +53,9 @@ function CourseDetail(props) {
               }}
             />}>{data.author.name}</Chip>
           </View>
-          <View style={{ paddingHorizontal: 3, flexDirection: "row", marginVertical: 5, justifyContent: 'space-between' }}>
-            <Text>{data.subTitle}</Text>
-            <Rating tintColor='#f2f2f2' imageSize={18} readonly startingValue={data.rate} />
+          <View style={{ paddingHorizontal: 3, flexDirection: "row", marginVertical: 5, justifyContent: 'space-between', ...themeLight.styles.text }}>
+            <Text style={themeLight.styles.text}>{data.subTitle}</Text>
+            <Rating type='custom' tintColor={themeLight.isLightTheme ? "#FFFFFF" : "#000000"} imageSize={18} readonly startingValue={data.rate} />
           </View>
           <Divider />
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
@@ -71,7 +73,7 @@ function CourseDetail(props) {
             />
           </View>
           <Divider />
-          <Text style={{ textAlign: 'justify', fontWeight: '600', paddingVertical: 15 }}>
+          <Text style={{ textAlign: 'justify', fontWeight: '600', paddingVertical: 15, ...themeLight.styles.text }}>
             {data.description}
           </Text>
           <View style={{ width: '90%', alignSelf: 'center' }}>
@@ -83,11 +85,12 @@ function CourseDetail(props) {
         </View>
         <View style={{ backgroundColor: 'white' }}>
           <TabView
+            lightTheme={themeLight.isLightTheme}
             routes={[
               { key: 'CONTENTS', title: 'CONTENTS' },
               { key: 'TRANSCRIPT', title: 'TRANSCRIPT' },
             ]}
-            scenes={[ListLesson, Transcript]}
+            scenes={[() => <ListLesson lightTheme={themeLight.isLightTheme} />, () => <Transcript lightTheme={themeLight.isLightTheme} />]}
           />
         </View>
       </ScrollView>
