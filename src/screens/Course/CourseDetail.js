@@ -62,14 +62,17 @@ function CourseDetail(props) {
             <BadgeIcon
               icon={<IconAntDesign name="star" size={30} style={{ color: 'white' }} />}
               title='Favorite'
+              lightTheme={themeLight.isLightTheme}
             />
             <BadgeIcon
               icon={<IconEntypo name="signal" size={30} style={{ color: 'white' }} />}
               title='Add to channel'
+              lightTheme={themeLight.isLightTheme}
             />
             <BadgeIcon
               icon={<IconEntypo name="arrow-with-circle-down" size={30} style={{ color: 'white' }} />}
               title='Download'
+              lightTheme={themeLight.isLightTheme}
             />
           </View>
           <Divider />
