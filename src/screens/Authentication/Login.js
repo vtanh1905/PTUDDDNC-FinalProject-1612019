@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { StyleSheet, View } from 'react-native';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
@@ -8,22 +8,29 @@ import Toast from 'components/Toast'
 import { TextInput } from 'react-native-paper';
 
 import { USER } from '../../assets/data'
-
+import UserContext from '../../contexts/UserContext'
 
 function Login(props) {
   const { navigation } = props;
   const [inputUserName, setInputUserName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
+  const { users, setUsers } = useContext(UserContext)
 
   const handleLogin = () => {
-    if (inputUserName.toLowerCase() === USER.username.toLowerCase() && inputPassword === USER.password) {
-      setInputUserName("");
-      setInputPassword("");
-      navigation.navigate('DashboardStack');
-    } else {
+    let checkLoginSuccess = false;
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+      if (inputUserName.toLowerCase() === user.username.toLowerCase() && inputPassword === user.password) {
+        setInputUserName("");
+        setInputPassword("");
+        checkLoginSuccess = true;
+        navigation.navigate('DashboardStack');
+        break;
+      }
+    }
+    if (!checkLoginSuccess) {
       Toast('Username or Password is not correct');
     }
-
   }
 
   return (

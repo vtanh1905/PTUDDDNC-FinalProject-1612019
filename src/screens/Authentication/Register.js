@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
 import Toast from 'components/Toast'
+import UserContext from '../../contexts/UserContext'
 
 function Register(props) {
-  console.log(props);
   const { navigation } = props;
   const [inputUsername, setInputUsername] = useState("")
   const [inputEmail, setInputEmail] = useState("")
   const [inputPassword, setInputPassword] = useState("")
   const [inputConfirmPassword, setInputConfirmPassword] = useState("")
+
+  const { users, setUsers } = useContext(UserContext)
 
   const handleRegister = () => {
     if (inputUsername === "" || inputEmail === "" || inputPassword === "" || inputConfirmPassword === "") {
@@ -23,6 +25,15 @@ function Register(props) {
       Toast("Password and Confirm Password is not correctly!");
       return
     }
+
+    setUsers([...users, {
+      username: inputUsername,
+      password: inputPassword,
+      fullname: "Vũ Tuấn Anh",
+      dob: "19/05/1998",
+      email: inputEmail,
+      phone: "0966996874"
+    }])
 
     Toast("Register Successfully!");
     navigation.navigate('Login');
