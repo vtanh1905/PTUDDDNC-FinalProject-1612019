@@ -10,6 +10,6 @@ Deadline 1: Mock-up UI/UX cho toàn bộ ứng dụng
   - Commit ID: 2675a15
 
 Deadline 2: Xây dựng ứng dụng offline cho toàn bộ ứng dụng
-  - Commit ID: 
-  - Video demo: 
+  - Commit ID: ad11514
+  - Video demo: https://youtu.be/zV5wYRWEHM8
 ------------------------------------------------
