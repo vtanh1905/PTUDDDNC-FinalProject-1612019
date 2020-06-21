@@ -55,7 +55,7 @@ function CourseDetail(props) {
           </View>
           <View style={{ paddingHorizontal: 3, flexDirection: "row", marginVertical: 5, justifyContent: 'space-between', ...themeLight.styles.text }}>
             <Text style={themeLight.styles.text}>{data.subTitle}</Text>
-            <Rating type='custom' tintColor={themeLight.isLightTheme ? "#FFFFFF" : "#000000"} imageSize={18} readonly startingValue={data.rate} />
+            <Rating type='custom' tintColor={themeLight.isLightTheme ? "rgb(242, 242, 242)" : "#000000"} imageSize={18} readonly startingValue={data.rate} />
           </View>
           <Divider />
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
