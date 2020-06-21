@@ -17,6 +17,11 @@ import ChangePassword from '../screens/AccountManagement/ChangePassword'
 import ListCourses from '../screens/Course/ListCourses'
 import CourseDetail from '../screens/Course/CourseDetail'
 
+// Path
+import ListPaths from '../screens/Path/ListPaths'
+import PathDetail from '../screens/Path/PathDetail'
+
+
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
@@ -24,8 +29,8 @@ import { Avatar } from 'react-native-elements';
 const optionStackHaveButtonBack = ({ navigation, route }, lightTheme) => ({
   headerTitleStyle: { alignSelf: 'center', paddingRight: 55 },
   headerLeft: () => (
-    <TouchableOpacity style={{ paddingLeft: 10 }} onPress={() => navigation.goBack()}>
-      <IconAntDesign name="arrowleft" size={30} color={lightTheme ? "#000000" : "#FFFFFF"} />
+    <TouchableOpacity style={{ paddingLeft: 15 }} onPress={() => navigation.goBack()}>
+      <IconAntDesign name="arrowleft" size={23} color={lightTheme ? "#000000" : "#FFFFFF"} />
     </TouchableOpacity>
   )
 });
@@ -69,6 +74,8 @@ function DashboardStack() {
       <Stack.Screen name="Setting" component={Setting} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
       <Stack.Screen name="ListCourses" component={ListCourses} options={{ title: '', ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
       <Stack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
+      <Stack.Screen name="Paths" component={ListPaths} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
+      <Stack.Screen name="PathDetail" component={PathDetail} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
     </Stack.Navigator>
 
   )

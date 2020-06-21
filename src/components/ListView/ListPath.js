@@ -12,7 +12,7 @@ function ListPath(props) {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={{ fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>{title}</Text>
-        <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => navigation.navigate('ListCourses')}>See all</Badge>
+        <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => navigation.navigate('Paths')}>See all</Badge>
       </View>
       <View style={styles.listCard}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
