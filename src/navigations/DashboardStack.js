@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 
 import ThemeContext from '../contexts/ThemeContext'
+import UserContext from '../contexts/UserContext'
 
 const Stack = createStackNavigator();
 // Tab Navigation
@@ -43,7 +44,7 @@ function getHeaderTitle(route) {
   return routeName;
 }
 
-const optionStackHaveAvatar = ({ navigation, route }) => ({
+const optionStackHaveAvatar = ({ navigation, route }, imageURL) => ({
   headerShown: getHeaderTitle(route) !== 'Search',
   headerTitle: getHeaderTitle(route),
   headerTitleStyle: { alignSelf: 'center', paddingLeft: 55 },
@@ -53,8 +54,7 @@ const optionStackHaveAvatar = ({ navigation, route }) => ({
         <Avatar
           rounded
           source={{
-            uri:
-              'https://hinhnendephd.com/wp-content/uploads/2019/10/anh-avatar-dep.jpg',
+            uri: imageURL,
           }}
         />
       </TouchableOpacity>
@@ -64,10 +64,11 @@ const optionStackHaveAvatar = ({ navigation, route }) => ({
 
 function DashboardStack() {
   const { themeLight } = useContext(ThemeContext)
+  const { user } = useContext(UserContext)
 
   return (
     <Stack.Navigator headerMode={"screen"}  >
-      <Stack.Screen name="BOTTONTAB" component={BottonTabStack} options={optionStackHaveAvatar} />
+      <Stack.Screen name="BOTTONTAB" component={BottonTabStack} options={(props) => optionStackHaveAvatar(props, user.avatar)} />
       <Stack.Screen name="Account Management" component={AccountManagement} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
       <Stack.Screen name="Profile" component={Profile} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
       <Stack.Screen name="Change Password" component={ChangePassword} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />

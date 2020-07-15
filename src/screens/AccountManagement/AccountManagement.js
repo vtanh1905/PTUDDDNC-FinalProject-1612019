@@ -5,6 +5,7 @@ import { Avatar, Divider } from 'react-native-paper';
 import { ListItem } from 'react-native-elements'
 
 import ThemeContext from '../../contexts/ThemeContext'
+import UserContext from '../../contexts/UserContext'
 
 const list = [
   {
@@ -27,13 +28,14 @@ const list = [
 function AccountManagement(props) {
   const { navigation } = props;
   const { themeLight } = useContext(ThemeContext)
+  const { user } = useContext(UserContext)
 
   return (
     <View style={styles.container}>
       <View style={styles.containerAvatar}>
-        <Avatar.Image size={100} source={{ uri: 'https://hinhnendephd.com/wp-content/uploads/2019/10/anh-avatar-dep.jpg' }} />
+        <Avatar.Image size={100} source={{ uri: user.avatar }} />
         <View style={styles.containerUsername}>
-          <Text style={{ ...styles.username, ...themeLight.styles.text }}>Anh Vu</Text>
+          <Text style={{ ...styles.username, ...themeLight.styles.text }}>{user.name}</Text>
         </View>
       </View>
       <View>

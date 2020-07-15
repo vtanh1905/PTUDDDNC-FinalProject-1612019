@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from "react-native";
@@ -8,6 +8,7 @@ const Stack = createStackNavigator();
 import AuthStack from './AuthStack'
 import DashboardStack from './DashboardStack'
 import ThemeContext from '../contexts/ThemeContext'
+
 
 const MyDarkTheme = {
   ...DarkTheme,
@@ -20,7 +21,7 @@ const MyDarkTheme = {
   },
 };
 
-function AppStack() {
+function AppStack(props) {
   const { themeLight } = useContext(ThemeContext)
 
   return (

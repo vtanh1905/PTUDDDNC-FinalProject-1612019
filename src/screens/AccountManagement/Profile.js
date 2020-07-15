@@ -5,12 +5,13 @@ import { Subheading, Title, Avatar, Divider } from 'react-native-paper';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
 
-import { USER } from '../../assets/data'
 import ThemeContext from '../../contexts/ThemeContext'
+import UserContext from '../../contexts/UserContext'
 
 function Profile(props) {
   const { navigation } = props;
   const { themeLight } = useContext(ThemeContext)
+  const { user } = useContext(UserContext)
 
   return (
     <View style={styles.container}>
@@ -22,28 +23,24 @@ function Profile(props) {
       </View> */}
       <View style={{ alignItems: "center", paddingVertical: 10 }}>
         <View>
-          <Avatar.Image size={100} source={{ uri: 'https://hinhnendephd.com/wp-content/uploads/2019/10/anh-avatar-dep.jpg' }} />
+          <Avatar.Image size={100} source={{ uri: user.avatar }} />
         </View>
 
       </View>
       <View style={styles.fieldView}>
         <Subheading style={themeLight.styles.text}>Full Name</Subheading>
-        <Title style={themeLight.styles.text}>{USER.fullname}</Title>
+        <Title style={themeLight.styles.text}>{user.name}</Title>
       </View>
       <Divider />
-      <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Birth Day</Subheading>
-        <Title style={themeLight.styles.text}>{USER.dob}</Title>
-      </View>
-      <Divider />
+
       <View style={styles.fieldView}>
         <Subheading style={themeLight.styles.text}>Email</Subheading>
-        <Title style={themeLight.styles.text}>{USER.email}</Title>
+        <Title style={themeLight.styles.text}>{user.email}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>
         <Subheading style={themeLight.styles.text}>Phone</Subheading>
-        <Title style={themeLight.styles.text}>{USER.phone}</Title>
+        <Title style={themeLight.styles.text}>{user.phone}</Title>
       </View>
       <Divider />
       <View style={styles.fieldView}>
