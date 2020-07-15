@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { View, StyleSheet, Text } from 'react-native';
 import { Avatar, Divider } from 'react-native-paper';
-
+import { AsyncStorage } from 'react-native';
 import { ListItem } from 'react-native-elements'
 
 import ThemeContext from '../../contexts/ThemeContext'
@@ -28,7 +28,7 @@ const list = [
 function AccountManagement(props) {
   const { navigation } = props;
   const { themeLight } = useContext(ThemeContext)
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
 
   return (
     <View style={styles.container}>
@@ -53,7 +53,12 @@ function AccountManagement(props) {
             linearGradientProps={!themeLight.isLightTheme ? {
               colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
             } : null}
-            onPress={() => { navigation.navigate(item.screenNext) }}
+            onPress={async () => {
+              if (item.title === 'Logout') {
+                await AsyncStorage.removeItem("token");
+              }
+              navigation.navigate(item.screenNext)
+            }}
           />
         ))
       }
