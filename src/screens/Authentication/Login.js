@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { AsyncStorage } from 'react-native';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
 import ButtonClear from 'components/Button/ButtonClear'
@@ -16,18 +17,6 @@ function Login(props) {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const { setUser } = useContext(UserContext)
-
-  useEffect(() => {
-    if (API_User_Login.error.hasError) {
-      Toast('Username or Password is not correct');
-    }
-
-    if (API_User_Login.data !== null) {
-      setUser(API_User_Login.data.userInfo);
-      Toast('Login Successfully');
-      // navigation.navigate('DashboardStack');
-    }
-  });
 
   return (
     <View style={styles.container}>
@@ -53,7 +42,22 @@ function Login(props) {
 
         <View style={styles.containerBotton}>
           <View>
-            <ButtonDefault title="Login" loading={API_User_Login.loading} onPress={() => Req_User_Login(inputEmail, inputPassword)} />
+            <ButtonDefault title="Login" loading={API_User_Login.loading} onPress={() => {
+              Req_User_Login(inputEmail, inputPassword).then(async (res) => {
+                if (res.status === 200) {
+                  setUser(res.data.userInfo);
+                  await AsyncStorage.setItem(
+                    'token',
+                    res.data.token
+                  );
+                  Toast('Login Successfully');
+                  navigation.navigate('DashboardStack');
+                } else if (res.status === 400) {
+                  Toast('Username or Password is not correct');
+                }
+
+              })
+            }} />
             <ButtonClear title="Forgot Password" onPress={() => navigation.navigate('ForgotPassword')} />
           </View>
         </View>

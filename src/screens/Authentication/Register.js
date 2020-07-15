@@ -1,22 +1,24 @@
 import React, { useState, useContext } from 'react'
 import { StyleSheet, View, ToastAndroid } from 'react-native';
 import { TextInput } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { Req_User_Register } from '../../reducers/user/API_User_Register'
+import { Req_User_Send_Email_Active } from '../../reducers/user/API_User_Send_Email_Active'
 
 import ButtonDefault from 'components/Button/ButtonDefault'
 import Toast from 'components/Toast'
 import UserContext from '../../contexts/UserContext'
 
 function Register(props) {
-  const { navigation } = props;
+  const { navigation, API_User_Register, Req_User_Register, Req_User_Send_Email_Active } = props;
   const [inputUsername, setInputUsername] = useState("")
   const [inputEmail, setInputEmail] = useState("")
+  const [inputPhone, setInputPhone] = useState("")
   const [inputPassword, setInputPassword] = useState("")
   const [inputConfirmPassword, setInputConfirmPassword] = useState("")
 
-  const { users, setUsers } = useContext(UserContext)
-
   const handleRegister = () => {
-    if (inputUsername === "" || inputEmail === "" || inputPassword === "" || inputConfirmPassword === "") {
+    if (inputUsername === "" || inputEmail === "" || inputPassword === "" || inputConfirmPassword === "" || inputPhone === "") {
       Toast("Please fill your information!");
       return
     }
@@ -26,17 +28,22 @@ function Register(props) {
       return
     }
 
-    setUsers([...users, {
-      username: inputUsername,
-      password: inputPassword,
-      fullname: "Vũ Tuấn Anh",
-      dob: "19/05/1998",
-      email: inputEmail,
-      phone: "0966996874"
-    }])
+    Req_User_Register(inputUsername, inputEmail, inputPhone, inputPassword).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        Req_User_Send_Email_Active(inputEmail).then((res) => {
+          if (res.status === 200) {
+            Toast("Please check your email to active account!");
+            navigation.navigate('Login');
+          } else if (res.status === 400) {
+            Toast(res.data.message);
+          }
+        })
+      } else if (res.status === 400) {
+        Toast(res.data.message);
+      }
+    })
 
-    Toast("Register Successfully!");
-    navigation.navigate('Login');
   }
 
   return (
@@ -62,6 +69,15 @@ function Register(props) {
 
         <View style={{ marginBottom: 7 }}>
           <TextInput
+            label='Phone'
+            theme={{ colors: { primary: "#2089DC" } }}
+            value={inputPhone}
+            onChangeText={text => setInputPhone(text)}
+          />
+        </View>
+
+        <View style={{ marginBottom: 7 }}>
+          <TextInput
             label='Password'
             secureTextEntry={true}
             theme={{ colors: { primary: "#2089DC" } }}
@@ -81,14 +97,26 @@ function Register(props) {
         </View>
 
         <View>
-          <ButtonDefault title="Confirm" onPress={handleRegister} />
+          <ButtonDefault loading={API_User_Register.loading} title="Confirm" onPress={handleRegister} />
         </View>
       </View>
     </View>
   )
 }
 
-export default Register
+const mapStatetoProps = state => {
+  return state;
+};
+
+const mapDispathtoProps = {
+  Req_User_Register,
+  Req_User_Send_Email_Active
+};
+
+export default connect(
+  mapStatetoProps,
+  mapDispathtoProps,
+)(Register);
 
 const styles = StyleSheet.create({
   container: {

@@ -2,9 +2,9 @@ const axios = require('axios');
 const action = (type, payload) => ({ type, payload });
 
 const type = {
-  LOADING_LOGIN: "LOADING_LOGIN",
-  LOADED_LOGIN: "LOADED_LOGIN",
-  LOADERR_LOGIN: "LOADERR_LOGIN"
+  LOADING_REGISTER: "LOADING_REGISTER",
+  LOADED_REGISTER: "LOADED_REGISTER",
+  LOADERR_REGISTER: "LOADERR_REGISTER"
 }
 
 const initialStates = {
@@ -19,13 +19,13 @@ const initialStates = {
 
 export default function reducer(state = initialStates, actions) {
   switch (actions.type) {
-    case type.LOADING_LOGIN:
+    case type.LOADING_REGISTER:
       return {
         ...state,
         loading: true,
       };
 
-    case type.LOADED_LOGIN:
+    case type.LOADED_REGISTER:
       return {
         ...state,
         loading: false,
@@ -36,7 +36,7 @@ export default function reducer(state = initialStates, actions) {
         },
       };
 
-    case type.LOADERR_LOGIN:
+    case type.LOADERR_REGISTER:
       return {
         ...state,
         loading: false,
@@ -50,17 +50,19 @@ export default function reducer(state = initialStates, actions) {
   }
 }
 
-export const Req_User_Login = (email, password) => {
+export const Req_User_Register = (fullname, email, phone, password) => {
   return async dispatch => {
-    dispatch(action(type.LOADING_LOGIN));
-    return await axios.post('https://api.itedu.me/user/login', {
-      "email": "vtanhxxx@gmail.com",
-      "password": "123456789"
+    dispatch(action(type.LOADING_REGISTER));
+    return await axios.post('https://api.itedu.me/user/register', {
+      "username": fullname,
+      "email": email,
+      "phone": phone,
+      "password": password
     }).then((res) => {
-      dispatch(action(type.LOADED_LOGIN, { data: res.data }));
+      dispatch(action(type.LOADED_REGISTER, { data: res.data }));
       return res;
     }).catch((err) => {
-      dispatch(action(type.LOADERR_LOGIN, { error: err.response }));
+      dispatch(action(type.LOADERR_REGISTER, { error: err.response }));
       return err.response;
     })
   };
