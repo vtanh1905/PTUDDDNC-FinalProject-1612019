@@ -51,6 +51,8 @@ function Login(props) {
                     res.data.token
                   );
                   Toast('Login Successfully');
+                  setInputEmail("");
+                  setInputPassword("");
                   navigation.navigate('DashboardStack');
                 } else if (res.status === 400) {
                   Toast('Username or Password is not correct');

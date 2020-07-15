@@ -1,29 +1,42 @@
-import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native';
+import React, { useState, useContext } from 'react'
+import { StyleSheet, View, AsyncStorage } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import { connect } from 'react-redux';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
 import ButtonClear from 'components/Button/ButtonClear'
 import Toast from 'components/Toast'
+import UserContext from '../../contexts/UserContext'
 
-import { TextInput } from 'react-native-paper';
 
-import { USER } from '../../assets/data'
 
+import { Req_User_Change_Pass } from '../../reducers/user/API_User_Change_Pass'
 
 
 function ChangePassword(props) {
-  const { navigation } = props;
+  const { navigation, Req_User_Change_Pass } = props;
   const [inputOldPassword, setInputOldPassword] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const [inputConfirmPassword, setInputConfirmPassword] = useState("");
 
+  const { user } = useContext(UserContext)
+
   const handleConfirm = () => {
-    if (inputOldPassword.toLowerCase() === USER.password.toLowerCase() && inputPassword === inputConfirmPassword) {
-      navigation.navigate('Login');
+    if (inputPassword === inputConfirmPassword) {
+      Req_User_Change_Pass(user.id, inputOldPassword, inputPassword).then(async (res) => {
+        if (res.status === 200) {
+          Toast('Change Password successfully!');
+          await AsyncStorage.removeItem("token");
+          navigation.navigate('Login');
+        } else {
+          Toast(res.data.message);
+        }
+
+
+      })
     } else {
       Toast('Something is not correct');
     }
-
   }
 
   return (
@@ -68,7 +81,19 @@ function ChangePassword(props) {
   )
 }
 
-export default ChangePassword
+const mapStatetoProps = state => {
+  return state;
+};
+
+const mapDispathtoProps = {
+  Req_User_Change_Pass
+};
+
+export default connect(
+  mapStatetoProps,
+  mapDispathtoProps,
+)(ChangePassword);
+
 
 const styles = StyleSheet.create({
   container: {
