@@ -19,7 +19,7 @@ function ListCourses(props) {
                   source: { uri: course.imageUrl },
                   rounded: false,
                 }}
-                titleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
+                titleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF", fontWeight: "bold" }}
                 title={((course.title).length > 35) ?
                   (((course.title).substring(0, 35 - 3)) + '...') :
                   course.title}
