@@ -17,6 +17,7 @@ import ChangePassword from '../screens/AccountManagement/ChangePassword'
 // Course
 import ListCourses from '../screens/Course/ListCourses'
 import CourseDetail from '../screens/Course/CourseDetail'
+import ListCoursesImage from '../screens/Course/ListCoursesImage'
 
 // Path
 import ListPaths from '../screens/Path/ListPaths'
@@ -77,6 +78,7 @@ function DashboardStack() {
       <Stack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
       <Stack.Screen name="Paths" component={ListPaths} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
       <Stack.Screen name="PathDetail" component={PathDetail} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
+      <Stack.Screen name="ListCoursesImage" component={ListCoursesImage} options={{ headerShown: false, ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
     </Stack.Navigator>
 
   )
