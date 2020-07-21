@@ -17,10 +17,10 @@ function ListAuthor(props) {
                 rounded
                 size={100}
                 source={{
-                  uri: item.imageURL,
+                  uri: item["user.avatar"],
                 }}
               />
-              <Text style={{ textAlign: "center", fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>{item.name}</Text>
+              <Text style={{ textAlign: "center", fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>{item["user.name"]}</Text>
             </View>
           )}
         </ScrollView>

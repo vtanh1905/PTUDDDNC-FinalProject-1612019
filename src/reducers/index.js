@@ -12,6 +12,8 @@ import API_Course_In_Browse from './course/API_Course_In_Browse';
 import API_Category_All from './category/API_Category_All';
 import API_Category_GetCourse from './category/API_Category_GetCourse';
 
+import API_Instructor_GetAll from './instructor/API_Instructor_GetAll';
+
 export default combineReducers({
     // User
     API_User_Login,
@@ -27,5 +29,7 @@ export default combineReducers({
     //Category
     API_Category_All,
     API_Category_GetCourse,
-    API_User_Status_With_Course
+    API_User_Status_With_Course,
+
+    API_Instructor_GetAll,
 });

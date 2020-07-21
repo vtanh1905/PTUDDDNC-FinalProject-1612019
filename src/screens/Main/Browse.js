@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Req_Category_All } from '../../reducers/category/API_Category_All'
+import { Req_Instructor_GetAll } from '../../reducers/instructor/API_Instructor_GetAll'
 
 import ListTag from 'components/ListView/ListTag'
 
@@ -15,10 +16,11 @@ import { SKILLS, AUTHORS, PATHS } from '../../assets/data'
 import ThemeContext from '../../contexts/ThemeContext'
 
 function Browse(props) {
-  const { navigation, API_Category_All, Req_Category_All } = props;
+  const { navigation, API_Category_All, Req_Category_All, Req_Instructor_GetAll, API_Instructor_GetAll } = props;
   const { themeLight } = useContext(ThemeContext)
   useEffect(() => {
     Req_Category_All();
+    Req_Instructor_GetAll();
   }, [])
 
   return (
@@ -85,10 +87,12 @@ function Browse(props) {
         }
 
 
+        {!API_Instructor_GetAll.loading && API_Instructor_GetAll.data !== null &&
+          <View style={{ marginTop: 15 }}>
+            <ListAuthor title="Top Author" data={API_Instructor_GetAll.data} lightTheme={themeLight.isLightTheme} />
+          </View>
+        }
 
-        <View style={{ marginTop: 15 }}>
-          <ListAuthor title="Top Author" data={AUTHORS} lightTheme={themeLight.isLightTheme} />
-        </View>
       </View >
     </ScrollView>
   )
@@ -99,7 +103,8 @@ const mapStatetoProps = state => {
 };
 
 const mapDispathtoProps = {
-  Req_Category_All
+  Req_Category_All,
+  Req_Instructor_GetAll
 };
 
 export default connect(
