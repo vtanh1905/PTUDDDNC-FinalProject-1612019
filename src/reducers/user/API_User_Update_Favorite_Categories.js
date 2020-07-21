@@ -3,9 +3,9 @@ import { AsyncStorage } from 'react-native';
 const action = (type, payload) => ({ type, payload });
 
 const type = {
-  LOADING_ME: "LOADING_ME",
-  LOADED_ME: "LOADED_ME",
-  LOADERR_ME: "LOADERR_ME"
+  LOADING_UPDATE_FAVORITE_CATEGORIES: "LOADING_UPDATE_FAVORITE_CATEGORIES",
+  LOADED_UPDATE_FAVORITE_CATEGORIES: "LOADED_UPDATE_FAVORITE_CATEGORIES",
+  LOADERR_UPDATE_FAVORITE_CATEGORIES: "LOADERR_UPDATE_FAVORITE_CATEGORIES"
 }
 
 const initialStates = {
@@ -20,13 +20,13 @@ const initialStates = {
 
 export default function reducer(state = initialStates, actions) {
   switch (actions.type) {
-    case type.LOADING_ME:
+    case type.LOADING_UPDATE_FAVORITE_CATEGORIES:
       return {
         ...state,
         loading: true,
       };
 
-    case type.LOADED_ME:
+    case type.LOADED_UPDATE_FAVORITE_CATEGORIES:
       return {
         ...state,
         loading: false,
@@ -37,7 +37,7 @@ export default function reducer(state = initialStates, actions) {
         },
       };
 
-    case type.LOADERR_ME:
+    case type.LOADERR_UPDATE_FAVORITE_CATEGORIES:
       return {
         ...state,
         loading: false,
@@ -51,21 +51,21 @@ export default function reducer(state = initialStates, actions) {
   }
 }
 
-export const Req_User_Me = () => {
+export const Req_User_Update_Favorite_Categories = (categoryIds) => {
   return async dispatch => {
-    dispatch(action(type.LOADING_ME));
-    return await axios.get('https://api.itedu.me/user/me', {
+    dispatch(action(type.LOADING_UPDATE_FAVORITE_CATEGORIES));
+    return await axios.put('https://api.itedu.me/user/update-favorite-categories', {
+      "categoryIds": categoryIds,
+    }, {
       headers: {
         "Authorization": "Bearer " + await AsyncStorage.getItem('token')
       }
+    }).then((res) => {
+      dispatch(action(type.LOADED_UPDATE_FAVORITE_CATEGORIES, { data: res.data }));
+      return res;
+    }).catch((err) => {
+      dispatch(action(type.LOADERR_UPDATE_FAVORITE_CATEGORIES, { error: err.response }));
+      return err.response;
     })
-      .then((res) => {
-        dispatch(action(type.LOADED_ME, { data: res.data }));
-        console.log(res);
-        return res;
-      }).catch((err) => {
-        dispatch(action(type.LOADERR_ME, { error: err.response }));
-        return err.response;
-      })
   };
 };
