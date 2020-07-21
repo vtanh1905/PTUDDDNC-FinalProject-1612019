@@ -1,5 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { Req_Category_All } from '../../reducers/category/API_Category_All'
 
 import ListTag from 'components/ListView/ListTag'
 
@@ -13,8 +15,11 @@ import { SKILLS, AUTHORS, PATHS } from '../../assets/data'
 import ThemeContext from '../../contexts/ThemeContext'
 
 function Browse(props) {
-  const { navigation } = props;
+  const { navigation, API_Category_All, Req_Category_All } = props;
   const { themeLight } = useContext(ThemeContext)
+  useEffect(() => {
+    Req_Category_All();
+  }, [])
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -70,13 +75,16 @@ function Browse(props) {
 
         </View>
 
-        <View style={{ marginVertical: 15 }}>
+        {/* <View style={{ marginVertical: 15 }}>
           <ListTag title="Popular Skill" data={SKILLS} lightTheme={themeLight.isLightTheme} />
-        </View>
+        </View> */}
+        {!API_Category_All.loading && API_Category_All.data !== null &&
+          <View style={{ marginVertical: 15 }}>
+            <ListPath title="Category" data={API_Category_All.data} navigation={navigation} lightTheme={themeLight.isLightTheme} />
+          </View>
+        }
 
-        <View style={{ marginVertical: 15 }}>
-          <ListPath title="Paths" data={PATHS} navigation={navigation} lightTheme={themeLight.isLightTheme} />
-        </View>
+
 
         <View style={{ marginTop: 15 }}>
           <ListAuthor title="Top Author" data={AUTHORS} lightTheme={themeLight.isLightTheme} />
@@ -86,4 +94,16 @@ function Browse(props) {
   )
 }
 
-export default Browse
+const mapStatetoProps = state => {
+  return state;
+};
+
+const mapDispathtoProps = {
+  Req_Category_All
+};
+
+export default connect(
+  mapStatetoProps,
+  mapDispathtoProps,
+)(Browse);
+

@@ -4,23 +4,34 @@ import { Badge } from 'react-native-paper';
 
 import Path from './Path'
 
+
+
 function ListPath(props) {
   const { title, data, lightTheme, navigation } = props;
 
+  const renderPaths = () => {
+    let temp = [];
+    for (let i = 0; i < data.length; i += 2) {
+      temp.push(
+        <View style={styles.card} key={i}>
+          <Path data={data[i]} image={data[i].image} navigation={navigation} lightTheme={lightTheme} />
+          <View style={{ height: 20 }}></View>
+          {i + 1 < data.length ? <Path data={data[i + 1]} navigation={navigation} lightTheme={lightTheme} /> : <></>}
+        </View>
+      );
+    }
+    return temp;
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={{ fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>{title}</Text>
-        <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => navigation.navigate('Paths')}>See all</Badge>
+        {/* <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => navigation.navigate('Paths')}>See all</Badge> */}
       </View>
       <View style={styles.listCard}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-          {data.map((course, index) => (
-            <View style={styles.card} key={index}>
-              <Path image={course.image} title={course.title} subTitle={course.subTitle} navigation={navigation} lightTheme={lightTheme} />
-            </View>
-          ))}
+          {renderPaths()}
         </ScrollView>
       </View>
     </View >

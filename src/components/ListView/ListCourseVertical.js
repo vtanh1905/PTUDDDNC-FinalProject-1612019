@@ -9,7 +9,11 @@ function ListCourses(props) {
 
   return (
     <View>
-      {title ? <Text style={{ fontWeight: "bold", padding: 10, fontSize: 25, color: lightTheme ? "#000000" : "#FFFFFF" }}>{title}</Text> : <></>}
+      {title &&
+        <View>
+          <Text style={{ fontWeight: "bold", padding: 10, fontSize: 25, color: lightTheme ? "#000000" : "#FFFFFF" }}>{title}</Text>
+        </View>
+      }
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           {data.map((course, index) => (

@@ -7,6 +7,9 @@ import API_User_Change_Pass from './user/API_User_Change_Pass';
 
 import API_Course_In_Browse from './course/API_Course_In_Browse';
 
+import API_Category_All from './category/API_Category_All';
+import API_Category_GetCourse from './category/API_Category_GetCourse';
+
 export default combineReducers({
     // User
     API_User_Login,
@@ -16,5 +19,9 @@ export default combineReducers({
     API_User_Change_Pass,
 
     // Course
-    API_Course_In_Browse
+    API_Course_In_Browse,
+
+    //Category
+    API_Category_All,
+    API_Category_GetCourse,
 });
