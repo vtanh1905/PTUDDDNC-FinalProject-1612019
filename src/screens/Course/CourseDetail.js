@@ -113,10 +113,10 @@ function CourseDetail(props) {
           <TabView
             lightTheme={themeLight.isLightTheme}
             routes={[
-              { key: 'CONTENTS', title: 'CONTENTS' },
-              { key: 'TRANSCRIPT', title: 'TRANSCRIPT' },
+              { key: 'CONTENTS', title: 'Bài học' },
+              { key: 'TRANSCRIPT', title: 'Tài liệu' },
             ]}
-            scenes={[() => <ListLesson data={API_Course_GetDetail.data.section[0].lesson} lightTheme={themeLight.isLightTheme} />, () => <Transcript lightTheme={themeLight.isLightTheme} />]}
+            scenes={[() => <ListLesson data={API_Course_GetDetail.data.section} lightTheme={themeLight.isLightTheme} />, () => <Transcript lightTheme={themeLight.isLightTheme} />]}
           />
         </View>
       </ScrollView>
