@@ -5,11 +5,13 @@ import ListCourseHorizontal from 'components/ListView/ListCourseHorizontal'
 
 import { LISTCOURSES } from '../../assets/data'
 import ThemeContext from '../../contexts/ThemeContext'
+import UserContext from '../../contexts/UserContext'
 
 function Home(props) {
   const { navigation } = props;
   const { themeLight } = useContext(ThemeContext)
-
+  const { user } = useContext(UserContext)
+  console.log(user);
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>

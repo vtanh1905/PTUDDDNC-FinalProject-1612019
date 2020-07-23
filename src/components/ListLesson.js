@@ -38,17 +38,22 @@ const list = [
   },
 ]
 
+function formatTime(totalHour) {
+  return Math.floor(totalHour * 60) + " phút " + Math.ceil(((totalHour * 60) % 1) * 60) + " giây"
+}
+
+
 function ListLesson(props) {
-  const { lightTheme } = props;
+  const { lightTheme, data } = props;
   return (
     <View>
       {
-        list.map((l, i) => (
+        data.map((l, i) => (
           <ListItem
             key={i}
-            leftAvatar={{ source: { uri: l.avatar_url }, rounded: false }}
-            title={l.name}
-            subtitle={l.subtitle}
+            leftAvatar={{ source: { uri: 'https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png' }, rounded: false }}
+            title={l.numberOrder + ". " + l.name}
+            subtitle={formatTime(l.hours)}
             bottomDivider
             titleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
             linearGradientProps={!lightTheme ? {

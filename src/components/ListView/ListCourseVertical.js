@@ -39,7 +39,7 @@ function ListCourses(props) {
                     </View>
                   </View>
                 )}
-              // onPress={() => navigation.navigate('CourseDetail', { data: course })}
+                onPress={() => navigation.navigate('CourseDetail', { data: course })}
 
               />
             </View>
