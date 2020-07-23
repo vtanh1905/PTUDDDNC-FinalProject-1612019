@@ -17,20 +17,20 @@ function ListLesson(props) {
       {
         data.map((s, i) => (
           <>
-            <Text style={{ fontWeight: "bold", borderBottomWidth: 1, borderBottomColor: "gray", paddingHorizontal: 10, paddingVertical: 10 }}>Chương {i + 1}: {s.name}</Text>
+            <Text key={i} style={{ fontWeight: "bold", borderBottomWidth: 1, borderBottomColor: "gray", paddingHorizontal: 10, paddingVertical: 10, fontSize: 16 }}>Chương {i + 1}: {s.name}</Text>
             {
               s.lesson.map((l, j) => (
                 <ListItem
                   key={j}
                   leftAvatar={{ source: { uri: 'https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png' }, rounded: false }}
-                  title={l.numberOrder + ". " + l.name}
+                  title={`${i + 1}.${j + 1}: ${l.name}`}
                   subtitle={formatTime(l.hours)}
                   bottomDivider
-                  titleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
+                  titleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF", fontWeight: "bold", fontSize: 14 }}
                   linearGradientProps={!lightTheme ? {
                     colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
                   } : null}
-                  subtitleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
+                  subtitleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF", fontSize: 11 }}
                   onPress={() => console.log("123123")}
                 />
               ))
