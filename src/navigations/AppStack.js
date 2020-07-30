@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 import AuthStack from './AuthStack'
 import DashboardStack from './DashboardStack'
 import ThemeContext from '../contexts/ThemeContext'
-
+import SplashScreen from '../screens/SplashScreen'
 
 const MyDarkTheme = {
   ...DarkTheme,
@@ -29,6 +29,7 @@ function AppStack(props) {
       {/* {!themeLight.isLightTheme ? <StatusBar backgroundColor={themeLight.styles.background2.backgroundColor} barStyle={'light-content'} /> : <></>} */}
       <StatusBar backgroundColor={themeLight.isLightTheme ? '#FFFFFF' : 'rgb(60, 63, 68)'} barStyle={themeLight.isLightTheme ? 'dark-content' : 'light-content'} />
       <Stack.Navigator headerMode={"none"}>
+        <Stack.Screen name="SPLASHSCREEN" component={SplashScreen} />
         <Stack.Screen name="AUTHSTACK" component={AuthStack} />
         <Stack.Screen name="DashboardStack" component={DashboardStack} />
       </Stack.Navigator>

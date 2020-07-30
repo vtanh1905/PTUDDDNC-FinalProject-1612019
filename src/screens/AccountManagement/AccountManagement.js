@@ -21,7 +21,7 @@ const list = [
   {
     title: 'Logout',
     icon: 'keyboard-return',
-    screenNext: 'Introduce'
+    screenNext: 'AUTHSTACK'
   },
 ]
 
@@ -56,8 +56,10 @@ function AccountManagement(props) {
             onPress={async () => {
               if (item.title === 'Logout') {
                 await AsyncStorage.removeItem("token");
+                navigation.replace(item.screenNext)
+              } else {
+                navigation.navigate(item.screenNext)
               }
-              navigation.navigate(item.screenNext)
             }}
           />
         ))

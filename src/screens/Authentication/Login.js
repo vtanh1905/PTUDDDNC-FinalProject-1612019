@@ -53,7 +53,7 @@ function Login(props) {
                   Toast('Login Successfully');
                   setInputEmail("");
                   setInputPassword("");
-                  navigation.navigate('DashboardStack');
+                  navigation.replace('DashboardStack');
                 } else if (res.status === 400) {
                   Toast('Username or Password is not correct');
                 }
