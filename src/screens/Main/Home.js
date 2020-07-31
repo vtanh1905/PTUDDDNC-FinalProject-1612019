@@ -11,7 +11,7 @@ function Home(props) {
   const { navigation } = props;
   const { themeLight } = useContext(ThemeContext)
   const { user } = useContext(UserContext)
-  console.log(user);
+
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>

@@ -6,6 +6,7 @@ import API_User_Me from './user/API_User_Me';
 import API_User_Change_Pass from './user/API_User_Change_Pass';
 import API_User_Status_With_Course from './user/API_User_Status_With_Course';
 import API_User_Update_Favorite_Categories from './user/API_User_Update_Favorite_Categories';
+import API_User_Get_Favorite_Courses from './user/API_User_Get_Favorite_Courses';
 
 import API_Course_In_Browse from './course/API_Course_In_Browse';
 import API_Course_GetDetail from './course/API_Course_GetDetail';
@@ -23,6 +24,7 @@ export default combineReducers({
     API_User_Me,
     API_User_Change_Pass,
     API_User_Update_Favorite_Categories,
+    API_User_Get_Favorite_Courses,
 
     // Course
     API_Course_In_Browse,

@@ -21,13 +21,14 @@ import { connect } from 'react-redux';
 import { Req_Course_GetDetail } from '../../reducers/course/API_Course_GetDetail'
 import { Req_User_Status_With_Course } from '../../reducers/user/API_User_Status_With_Course'
 import { Req_User_Like_Course } from '../../reducers/user/API_User_Like_Course'
+import { Req_User_Get_Favorite_Courses } from '../../reducers/user/API_User_Get_Favorite_Courses'
 
 function formatTime(totalHour) {
   return Math.floor(totalHour * 60) + " phút " + Math.ceil(((totalHour * 60) % 1) * 60) + " giây"
 }
 
 function CourseDetail(props) {
-  const { navigation, route, API_Course_GetDetail, Req_Course_GetDetail, Req_User_Status_With_Course, API_User_Status_With_Course, Req_User_Like_Course } = props;
+  const { navigation, route, API_Course_GetDetail, Req_Course_GetDetail, Req_User_Status_With_Course, API_User_Status_With_Course, Req_User_Like_Course, Req_User_Get_Favorite_Courses } = props;
   const { data } = route.params;
   const { themeLight } = useContext(ThemeContext)
   const { user } = useContext(UserContext)
@@ -99,6 +100,7 @@ function CourseDetail(props) {
                 Req_User_Like_Course(data.id).then((res) => {
                   if (res.status === 200) {
                     setStatusLikeCourse(res.data.likeStatus)
+                    Req_User_Get_Favorite_Courses();
                   }
                 })
               }}
@@ -148,7 +150,8 @@ const mapStatetoProps = state => {
 const mapDispathtoProps = {
   Req_Course_GetDetail,
   Req_User_Status_With_Course,
-  Req_User_Like_Course
+  Req_User_Like_Course,
+  Req_User_Get_Favorite_Courses
 };
 
 export default connect(
