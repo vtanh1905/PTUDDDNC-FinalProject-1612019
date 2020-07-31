@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, Text, ScrollView, ActivityIndicator } from 'react-native'
 import { Video } from 'expo-av'
 import VideoPlayer from 'expo-video-player'
@@ -7,6 +7,7 @@ import { Rating, Avatar } from 'react-native-elements';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import Toast from 'components/Toast'
 
 import ButtonDefault from 'components/Button/ButtonDefault'
 import BadgeIcon from 'components/BadgeIcon'
@@ -18,28 +19,36 @@ import UserContext from '../../contexts/UserContext'
 
 import { connect } from 'react-redux';
 import { Req_Course_GetDetail } from '../../reducers/course/API_Course_GetDetail'
+import { Req_User_Status_With_Course } from '../../reducers/user/API_User_Status_With_Course'
+import { Req_User_Like_Course } from '../../reducers/user/API_User_Like_Course'
 
 function formatTime(totalHour) {
   return Math.floor(totalHour * 60) + " phút " + Math.ceil(((totalHour * 60) % 1) * 60) + " giây"
 }
 
 function CourseDetail(props) {
-  const { navigation, route, API_Course_GetDetail, Req_Course_GetDetail } = props;
+  const { navigation, route, API_Course_GetDetail, Req_Course_GetDetail, Req_User_Status_With_Course, API_User_Status_With_Course, Req_User_Like_Course } = props;
   const { data } = route.params;
   const { themeLight } = useContext(ThemeContext)
   const { user } = useContext(UserContext)
+  const [statusLikeCourse, setStatusLikeCourse] = useState(false)
   useEffect(() => {
     Req_Course_GetDetail(data.id, user.id)
+    Req_User_Status_With_Course(data.id).then((res) => {
+      if (res.status === 200) {
+        setStatusLikeCourse(res.data.likeStatus)
+      }
+    })
   }, [])
 
-  if (API_Course_GetDetail.loading || API_Course_GetDetail.data === null) {
+  if (API_Course_GetDetail.loading || API_Course_GetDetail.data === null || API_User_Status_With_Course.loading || API_User_Status_With_Course.data === null) {
     return (
       <View style={{ height: '85%', justifyContent: "center", alignContent: "center" }}>
         <ActivityIndicator color="#0069D9" size={100} />
       </View>
     )
   }
-  console.log(API_Course_GetDetail.data.section);
+  // console.log(API_User_Status_With_Course.data);
   return (
     <View style={styles.container}>
       <IconFontAwesome name="chevron-down" size={20} style={{ color: 'white', position: 'absolute', top: 16, left: 23, zIndex: 99 }} onPress={() => navigation.goBack()} />
@@ -83,9 +92,16 @@ function CourseDetail(props) {
           <Divider />
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
             <BadgeIcon
-              icon={<IconAntDesign name="star" size={30} style={{ color: 'white' }} />}
+              icon={<IconAntDesign name="star" size={30} style={{ color: `${statusLikeCourse ? '#F0CA02' : 'white'}` }} />}
               title='Favorite'
               lightTheme={themeLight.isLightTheme}
+              onPress={() => {
+                Req_User_Like_Course(data.id).then((res) => {
+                  if (res.status === 200) {
+                    setStatusLikeCourse(res.data.likeStatus)
+                  }
+                })
+              }}
             />
             <BadgeIcon
               icon={<IconEntypo name="signal" size={30} style={{ color: 'white' }} />}
@@ -130,7 +146,9 @@ const mapStatetoProps = state => {
 };
 
 const mapDispathtoProps = {
-  Req_Course_GetDetail
+  Req_Course_GetDetail,
+  Req_User_Status_With_Course,
+  Req_User_Like_Course
 };
 
 export default connect(
