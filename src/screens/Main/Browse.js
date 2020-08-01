@@ -89,7 +89,7 @@ function Browse(props) {
 
         {!API_Instructor_GetAll.loading && API_Instructor_GetAll.data !== null &&
           <View style={{ marginTop: 15 }}>
-            <ListAuthor title="Top Author" data={API_Instructor_GetAll.data} lightTheme={themeLight.isLightTheme} />
+            <ListAuthor title="Author" data={API_Instructor_GetAll.data} navigation={navigation} lightTheme={themeLight.isLightTheme} />
           </View>
         }
 

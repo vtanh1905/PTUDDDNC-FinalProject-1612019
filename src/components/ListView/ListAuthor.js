@@ -1,9 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements';
 
 function ListAuthor(props) {
-  const { title, lightTheme, data } = props;
+  const { title, lightTheme, data, navigation } = props;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -12,7 +12,7 @@ function ListAuthor(props) {
       <View style={styles.listTag}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
           {data.map((item, index) =>
-            <View style={{ paddingHorizontal: 5 }} key={index}>
+            <TouchableOpacity style={{ paddingHorizontal: 5 }} key={index} onPress={() => navigation.navigate('AuthorDetail', { data: item, lightTheme: lightTheme })}>
               <Avatar
                 rounded
                 size={100}
@@ -21,7 +21,7 @@ function ListAuthor(props) {
                 }}
               />
               <Text style={{ textAlign: "center", fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>{item["user.name"]}</Text>
-            </View>
+            </TouchableOpacity>
           )}
         </ScrollView>
       </View>
