@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, Text, ScrollView, ActivityIndicator } from 'react-native'
-import { Video } from 'expo-av'
-import VideoPlayer from 'expo-video-player'
+
 import { Badge, Divider, Chip } from 'react-native-paper';
 import { Rating, Avatar } from 'react-native-elements';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
@@ -9,6 +8,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import Toast from 'components/Toast'
 
+import PlayVideo from '../../components/PlayVideo'
 import ButtonDefault from 'components/Button/ButtonDefault'
 import BadgeIcon from 'components/BadgeIcon'
 import TabView from 'components/TabView'
@@ -22,6 +22,7 @@ import { Req_Course_GetDetail } from '../../reducers/course/API_Course_GetDetail
 import { Req_User_Status_With_Course } from '../../reducers/user/API_User_Status_With_Course'
 import { Req_User_Like_Course } from '../../reducers/user/API_User_Like_Course'
 import { Req_User_Get_Favorite_Courses } from '../../reducers/user/API_User_Get_Favorite_Courses'
+
 
 function formatTime(totalHour) {
   return Math.floor(totalHour * 60) + " phút " + Math.ceil(((totalHour * 60) % 1) * 60) + " giây"
@@ -49,31 +50,14 @@ function CourseDetail(props) {
       </View>
     )
   }
-  // console.log(API_User_Status_With_Course.data);
+  console.log(API_Course_GetDetail.data.id);
   return (
     <View style={styles.container}>
       <IconFontAwesome name="chevron-down" size={20} style={{ color: 'white', position: 'absolute', top: 16, left: 23, zIndex: 99 }} onPress={() => navigation.goBack()} />
-      <View>
-        <VideoPlayer
-          height={225}
-          showFullscreenButton={false}
-
-          videoProps={{
-            shouldPlay: false,
-            resizeMode: Video.RESIZE_MODE_STRETCH,
-            source: {
-              // uri: "https://youtube.com/embed/E-LUKWIBNmY"
-              uri: API_Course_GetDetail.data.promoVidUrl
-            }
-
-          }}
-        // switchToLandscape={() => {
-        //   changeScreenOrientation('LANDSCAPE');
-        //   setCurrentOrientation('LANDSCAPE');
-        // }}
-        // switchToPortrait={() => changeScreenOrientation('PORTRAIT')}
-        />
-      </View>
+      <PlayVideo
+        // urlVideo={API_Course_GetDetail.data.promoVidUrl}
+        urlVideo="https://www.youtube.com/watch?v=o4NSbpJ4VdE"
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
           <Text style={{ fontSize: 27, fontWeight: "bold", ...themeLight.styles.text }}>{data.title}</Text>
