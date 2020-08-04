@@ -55,8 +55,7 @@ function CourseDetail(props) {
     <View style={styles.container}>
       <IconFontAwesome name="chevron-down" size={20} style={{ color: 'white', position: 'absolute', top: 16, left: 23, zIndex: 99 }} onPress={() => navigation.goBack()} />
       <PlayVideo
-        // urlVideo={API_Course_GetDetail.data.promoVidUrl}
-        urlVideo="https://www.youtube.com/watch?v=o4NSbpJ4VdE"
+        urlVideo={API_Course_GetDetail.data.promoVidUrl}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>

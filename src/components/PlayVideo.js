@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { Video } from 'expo-av'
 import VideoPlayer from 'expo-video-player'
-
+import { WebView } from 'react-native-webview'
 function PlayVideo(props) {
   const { urlVideo } = props;
 
@@ -45,8 +45,13 @@ function PlayVideo(props) {
   // urlVideo Youtuble
   if (/www\.youtube\.com/.test(urlVideo)) {
     return (
-      <View>
-        <Text>123123</Text>
+      <View style={{ height: 225 }}>
+        <WebView
+          // style={styles.WebViewContainer}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          source={{ uri: 'https://www.youtube.com/embed/YE7VzlLtp-4' }}
+        />
       </View>
     )
   }
