@@ -16,13 +16,14 @@ import ListLesson from 'components/ListLesson'
 import Transcript from './Transcript'
 import ThemeContext from '../../contexts/ThemeContext'
 import UserContext from '../../contexts/UserContext'
+import ListCourseHorizontal from 'components/ListView/ListCourseHorizontal'
 
 import { connect } from 'react-redux';
 import { Req_Course_GetDetail } from '../../reducers/course/API_Course_GetDetail'
 import { Req_User_Status_With_Course } from '../../reducers/user/API_User_Status_With_Course'
 import { Req_User_Like_Course } from '../../reducers/user/API_User_Like_Course'
 import { Req_User_Get_Favorite_Courses } from '../../reducers/user/API_User_Get_Favorite_Courses'
-
+import { LISTCOURSES } from '../../assets/data'
 
 function formatTime(totalHour) {
   return Math.floor(totalHour * 60) + " phút " + Math.ceil(((totalHour * 60) % 1) * 60) + " giây"
@@ -57,6 +58,7 @@ function CourseDetail(props) {
   }
   console.log("Course ID : " + API_Course_GetDetail.data.id);
   console.log("User ID : " + user.id);
+
   return (
     <View style={styles.container}>
       <IconFontAwesome name="chevron-down" size={20} style={{ color: 'white', position: 'absolute', top: 16, left: 23, zIndex: 99 }} onPress={() => navigation.goBack()} />
@@ -126,6 +128,8 @@ function CourseDetail(props) {
             scenes={[() => <ListLesson data={API_Course_GetDetail.data.section} lightTheme={themeLight.isLightTheme} urlVideo={urlVideo} setUrlVideo={setUrlVideo} />, () => <Transcript lightTheme={themeLight.isLightTheme} />]}
           />
         </View>
+
+        <ListCourseHorizontal title={"Other Courses"} data={API_Course_GetDetail.data.coursesLikeCategory} navigation={navigation} lightTheme={themeLight.isLightTheme} showSeeAll={false} />
       </ScrollView>
 
     </View>
