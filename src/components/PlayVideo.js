@@ -15,33 +15,6 @@ function PlayVideo(props) {
     )
   }
 
-  // urlVideo mp4
-  if (/\.mp4$/.test(urlVideo) || /\.mov$/.test(urlVideo)) {
-    return (
-      <View>
-        <VideoPlayer
-          height={225}
-          showFullscreenButton={false}
-
-          videoProps={{
-            shouldPlay: false,
-            resizeMode: Video.RESIZE_MODE_STRETCH,
-            source: {
-              // uri: "https://youtube.com/embed/E-LUKWIBNmY"
-              uri: urlVideo
-            }
-
-          }}
-        // switchToLandscape={() => {
-        //   changeScreenOrientation('LANDSCAPE');
-        //   setCurrentOrientation('LANDSCAPE');
-        // }}
-        // switchToPortrait={() => changeScreenOrientation('PORTRAIT')}
-        />
-      </View>
-    )
-  }
-
   // urlVideo Youtuble
   if (/www\.youtube\.com/.test(urlVideo)) {
     return (
@@ -58,8 +31,26 @@ function PlayVideo(props) {
 
   //Error
   return (
-    <View style={{ height: 225, backgroundColor: "#000000", alignItems: "center", justifyContent: "center" }}>
-      <Text style={{ color: "#FFFFFF", fontSize: 30 }}>Error</Text>
+    <View>
+      <VideoPlayer
+        height={225}
+        showFullscreenButton={false}
+
+        videoProps={{
+          shouldPlay: false,
+          resizeMode: Video.RESIZE_MODE_STRETCH,
+          source: {
+            // uri: "https://youtube.com/embed/E-LUKWIBNmY"
+            uri: urlVideo
+          }
+
+        }}
+      // switchToLandscape={() => {
+      //   changeScreenOrientation('LANDSCAPE');
+      //   setCurrentOrientation('LANDSCAPE');
+      // }}
+      // switchToPortrait={() => changeScreenOrientation('PORTRAIT')}
+      />
     </View>
   )
 }

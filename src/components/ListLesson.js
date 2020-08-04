@@ -11,7 +11,7 @@ function formatTime(totalHour) {
 
 
 function ListLesson(props) {
-  const { lightTheme, data } = props;
+  const { lightTheme, data, urlVideo, setUrlVideo } = props;
   return (
     <View>
       {
@@ -21,8 +21,8 @@ function ListLesson(props) {
             {
               s.lesson.map((l, j) => (
                 <ListItem
-                  key={j}
-                  leftAvatar={{ source: { uri: 'https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png' }, rounded: false }}
+                  key={i + " " + j}
+                  leftAvatar={{ source: { uri: "https://www.pngkey.com/png/detail/200-2009668_february-2016-survey-on-dr-lessons-icon.png" }, rounded: false }}
                   title={`${i + 1}.${j + 1}: ${l.name}`}
                   subtitle={formatTime(l.hours)}
                   bottomDivider
@@ -31,7 +31,7 @@ function ListLesson(props) {
                     colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
                   } : null}
                   subtitleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF", fontSize: 11 }}
-                  onPress={() => console.log("123123")}
+                  onPress={() => setUrlVideo(l.videoUrl)}
                 />
               ))
             }

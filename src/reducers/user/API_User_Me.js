@@ -53,6 +53,7 @@ export default function reducer(state = initialStates, actions) {
 
 export const Req_User_Me = () => {
   return async dispatch => {
+    console.log(await AsyncStorage.getItem('token'));
     dispatch(action(type.LOADING_ME));
     return await axios.get('https://api.itedu.me/user/me', {
       headers: {

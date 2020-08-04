@@ -34,8 +34,13 @@ function CourseDetail(props) {
   const { themeLight } = useContext(ThemeContext)
   const { user } = useContext(UserContext)
   const [statusLikeCourse, setStatusLikeCourse] = useState(false)
+  const [urlVideo, setUrlVideo] = useState(null)
   useEffect(() => {
-    Req_Course_GetDetail(data.id, user.id)
+    Req_Course_GetDetail(data.id, user.id).then(res => {
+      if (res.status === 200) {
+        setUrlVideo(res.data.payload.promoVidUrl)
+      }
+    })
     Req_User_Status_With_Course(data.id).then((res) => {
       if (res.status === 200) {
         setStatusLikeCourse(res.data.likeStatus)
@@ -50,12 +55,13 @@ function CourseDetail(props) {
       </View>
     )
   }
-  console.log(API_Course_GetDetail.data.id);
+  console.log("Course ID : " + API_Course_GetDetail.data.id);
+  console.log("User ID : " + user.id);
   return (
     <View style={styles.container}>
       <IconFontAwesome name="chevron-down" size={20} style={{ color: 'white', position: 'absolute', top: 16, left: 23, zIndex: 99 }} onPress={() => navigation.goBack()} />
       <PlayVideo
-        urlVideo={API_Course_GetDetail.data.promoVidUrl}
+        urlVideo={urlVideo}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
@@ -117,7 +123,7 @@ function CourseDetail(props) {
               { key: 'CONTENTS', title: 'Bài học' },
               { key: 'TRANSCRIPT', title: 'Tài liệu' },
             ]}
-            scenes={[() => <ListLesson data={API_Course_GetDetail.data.section} lightTheme={themeLight.isLightTheme} />, () => <Transcript lightTheme={themeLight.isLightTheme} />]}
+            scenes={[() => <ListLesson data={API_Course_GetDetail.data.section} lightTheme={themeLight.isLightTheme} urlVideo={urlVideo} setUrlVideo={setUrlVideo} />, () => <Transcript lightTheme={themeLight.isLightTheme} />]}
           />
         </View>
       </ScrollView>
