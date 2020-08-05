@@ -18,6 +18,7 @@ import ChangePassword from '../screens/AccountManagement/ChangePassword'
 import ListCourses from '../screens/Course/ListCourses'
 import CourseDetail from '../screens/Course/CourseDetail'
 import ListCoursesImage from '../screens/Course/ListCoursesImage'
+import ListCoursesHasData from '../screens/Course/ListCoursesHasData'
 
 // Path
 import ListPaths from '../screens/Path/ListPaths'
@@ -77,6 +78,7 @@ function DashboardStack() {
       <Stack.Screen name="Change Password" component={ChangePassword} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
       <Stack.Screen name="Setting" component={Setting} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
       <Stack.Screen name="ListCourses" component={ListCourses} options={{ title: '', ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
+      <Stack.Screen name="ListCoursesHasData" component={ListCoursesHasData} options={{ title: '', ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
       <Stack.Screen name="CourseDetail" component={CourseDetail} options={{ headerShown: false, ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
       <Stack.Screen name="Paths" component={ListPaths} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
       <Stack.Screen name="PathDetail" component={PathDetail} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />

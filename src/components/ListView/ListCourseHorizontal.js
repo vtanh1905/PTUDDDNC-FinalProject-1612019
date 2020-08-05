@@ -14,7 +14,7 @@ function ListCourseHorizontal(props) {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={{ fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>{title}</Text>
-        {showSeeAll === undefined ? <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => navigation.navigate('ListCourses', { title, data })}>See all</Badge> : <></>}
+        {showSeeAll === undefined ? <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => navigation.navigate('ListCoursesHasData', { title, data })}>See all</Badge> : <></>}
       </View>
       <View style={styles.listCard}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
