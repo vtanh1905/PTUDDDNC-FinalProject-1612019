@@ -42,8 +42,8 @@ function BottonTabStack() {
       }}
     >
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Download" component={Download} />
       <Tab.Screen name="Fauvorite" component={Fauvorite} />
-      {/* <Tab.Screen name="Download" component={Download} /> */}
       <Tab.Screen name="Browse" component={Browse} />
       <Tab.Screen name="Search" component={Search} />
     </Tab.Navigator>
