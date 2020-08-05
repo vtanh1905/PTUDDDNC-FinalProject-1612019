@@ -10,6 +10,8 @@ import API_User_Get_Favorite_Courses from './user/API_User_Get_Favorite_Courses'
 
 import API_Course_In_Browse from './course/API_Course_In_Browse';
 import API_Course_GetDetail from './course/API_Course_GetDetail';
+import API_Course_NewRealease from './course/API_Course_NewRealease';
+import API_Course_TopRate from './course/API_Course_TopRate';
 
 import API_Category_All from './category/API_Category_All';
 import API_Category_GetCourse from './category/API_Category_GetCourse';
@@ -33,6 +35,8 @@ export default combineReducers({
     // Course
     API_Course_In_Browse,
     API_Course_GetDetail,
+    API_Course_NewRealease,
+    API_Course_TopRate,
 
     //Category
     API_Category_All,
