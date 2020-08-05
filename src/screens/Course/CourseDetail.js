@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, View, Text, ScrollView, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, Text, ScrollView, ActivityIndicator, Share } from 'react-native'
 
 import { Badge, Divider, Chip } from 'react-native-paper';
 import { Rating, Avatar } from 'react-native-elements';
@@ -97,14 +97,21 @@ function CourseDetail(props) {
               }}
             />
             <BadgeIcon
-              icon={<IconEntypo name="signal" size={30} style={{ color: 'white' }} />}
-              title='Add to channel'
-              lightTheme={themeLight.isLightTheme}
-            />
-            <BadgeIcon
               icon={<IconEntypo name="arrow-with-circle-down" size={30} style={{ color: 'white' }} />}
               title='Download'
               lightTheme={themeLight.isLightTheme}
+            />
+            <BadgeIcon
+              icon={<IconEntypo name="link" size={30} style={{ color: 'white' }} />}
+              title='Share'
+              lightTheme={themeLight.isLightTheme}
+              onPress={async () => {
+                try {
+                  await Share.share({ message: `https://itedu.me/course-detail/${data.id}` });
+                } catch (error) {
+                  alert(error.message);
+                }
+              }}
             />
           </View>
           <Divider />
