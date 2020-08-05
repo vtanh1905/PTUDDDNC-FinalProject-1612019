@@ -23,19 +23,34 @@ import { Req_Course_GetDetail } from '../../reducers/course/API_Course_GetDetail
 import { Req_User_Status_With_Course } from '../../reducers/user/API_User_Status_With_Course'
 import { Req_User_Like_Course } from '../../reducers/user/API_User_Like_Course'
 import { Req_User_Get_Favorite_Courses } from '../../reducers/user/API_User_Get_Favorite_Courses'
-import { LISTCOURSES } from '../../assets/data'
+import { Req_Register_Course } from '../../reducers/payment/API_Register_Course'
+import { Req_Get_Status_Register_Course } from '../../reducers/payment/API_Get_Status_Register_Course'
 
 function formatTime(totalHour) {
   return Math.floor(totalHour * 60) + " phút " + Math.ceil(((totalHour * 60) % 1) * 60) + " giây"
 }
 
 function CourseDetail(props) {
-  const { navigation, route, API_Course_GetDetail, Req_Course_GetDetail, Req_User_Status_With_Course, API_User_Status_With_Course, Req_User_Like_Course, Req_User_Get_Favorite_Courses } = props;
+  const {
+    navigation,
+    route,
+    API_Course_GetDetail,
+    Req_Course_GetDetail,
+    Req_User_Status_With_Course,
+    API_User_Status_With_Course,
+    Req_User_Like_Course,
+    Req_User_Get_Favorite_Courses,
+    Req_Register_Course,
+    API_Register_Course,
+    Req_Get_Status_Register_Course,
+    API_Get_Status_Register_Course
+  } = props;
   const { data } = route.params;
   const { themeLight } = useContext(ThemeContext)
   const { user } = useContext(UserContext)
   const [statusLikeCourse, setStatusLikeCourse] = useState(false)
   const [urlVideo, setUrlVideo] = useState(null)
+  const [isRegistered, setIsRegistered] = useState(false)
   useEffect(() => {
     Req_Course_GetDetail(data.id, user.id).then(res => {
       if (res.status === 200) {
@@ -45,6 +60,11 @@ function CourseDetail(props) {
     Req_User_Status_With_Course(data.id).then((res) => {
       if (res.status === 200) {
         setStatusLikeCourse(res.data.likeStatus)
+      }
+    })
+    Req_Get_Status_Register_Course(data.id).then(res => {
+      if (res.status === 200) {
+        setIsRegistered(res.data.didUserBuyCourse)
       }
     })
   }, [])
@@ -118,10 +138,16 @@ function CourseDetail(props) {
           <Text style={{ textAlign: 'justify', fontWeight: '600', paddingVertical: 15, ...themeLight.styles.text }}>
             {API_Course_GetDetail.data.description}
           </Text>
-          {/* <View style={{ width: '90%', alignSelf: 'center' }}>
-            <ButtonDefault title='Take a learning check' />
+          <View style={{ width: '90%', alignSelf: 'center' }}>
+            <ButtonDefault loading={API_Register_Course.loading} title={`${isRegistered ? "Registered" : "Register"}`} disabled={isRegistered} onPress={() => {
+              Req_Register_Course(data.id).then((res) => {
+                if (res.status === 200) {
+                  Toast("Register Successfully")
+                }
+              })
+            }} />
           </View>
-          <View style={{ width: '90%', alignSelf: 'center', marginTop: 10 }}>
+          {/* <View style={{ width: '90%', alignSelf: 'center', marginTop: 10 }}>
             <ButtonDefault title='View related paths & courses' />
           </View> */}
         </View>
@@ -151,7 +177,9 @@ const mapDispathtoProps = {
   Req_Course_GetDetail,
   Req_User_Status_With_Course,
   Req_User_Like_Course,
-  Req_User_Get_Favorite_Courses
+  Req_User_Get_Favorite_Courses,
+  Req_Register_Course,
+  Req_Get_Status_Register_Course
 };
 
 export default connect(

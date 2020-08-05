@@ -16,6 +16,10 @@ import API_Category_GetCourse from './category/API_Category_GetCourse';
 
 import API_Instructor_GetAll from './instructor/API_Instructor_GetAll';
 
+
+import API_Register_Course from './payment/API_Register_Course';
+import API_Get_Status_Register_Course from './payment/API_Get_Status_Register_Course';
+
 export default combineReducers({
     // User
     API_User_Login,
@@ -35,5 +39,10 @@ export default combineReducers({
     API_Category_GetCourse,
     API_User_Status_With_Course,
 
+    //Instructor
     API_Instructor_GetAll,
+
+    //Payment
+    API_Register_Course,
+    API_Get_Status_Register_Course
 });
