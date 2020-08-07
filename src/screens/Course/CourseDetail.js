@@ -17,6 +17,7 @@ import Transcript from './Transcript'
 import ThemeContext from '../../contexts/ThemeContext'
 import UserContext from '../../contexts/UserContext'
 import ListCourseHorizontal from 'components/ListView/ListCourseHorizontal'
+import Comments from '../../components/Comments'
 
 import { connect } from 'react-redux';
 import { Req_Course_GetDetail } from '../../reducers/course/API_Course_GetDetail'
@@ -44,7 +45,8 @@ function CourseDetail(props) {
     Req_Register_Course,
     API_Register_Course,
     Req_Get_Status_Register_Course,
-    Req_Comment_Course
+    Req_Comment_Course,
+    API_Course_Coment
   } = props;
   const { data } = route.params;
   const { themeLight } = useContext(ThemeContext)
@@ -54,10 +56,13 @@ function CourseDetail(props) {
   const [isRegistered, setIsRegistered] = useState(false)
   const [rateComment, setRateComment] = useState(3)
   const [textComment, setTextComment] = useState("")
+  const [listComments, setListComments] = useState([])
+
   useEffect(() => {
     Req_Course_GetDetail(data.id, user.id).then(res => {
       if (res.status === 200) {
         setUrlVideo(res.data.payload.promoVidUrl)
+        setListComments(res.data.payload.ratings.ratingList)
       }
     })
     Req_User_Status_With_Course(data.id).then((res) => {
@@ -167,11 +172,13 @@ function CourseDetail(props) {
 
         <View style={{ paddingHorizontal: 10 }}>
           <Text style={{ fontWeight: "bold", color: themeLight.isLightTheme ? "#000000" : "#FFFFFF" }}>Comment</Text>
-          <View>
+          <Comments data={listComments} lightTheme={themeLight.isLightTheme} />
+          <View style={{ marginTop: 5 }}>
             <TextInput
               multiline={true}
               numberOfLines={3}
               underlineColor="#000000"
+              value={textComment}
               onChange={(value) => setTextComment(value.nativeEvent.text)}
             />
             <View style={{ flex: 1 }}>
@@ -179,9 +186,20 @@ function CourseDetail(props) {
                 <AirbnbRating defaultRating={rateComment} showRating={false} size={20} onFinishRating={(value) => setRateComment(value)} />
               </View>
               <View style={{ alignItems: "flex-end", marginTop: -25 }}>
-                <ButtonDefault title="Submit" onPress={() => {
+                <ButtonDefault loading={API_Course_Coment.loading} title="Submit" onPress={() => {
+                  if (textComment === "") {
+                    Toast("Please write your comment!")
+                    return;
+                  }
                   Req_Comment_Course(data.id, rateComment, textComment).then(res => {
                     if (res.status === 200) {
+                      setListComments([...listComments, {
+                        user,
+                        content: textComment,
+                        averagePoint: rateComment,
+                      }])
+                      setRateComment(3)
+                      setTextComment("")
                       Toast("Comment Successfully")
                     }
                   })
