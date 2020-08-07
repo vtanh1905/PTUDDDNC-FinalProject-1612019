@@ -170,7 +170,7 @@ function CourseDetail(props) {
           />
         </View>
 
-        <View style={{ paddingHorizontal: 10 }}>
+        <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
           <Text style={{ fontWeight: "bold", color: themeLight.isLightTheme ? "#000000" : "#FFFFFF" }}>Comment</Text>
           <Comments data={listComments} lightTheme={themeLight.isLightTheme} />
           <View style={{ marginTop: 5 }}>
