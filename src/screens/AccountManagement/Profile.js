@@ -46,7 +46,8 @@ function Profile(props) {
   };
 
   const handleSubmit = () => {
-    Req_User_Update_Profile(textFullName, "https://cdn.trochoiviet.com/wp-content/uploads/2016/08/pikachu.jpg", textPhone).then(res => {
+    //"https://cdn.trochoiviet.com/wp-content/uploads/2016/08/pikachu.jpg"
+    Req_User_Update_Profile(textFullName, imageURL, textPhone).then(res => {
       if (res.status === 200) {
         setUser(res.data.payload)
         setCanEdit(false)
