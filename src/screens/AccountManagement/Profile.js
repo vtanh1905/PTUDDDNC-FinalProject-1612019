@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-
-import { Subheading, Title, Avatar, Divider } from 'react-native-paper';
+import React, { useContext, useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import IconFeather from 'react-native-vector-icons/Feather';
+import { Subheading, Title, Avatar, Divider, TextInput } from 'react-native-paper';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
+import ButtonClear from 'components/Button/ButtonClear'
 
 import ThemeContext from '../../contexts/ThemeContext'
 import UserContext from '../../contexts/UserContext'
@@ -12,44 +13,49 @@ function Profile(props) {
   const { navigation } = props;
   const { themeLight } = useContext(ThemeContext)
   const { user } = useContext(UserContext)
+  const [canEdit, setCanEdit] = useState(false)
+  const [textFullName, setTextFullName] = useState(user.name)
+  const [textPhone, setTextPhone] = useState(user.phone)
+
+  const handleEdit = () => {
+    setTextFullName(user.name)
+    setTextPhone(user.phone)
+    setCanEdit(!canEdit)
+  }
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.containerAvatar}>
-        <Avatar.Image size={100} source={{ uri: 'https://hinhnendephd.com/wp-content/uploads/2019/10/anh-avatar-dep.jpg' }} />
-        <View style={styles.containerUsername}>
-          <Text style={styles.username}>Anh Vu</Text>
-        </View>
-      </View> */}
+
       <View style={{ alignItems: "center", paddingVertical: 10 }}>
         <View>
           <Avatar.Image size={100} source={{ uri: user.avatar }} />
         </View>
+      </View>
 
-      </View>
+      <TouchableOpacity style={{ position: 'absolute', top: 16, right: 23, zIndex: 99 }} onPress={handleEdit}>
+        <IconFeather name="edit" size={25} style={{ color: `${canEdit ? 'gray' : '#000000'}` }} />
+      </TouchableOpacity>
+
+
       <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Full Name</Subheading>
-        <Title style={themeLight.styles.text}>{user.name}</Title>
+        <TextInput label="Email" value={user.email} disabled={true} />
       </View>
       <Divider />
 
       <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Email</Subheading>
-        <Title style={themeLight.styles.text}>{user.email}</Title>
+        <TextInput label="Full Name" value={textFullName} disabled={!canEdit} onChangeText={(value) => setTextFullName(value)} />
       </View>
       <Divider />
       <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Phone</Subheading>
-        <Title style={themeLight.styles.text}>{user.phone}</Title>
+        <TextInput label="Phone" value={textPhone} disabled={!canEdit} onChangeText={(value) => setTextPhone(value)} />
       </View>
       <Divider />
-      <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Password</Subheading>
-        <Title style={themeLight.styles.text}>***********</Title>
-      </View>
       <Divider />
       <View style={styles.fieldView}>
-        <ButtonDefault title="Change Password" onPress={() => navigation.navigate('Change Password')} />
+        {canEdit ?
+          <ButtonDefault title="Confirm" />
+          : <ButtonDefault title="Change Password" onPress={() => navigation.navigate('Change Password')} />}
+
       </View>
     </View>
   )
