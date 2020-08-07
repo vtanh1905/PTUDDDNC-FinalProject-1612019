@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, Text, ScrollView, ActivityIndicator, Share } from 'react-native'
 
-import { Badge, Divider, Chip } from 'react-native-paper';
-import { Rating, Avatar } from 'react-native-elements';
+import { Badge, Divider, Chip, TextInput } from 'react-native-paper';
+import { Rating, Avatar, AirbnbRating } from 'react-native-elements';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -25,6 +25,7 @@ import { Req_User_Like_Course } from '../../reducers/user/API_User_Like_Course'
 import { Req_User_Get_Favorite_Courses } from '../../reducers/user/API_User_Get_Favorite_Courses'
 import { Req_Register_Course } from '../../reducers/payment/API_Register_Course'
 import { Req_Get_Status_Register_Course } from '../../reducers/payment/API_Get_Status_Register_Course'
+import { Req_Comment_Course } from '../../reducers/course/API_Course_Coment'
 
 function formatTime(totalHour) {
   return Math.floor(totalHour * 60) + " phút " + Math.ceil(((totalHour * 60) % 1) * 60) + " giây"
@@ -43,7 +44,7 @@ function CourseDetail(props) {
     Req_Register_Course,
     API_Register_Course,
     Req_Get_Status_Register_Course,
-    API_Get_Status_Register_Course
+    Req_Comment_Course
   } = props;
   const { data } = route.params;
   const { themeLight } = useContext(ThemeContext)
@@ -51,6 +52,8 @@ function CourseDetail(props) {
   const [statusLikeCourse, setStatusLikeCourse] = useState(false)
   const [urlVideo, setUrlVideo] = useState(null)
   const [isRegistered, setIsRegistered] = useState(false)
+  const [rateComment, setRateComment] = useState(3)
+  const [textComment, setTextComment] = useState("")
   useEffect(() => {
     Req_Course_GetDetail(data.id, user.id).then(res => {
       if (res.status === 200) {
@@ -162,6 +165,33 @@ function CourseDetail(props) {
           />
         </View>
 
+        <View style={{ paddingHorizontal: 10 }}>
+          <Text style={{ fontWeight: "bold", color: themeLight.isLightTheme ? "#000000" : "#FFFFFF" }}>Comment</Text>
+          <View>
+            <TextInput
+              multiline={true}
+              numberOfLines={3}
+              underlineColor="#000000"
+              onChange={(value) => setTextComment(value.nativeEvent.text)}
+            />
+            <View style={{ flex: 1 }}>
+              <View style={{ alignItems: "flex-start" }}>
+                <AirbnbRating defaultRating={rateComment} showRating={false} size={20} onFinishRating={(value) => setRateComment(value)} />
+              </View>
+              <View style={{ alignItems: "flex-end", marginTop: -25 }}>
+                <ButtonDefault title="Submit" onPress={() => {
+                  Req_Comment_Course(data.id, rateComment, textComment).then(res => {
+                    if (res.status === 200) {
+                      Toast("Comment Successfully")
+                    }
+                  })
+                }} />
+              </View>
+            </View>
+          </View>
+
+        </View>
+
         <ListCourseHorizontal title={"Other Courses"} data={API_Course_GetDetail.data.coursesLikeCategory} navigation={navigation} lightTheme={themeLight.isLightTheme} showSeeAll={false} />
       </ScrollView>
 
@@ -179,7 +209,8 @@ const mapDispathtoProps = {
   Req_User_Like_Course,
   Req_User_Get_Favorite_Courses,
   Req_Register_Course,
-  Req_Get_Status_Register_Course
+  Req_Get_Status_Register_Course,
+  Req_Comment_Course
 };
 
 export default connect(
