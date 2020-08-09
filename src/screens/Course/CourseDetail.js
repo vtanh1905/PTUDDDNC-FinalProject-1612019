@@ -35,10 +35,6 @@ function formatTime(totalHour) {
   return Math.floor(totalHour * 60) + " phút " + Math.ceil(((totalHour * 60) % 1) * 60) + " giây"
 }
 
-const LinkDownLoad = "https://storage.googleapis.com/itedu-bucket/Courses/71e49280-7b15-4c13-8c89-dba079c83757/95e6b1a6-49af-4f72-9ef6-cd4b29a9a2a2/Section-2.1.-Introduction.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=storage-admin%40itedu-storage.iam.gserviceaccount.com%2F20200809%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20200809T032046Z&X-Goog-Expires=86401&X-Goog-SignedHeaders=host&X-Goog-Signature=b3ce9dff18e26406b04f4bf6882f8031381bd3e310e433c3d761167a8e6673aa8be59b3ca4796551b95720ff552127408a562552041108bddc627be19a232cf76c815c0f52e5dbe55bfa88baf1052c7f32fab99aa58c6ea3094ac6beefbe08db1954e93e282cab25768279e844a5a85a6fff0f9c9d5c728d0e3871cffce42478b6045c5d6981e14734b93158cc4bfc8c25e26f7b0285930424ae5c061b7721a004cd49f901ac69c955668686530eb3218791b80f7696e58566f356598cb2a94035dfaca805964e225db80617597b525003db4585c40491e3e7db888c06f591a1f4bcbee6a4f0c516ff572b176ef5bd31535b3f15af026b475b82f03f81a9e7d1"
-const FileURL = "file:///data/user/0/host.exp.exponent/cache/"
-// "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540vtanh1905%252FFinalProject-1612019/ImagePicker/ac9e8cd5-b942-47b0-9d69-ee90e924adce.jpg"
-
 function CourseDetail(props) {
   const {
     navigation,
@@ -148,10 +144,13 @@ function CourseDetail(props) {
               title='Download'
               lightTheme={themeLight.isLightTheme}
               onPress={async () => {
-                console.log("Download");
+                if (urlVideo === null || urlVideo === undefined || /www\.youtube\.com/.test(urlVideo) === true) {
+                  Toast("Video can't download!")
+                  return false;
+                }
                 const fileUri = FileSystem.documentDirectory + "abc.mp4";
                 let downloadObject = FileSystem.createDownloadResumable(
-                  LinkDownLoad,
+                  urlVideo,
                   fileUri,
                   {},
                   (downloadProgress) => {
@@ -162,7 +161,7 @@ function CourseDetail(props) {
                 );
                 let response = await downloadObject.downloadAsync();
                 setShowModalDownload(false)
-                // console.log(response);
+                Toast("Download Successfully!")
               }}
             />
             <BadgeIcon
