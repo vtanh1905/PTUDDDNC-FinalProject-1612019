@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, View, Text, ScrollView, ActivityIndicator, Share } from 'react-native'
+import { StyleSheet, View, Text, ScrollView, ActivityIndicator, Share, TouchableOpacity } from 'react-native'
 
 import { Badge, Divider, Chip, TextInput } from 'react-native-paper';
 import { Rating, Avatar, AirbnbRating } from 'react-native-elements';
@@ -75,7 +75,7 @@ function CourseDetail(props) {
         setIsRegistered(res.data.didUserBuyCourse)
       }
     })
-  }, [])
+  }, [setRateComment, setTextComment])
 
   if (API_Course_GetDetail.loading || API_Course_GetDetail.data === null || API_User_Status_With_Course.loading || API_User_Status_With_Course.data === null) {
     return (
@@ -89,7 +89,18 @@ function CourseDetail(props) {
 
   return (
     <View style={styles.container}>
-      <IconFontAwesome name="chevron-down" size={20} style={{ color: 'white', position: 'absolute', top: 16, left: 23, zIndex: 99 }} onPress={() => navigation.goBack()} />
+      <TouchableOpacity
+        style={{ position: 'absolute', top: 16, left: 23, zIndex: 99 }}
+        onPress={() => navigation.goBack()}
+      >
+        <IconFontAwesome
+          name="chevron-down"
+          size={20}
+          style={{ color: 'white' }}
+
+        />
+      </TouchableOpacity>
+
       <PlayVideo
         urlVideo={urlVideo}
       />
@@ -163,10 +174,13 @@ function CourseDetail(props) {
           <TabView
             lightTheme={themeLight.isLightTheme}
             routes={[
-              { key: 'CONTENTS', title: 'Bài học' },
-              { key: 'TRANSCRIPT', title: 'Tài liệu' },
+              { key: 'CONTENTS', title: 'Lessons' },
+              { key: 'TRANSCRIPT', title: 'Exercise' },
             ]}
-            scenes={[() => <ListLesson data={API_Course_GetDetail.data.section} lightTheme={themeLight.isLightTheme} urlVideo={urlVideo} setUrlVideo={setUrlVideo} />, () => <Transcript lightTheme={themeLight.isLightTheme} />]}
+            scenes={[
+              () => <ListLesson data={API_Course_GetDetail.data.section} lightTheme={themeLight.isLightTheme} urlVideo={urlVideo} setUrlVideo={setUrlVideo} />,
+              () => <Transcript lightTheme={themeLight.isLightTheme} />
+            ]}
           />
         </View>
 

@@ -13,7 +13,13 @@ function CardCourse(props) {
 
   return (
     <View style={{ width: 210 }}>
-      <Card onPress={() => { navigation.replace('CourseDetail', { data: { id: data.id, title: data.title } }) }}>
+      <Card onPress={() => {
+        if (navigation.canGoBack()) {
+          navigation.replace('CourseDetail', { data: { id: data.id, title: data.title } })
+        } else {
+          navigation.navigate('CourseDetail', { data: { id: data.id, title: data.title } })
+        }
+      }}>
         <Card.Cover style={{ height: 100 }} source={{ uri: data.imageUrl }} />
         <Card.Content style={{ height: 100, backgroundColor: `${lightTheme ? "white" : "rgb(60, 63, 68)"}` }}>
           <Text style={{ fontSize: 14, marginTop: 10, fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>
