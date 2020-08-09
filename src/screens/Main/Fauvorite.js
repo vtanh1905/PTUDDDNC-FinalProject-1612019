@@ -22,7 +22,7 @@ function Fauvorite(props) {
       </View>
     )
   }
-
+  console.log(API_User_Get_Favorite_Courses.data);
   return (
     <>
       {API_User_Get_Favorite_Courses.data.payload.length !== 0 ? (

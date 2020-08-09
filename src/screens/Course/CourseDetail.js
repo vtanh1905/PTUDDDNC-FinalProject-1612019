@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, View, Text, ScrollView, ActivityIndicator, Share, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, ScrollView, ActivityIndicator, Share, TouchableOpacity, AsyncStorage } from 'react-native'
 
 import { Badge, Divider, Chip, TextInput } from 'react-native-paper';
 import { Rating, Avatar, AirbnbRating } from 'react-native-elements';
@@ -89,9 +89,9 @@ function CourseDetail(props) {
       </View>
     )
   }
-  console.log("Course ID : " + API_Course_GetDetail.data.id);
-  console.log("User ID : " + user.id);
-
+  // console.log("Course ID : " + API_Course_GetDetail.data);
+  // console.log("User ID : " + user.id);
+  // console.log(API_Course_GetDetail.data);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -148,7 +148,7 @@ function CourseDetail(props) {
                   Toast("Video can't download!")
                   return false;
                 }
-                const fileUri = FileSystem.documentDirectory + "abc.mp4";
+                const fileUri = FileSystem.documentDirectory + data.title + ".mp4";
                 let downloadObject = FileSystem.createDownloadResumable(
                   urlVideo,
                   fileUri,
@@ -159,7 +159,16 @@ function CourseDetail(props) {
                     setProgressDownload(progress)
                   }
                 );
+                // courseImage courseTitle courseAveragePoint id
                 let response = await downloadObject.downloadAsync();
+                let videoDownload = await AsyncStorage.getItem("videoDownload")
+                if (!videoDownload) {
+                  videoDownload = []
+                } else {
+                  videoDownload = JSON.parse(videoDownload)
+                }
+                videoDownload.push({ id: API_Course_GetDetail.data.id, courseTitle: API_Course_GetDetail.data.title, courseImage: API_Course_GetDetail.data.imageUrl, courseAveragePoint: API_Course_GetDetail.data.averagePoint })
+                await AsyncStorage.setItem('videoDownload', JSON.stringify(videoDownload))
                 setShowModalDownload(false)
                 Toast("Download Successfully!")
               }}
