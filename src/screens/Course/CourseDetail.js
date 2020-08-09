@@ -6,6 +6,8 @@ import { Rating, Avatar, AirbnbRating } from 'react-native-elements';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import * as FileSystem from 'expo-file-system';
+
 import Toast from 'components/Toast'
 
 import PlayVideo from '../../components/PlayVideo'
@@ -18,6 +20,7 @@ import ThemeContext from '../../contexts/ThemeContext'
 import UserContext from '../../contexts/UserContext'
 import ListCourseHorizontal from 'components/ListView/ListCourseHorizontal'
 import Comments from '../../components/Comments'
+import ModalDownload from '../../components/ModalDownload'
 
 import { connect } from 'react-redux';
 import { Req_Course_GetDetail } from '../../reducers/course/API_Course_GetDetail'
@@ -31,6 +34,10 @@ import { Req_Comment_Course } from '../../reducers/course/API_Course_Coment'
 function formatTime(totalHour) {
   return Math.floor(totalHour * 60) + " phút " + Math.ceil(((totalHour * 60) % 1) * 60) + " giây"
 }
+
+const LinkDownLoad = "https://storage.googleapis.com/itedu-bucket/Courses/71e49280-7b15-4c13-8c89-dba079c83757/95e6b1a6-49af-4f72-9ef6-cd4b29a9a2a2/Section-2.1.-Introduction.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=storage-admin%40itedu-storage.iam.gserviceaccount.com%2F20200809%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20200809T032046Z&X-Goog-Expires=86401&X-Goog-SignedHeaders=host&X-Goog-Signature=b3ce9dff18e26406b04f4bf6882f8031381bd3e310e433c3d761167a8e6673aa8be59b3ca4796551b95720ff552127408a562552041108bddc627be19a232cf76c815c0f52e5dbe55bfa88baf1052c7f32fab99aa58c6ea3094ac6beefbe08db1954e93e282cab25768279e844a5a85a6fff0f9c9d5c728d0e3871cffce42478b6045c5d6981e14734b93158cc4bfc8c25e26f7b0285930424ae5c061b7721a004cd49f901ac69c955668686530eb3218791b80f7696e58566f356598cb2a94035dfaca805964e225db80617597b525003db4585c40491e3e7db888c06f591a1f4bcbee6a4f0c516ff572b176ef5bd31535b3f15af026b475b82f03f81a9e7d1"
+const FileURL = "file:///data/user/0/host.exp.exponent/cache/"
+// "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540vtanh1905%252FFinalProject-1612019/ImagePicker/ac9e8cd5-b942-47b0-9d69-ee90e924adce.jpg"
 
 function CourseDetail(props) {
   const {
@@ -57,6 +64,8 @@ function CourseDetail(props) {
   const [rateComment, setRateComment] = useState(3)
   const [textComment, setTextComment] = useState("")
   const [listComments, setListComments] = useState([])
+  const [showModalDownload, setShowModalDownload] = useState(false)
+  const [progressDownload, setProgressDownload] = useState(0)
 
   useEffect(() => {
     Req_Course_GetDetail(data.id, user.id).then(res => {
@@ -97,7 +106,6 @@ function CourseDetail(props) {
           name="chevron-down"
           size={20}
           style={{ color: 'white' }}
-
         />
       </TouchableOpacity>
 
@@ -139,6 +147,23 @@ function CourseDetail(props) {
               icon={<IconEntypo name="arrow-with-circle-down" size={30} style={{ color: 'white' }} />}
               title='Download'
               lightTheme={themeLight.isLightTheme}
+              onPress={async () => {
+                console.log("Download");
+                const fileUri = FileSystem.documentDirectory + "abc.mp4";
+                let downloadObject = FileSystem.createDownloadResumable(
+                  LinkDownLoad,
+                  fileUri,
+                  {},
+                  (downloadProgress) => {
+                    setShowModalDownload(true)
+                    const progress = downloadProgress.totalBytesWritten / downloadProgress.totalBytesExpectedToWrite;
+                    setProgressDownload(progress)
+                  }
+                );
+                let response = await downloadObject.downloadAsync();
+                setShowModalDownload(false)
+                // console.log(response);
+              }}
             />
             <BadgeIcon
               icon={<IconEntypo name="link" size={30} style={{ color: 'white' }} />}
@@ -227,6 +252,7 @@ function CourseDetail(props) {
         <ListCourseHorizontal title={"Other Courses"} data={API_Course_GetDetail.data.coursesLikeCategory} navigation={navigation} lightTheme={themeLight.isLightTheme} showSeeAll={false} />
       </ScrollView>
 
+      <ModalDownload visible={showModalDownload} setVisible={setShowModalDownload} value={+parseFloat(`${progressDownload}`).toFixed(2)} />
     </View>
   )
 }
