@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native';
-
+import React, { useState, useContext, useEffect } from 'react'
+import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
 import { SearchBar, ListItem, Icon } from 'react-native-elements';
 
 import TabView from 'components/TabView'
@@ -62,12 +62,18 @@ import ListCourses from 'components/ListInSearch/ListCourses'
 import ListPaths from 'components/ListInSearch/ListPaths'
 import ListAuthors from 'components/ListInSearch/ListAuthors'
 import HistorySearch from '../../components/HistorySearch'
+import { Req_Search_Course } from '../../reducers/course/API_Course_Search'
+
 
 function Search(props) {
-  const { navigation } = props;
+  const { navigation, Req_Search_Course, API_Course_Search } = props;
   const [inputSearch, setInputSearch] = useState("")
   const { themeLight } = useContext(ThemeContext)
   const [showHistorySearch, setShowHistorySearch] = useState(false)
+
+  useEffect(() => {
+    Req_Search_Course("")
+  }, [])
 
   return (
     <View style={{ flex: 1, fontSize: 9, ...themeLight.styles.background1 }}>
@@ -89,7 +95,11 @@ function Search(props) {
       {/* <View style={{ position: "absolute", top: 58, left: '2%', zIndex: 100, width: '96%' }}>
         <HistorySearch visible={showHistorySearch} />
       </View> */}
-      {inputSearch !== "" ?
+      {API_Course_Search.loading || API_Course_Search.data === null ?
+        <View style={{ height: '85%', justifyContent: "center", alignContent: "center" }}>
+          <ActivityIndicator color="#0069D9" size={100} />
+        </View>
+        :
         <View style={{ flex: 1 }}>
           <TabView
             lightTheme={themeLight.isLightTheme}
@@ -107,10 +117,22 @@ function Search(props) {
             ]}
           />
         </View>
-        : <></>}
+      }
 
     </View>
   )
 }
 
-export default Search
+const mapStatetoProps = state => {
+  return state;
+};
+
+const mapDispathtoProps = {
+  Req_Search_Course
+};
+
+export default connect(
+  mapStatetoProps,
+  mapDispathtoProps,
+)(Search);
+
