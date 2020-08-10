@@ -144,10 +144,24 @@ function CourseDetail(props) {
               title='Download'
               lightTheme={themeLight.isLightTheme}
               onPress={async () => {
+                // Kiểm tra phải link mp4
                 if (urlVideo === null || urlVideo === undefined || /www\.youtube\.com/.test(urlVideo) === true) {
                   Toast("Video can't download!")
                   return false;
                 }
+                let videoDownload = await AsyncStorage.getItem("videoDownload")
+                if (!videoDownload) {
+                  videoDownload = []
+                } else {
+                  videoDownload = JSON.parse(videoDownload)
+                  const checkExistDownload = videoDownload.some(item => item.id === API_Course_GetDetail.data.id)
+                  if (checkExistDownload === true) {
+                    Toast("Video downloaded!")
+                    return
+                  }
+                }
+
+
                 const fileUri = FileSystem.documentDirectory + data.title + ".mp4";
                 let downloadObject = FileSystem.createDownloadResumable(
                   urlVideo,
@@ -161,12 +175,8 @@ function CourseDetail(props) {
                 );
                 // courseImage courseTitle courseAveragePoint id
                 let response = await downloadObject.downloadAsync();
-                let videoDownload = await AsyncStorage.getItem("videoDownload")
-                if (!videoDownload) {
-                  videoDownload = []
-                } else {
-                  videoDownload = JSON.parse(videoDownload)
-                }
+
+
                 videoDownload.push({ id: API_Course_GetDetail.data.id, courseTitle: API_Course_GetDetail.data.title, courseImage: API_Course_GetDetail.data.imageUrl, courseAveragePoint: API_Course_GetDetail.data.averagePoint })
                 await AsyncStorage.setItem('videoDownload', JSON.stringify(videoDownload))
                 setShowModalDownload(false)
