@@ -54,8 +54,8 @@ export const Req_User_Login = (email, password) => {
   return async dispatch => {
     dispatch(action(type.LOADING_LOGIN));
     return await axios.post('https://api.itedu.me/user/login', {
-      "email": "vtanhxxx@gmail.com",
-      "password": "123456789"
+      "email": email,
+      "password": password
     }).then((res) => {
       dispatch(action(type.LOADED_LOGIN, { data: res.data }));
       return res;
