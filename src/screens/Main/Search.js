@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native';
 
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, ListItem, Icon } from 'react-native-elements';
 
 import TabView from 'components/TabView'
 import ThemeContext from '../../contexts/ThemeContext'
@@ -61,11 +61,13 @@ import ListAll from 'components/ListInSearch/ListAll'
 import ListCourses from 'components/ListInSearch/ListCourses'
 import ListPaths from 'components/ListInSearch/ListPaths'
 import ListAuthors from 'components/ListInSearch/ListAuthors'
+import HistorySearch from '../../components/HistorySearch'
 
 function Search(props) {
   const { navigation } = props;
   const [inputSearch, setInputSearch] = useState("")
   const { themeLight } = useContext(ThemeContext)
+  const [showHistorySearch, setShowHistorySearch] = useState(false)
 
   return (
     <View style={{ flex: 1, fontSize: 9, ...themeLight.styles.background1 }}>
@@ -76,13 +78,17 @@ function Search(props) {
         <SearchBar
           placeholder="Type Here..."
           lightTheme={themeLight.isLightTheme}
-          round={true}
+          // round={true}
           clearIcon={false}
           autoFocus={true}
           onChangeText={(text) => setInputSearch(text)}
           value={inputSearch}
+          showSoftInputOnFocus={true}
         />
       </View>
+      {/* <View style={{ position: "absolute", top: 58, left: '2%', zIndex: 100, width: '96%' }}>
+        <HistorySearch visible={showHistorySearch} />
+      </View> */}
       {inputSearch !== "" ?
         <View style={{ flex: 1 }}>
           <TabView
@@ -108,9 +114,3 @@ function Search(props) {
 }
 
 export default Search
-
-// const styles = StyleSheet.create({
-//   headerSearch: {
-
-//   },
-// })
