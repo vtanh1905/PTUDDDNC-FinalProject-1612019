@@ -96,13 +96,13 @@ function Search(props) {
             routes={[
               { key: 'ALL', title: 'ALL' },
               { key: 'COURSES', title: 'COURSE' },
-              { key: 'PATHS', title: 'PATH' },
+              // { key: 'PATHS', title: 'PATH' },
               { key: 'AUTHORS', title: 'AUTHOR' },
             ]}
             scenes={[
               (jumpTo) => <ListAll jumpTo={jumpTo} navigation={navigation} lightTheme={themeLight.isLightTheme} />,
               () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
-              () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
+              // () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
               () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>
             ]}
           />
