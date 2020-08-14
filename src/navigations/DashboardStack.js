@@ -85,7 +85,7 @@ function DashboardStack() {
       <Stack.Screen name="PathDetail" component={PathDetail} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
       <Stack.Screen name="ListCoursesImage" component={ListCoursesImage} options={{ headerShown: false, ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
       <Stack.Screen name="AuthorDetail" component={AuthorDetail} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
-      <Stack.Screen name="AuthorDetailCallAPI" component={AuthorDetailCallAPI} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
+      <Stack.Screen name="Author Detail" component={AuthorDetailCallAPI} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
     </Stack.Navigator>
 
   )

@@ -23,7 +23,7 @@ function AuthorDetailCallAPI(props) {
       </View>
     )
   }
-  console.log(API_Instructor_GetDetail.data);
+
   return (
     <ScrollView>
       <View style={{ alignItems: "center", paddingTop: 15 }}>

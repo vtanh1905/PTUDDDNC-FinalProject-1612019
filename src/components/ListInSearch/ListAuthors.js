@@ -20,7 +20,7 @@ function ListAuthors(props) {
               colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
             } : null}
             subtitleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
-            onPress={() => navigation.navigate('AuthorDetailCallAPI', { data: l, lightTheme: lightTheme })}
+            onPress={() => navigation.navigate('Author Detail', { data: l, lightTheme: lightTheme })}
           />
         ))
       }
