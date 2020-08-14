@@ -46,7 +46,7 @@ const list = [
 ]
 
 function ListAll(props) {
-  const { jumpTo, navigation, lightTheme } = props;
+  const { jumpTo, navigation, lightTheme, dataCourses, dataInstructors } = props;
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -55,7 +55,7 @@ function ListAll(props) {
           <Text style={{ fontWeight: "bold", fontSize: 20, color: lightTheme ? "#000000" : "#FFFFFF" }}>Courses</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("COURSES")}>See all</Badge>
         </View>
-        <ListCourses navigation={navigation} lightTheme={lightTheme} />
+        <ListCourses navigation={navigation} lightTheme={lightTheme} data={dataCourses} />
         {/* <View style={styles.header}>
           <Text style={{ fontWeight: "bold", fontSize: 20, color: lightTheme ? "#000000" : "#FFFFFF" }}>Paths</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("PATHS")}>See all</Badge>
@@ -65,7 +65,7 @@ function ListAll(props) {
           <Text style={{ fontWeight: "bold", fontSize: 20, color: lightTheme ? "#000000" : "#FFFFFF" }}>Authors</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("AUTHORS")}> See all</Badge>
         </View>
-        <ListAuthors navigation={navigation} lightTheme={lightTheme} />
+        <ListAuthors navigation={navigation} lightTheme={lightTheme} data={dataInstructors} />
       </View>
     </ScrollView>
   )

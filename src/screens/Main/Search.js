@@ -75,6 +75,8 @@ function Search(props) {
     Req_Search_Course("")
   }, [])
 
+  // console.log(API_Course_Search.data.courses.data);
+
   return (
     <View style={{ flex: 1, fontSize: 9, ...themeLight.styles.background1 }}>
       <View style={{
@@ -110,10 +112,10 @@ function Search(props) {
               { key: 'AUTHORS', title: 'AUTHOR' },
             ]}
             scenes={[
-              (jumpTo) => <ListAll jumpTo={jumpTo} navigation={navigation} lightTheme={themeLight.isLightTheme} />,
-              () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
+              (jumpTo) => <ListAll jumpTo={jumpTo} navigation={navigation} lightTheme={themeLight.isLightTheme} dataCourses={API_Course_Search.data.courses.data} dataInstructors={API_Course_Search.data.instructors.data} />,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses navigation={navigation} lightTheme={themeLight.isLightTheme} data={API_Course_Search.data.courses.data} /></ScrollView>,
               // () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
-              () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors navigation={navigation} lightTheme={themeLight.isLightTheme} data={API_Course_Search.data.instructors.data} /></ScrollView>
             ]}
           />
         </View>

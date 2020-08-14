@@ -5,16 +5,17 @@ import { ListItem } from 'react-native-elements'
 import { AUTHORS } from '../../assets/data'
 
 function ListAuthors(props) {
-  const { lightTheme } = props;
+  const { lightTheme, data } = props;
+
   return (
     <View>
       {
-        AUTHORS.map((l, i) => (
+        data.map((l, i) => (
           <ListItem
             key={i}
-            leftAvatar={{ source: { uri: l.imageURL } }}
+            leftAvatar={{ source: { uri: l.avatar } }}
             title={l.name}
-            subtitle={l.countCourses + " courses"}
+            subtitle={l.numcourses + " courses"}
             bottomDivider
             titleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
             linearGradientProps={!lightTheme ? {
