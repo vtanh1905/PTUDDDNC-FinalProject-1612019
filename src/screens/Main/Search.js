@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native';
-
-import { SearchBar } from 'react-native-elements';
+import React, { useState, useContext, useEffect } from 'react'
+import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
+import { SearchBar, ListItem, Icon } from 'react-native-elements';
 
 import TabView from 'components/TabView'
 import ThemeContext from '../../contexts/ThemeContext'
@@ -61,11 +61,21 @@ import ListAll from 'components/ListInSearch/ListAll'
 import ListCourses from 'components/ListInSearch/ListCourses'
 import ListPaths from 'components/ListInSearch/ListPaths'
 import ListAuthors from 'components/ListInSearch/ListAuthors'
+import HistorySearch from '../../components/HistorySearch'
+import { Req_Search_Course } from '../../reducers/course/API_Course_Search'
+
 
 function Search(props) {
-  const { navigation } = props;
+  const { navigation, Req_Search_Course, API_Course_Search } = props;
   const [inputSearch, setInputSearch] = useState("")
   const { themeLight } = useContext(ThemeContext)
+  const [showHistorySearch, setShowHistorySearch] = useState(false)
+
+  useEffect(() => {
+    Req_Search_Course("")
+  }, [])
+
+  // console.log(API_Course_Search.data.courses.data);
 
   return (
     <View style={{ flex: 1, fontSize: 9, ...themeLight.styles.background1 }}>
@@ -76,41 +86,55 @@ function Search(props) {
         <SearchBar
           placeholder="Type Here..."
           lightTheme={themeLight.isLightTheme}
-          round={true}
+          // round={true}
           clearIcon={false}
           autoFocus={true}
           onChangeText={(text) => setInputSearch(text)}
           value={inputSearch}
+          showSoftInputOnFocus={true}
         />
       </View>
-      {inputSearch !== "" ?
+      {/* <View style={{ position: "absolute", top: 58, left: '2%', zIndex: 100, width: '96%' }}>
+        <HistorySearch visible={showHistorySearch} />
+      </View> */}
+      {API_Course_Search.loading || API_Course_Search.data === null ?
+        <View style={{ height: '85%', justifyContent: "center", alignContent: "center" }}>
+          <ActivityIndicator color="#0069D9" size={100} />
+        </View>
+        :
         <View style={{ flex: 1 }}>
           <TabView
             lightTheme={themeLight.isLightTheme}
             routes={[
               { key: 'ALL', title: 'ALL' },
               { key: 'COURSES', title: 'COURSE' },
-              { key: 'PATHS', title: 'PATH' },
+              // { key: 'PATHS', title: 'PATH' },
               { key: 'AUTHORS', title: 'AUTHOR' },
             ]}
             scenes={[
-              (jumpTo) => <ListAll jumpTo={jumpTo} navigation={navigation} lightTheme={themeLight.isLightTheme} />,
-              () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
-              () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
-              () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>
+              (jumpTo) => <ListAll jumpTo={jumpTo} navigation={navigation} lightTheme={themeLight.isLightTheme} dataCourses={API_Course_Search.data.courses.data} dataInstructors={API_Course_Search.data.instructors.data} />,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListCourses navigation={navigation} lightTheme={themeLight.isLightTheme} data={API_Course_Search.data.courses.data} /></ScrollView>,
+              // () => <ScrollView showsVerticalScrollIndicator={false}><ListPaths navigation={navigation} lightTheme={themeLight.isLightTheme} /></ScrollView>,
+              () => <ScrollView showsVerticalScrollIndicator={false}><ListAuthors navigation={navigation} lightTheme={themeLight.isLightTheme} data={API_Course_Search.data.instructors.data} /></ScrollView>
             ]}
           />
         </View>
-        : <></>}
+      }
 
     </View>
   )
 }
 
-export default Search
+const mapStatetoProps = state => {
+  return state;
+};
 
-// const styles = StyleSheet.create({
-//   headerSearch: {
+const mapDispathtoProps = {
+  Req_Search_Course
+};
 
-//   },
-// })
+export default connect(
+  mapStatetoProps,
+  mapDispathtoProps,
+)(Search);
+

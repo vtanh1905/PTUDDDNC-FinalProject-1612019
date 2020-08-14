@@ -1,74 +1,70 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Animated } from 'react-native'
-import MaskedView from '@react-native-community/masked-view'
+import React, { useEffect, useContext } from 'react'
+import { View, Text, Image, StyleSheet } from 'react-native'
+import { connect } from 'react-redux';
+
+import { Req_User_Me } from '../reducers/user/API_User_Me'
+import ThemeContext from '../contexts/ThemeContext'
+import UserContext from '../contexts/UserContext'
+
+function SplashScreen(props) {
+  const { navigation, Req_User_Me } = props;
+  const { themeLight } = useContext(ThemeContext)
+  const { setUser } = useContext(UserContext)
+
+  useEffect(() => {
+    Req_User_Me().then(async (res) => {
+      if (res.status === 200) {
+        setUser(res.data.payload)
+        navigation.replace('DashboardStack');
+      } else {
+        navigation.replace('AUTHSTACK');
+      }
+      // else if (res.status === 401) {
+      //   await AsyncStorage.removeItem('token');
+      // }
+    });
+  }, [])
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.logo}>
+        <Image style={styles.stretch} source={require("../assets/logo.png")} />
+        <Text style={{ ...styles.title, ...themeLight.styles.text }}>Study Online</Text>
+      </View>
+    </View>
+  )
+}
+
+const mapStatetoProps = state => {
+  return state;
+};
+
+const mapDispathtoProps = {
+  Req_User_Me
+};
+
+export default connect(
+  mapStatetoProps,
+  mapDispathtoProps,
+)(SplashScreen);
+
 
 const styles = StyleSheet.create({
-    centered: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-})
-
-export default function SplashScreen() {
-    const [loadingProgress, setLoadingProgress] = useState(new Animated.Value(0))
-    const [animationDone, setAnimationDone] = useState(false)
-
-    useEffect(() => {
-        Animated.timing(loadingProgress, {
-            toValue: 100,
-            duration: 1000,
-            useNativeDriver: true,
-            delay: 400,
-        }).start(() => setAnimationDone(true))
-    })
-
-    const colorLayer = (
-        <View style={[StyleSheet.absoluteFill, { backgroundColor: "#2089DC" }]} />
-    )
-
-    const whiteLayer = (
-        <View style={[StyleSheet.absoluteFill, { backgroundColor: '#fff' }]} />
-    )
-
-    const imageScale = {
-        transform: [
-            {
-                scale: loadingProgress.interpolate({
-                    inputRange: [0, 15, 100],
-                    outputRange: [0.1, 0.06, 16],
-                }),
-            },
-        ],
-    }
-
-    const opacity = {
-        opacity: loadingProgress.interpolate({
-            inputRange: [0, 25, 50],
-            outputRange: [0, 0, 1],
-            extrapolate: 'clamp',
-        }),
-    }
-
-    return (
-        <View style={{ flex: 1 }}>
-            {colorLayer}
-            <MaskedView
-                style={{ flex: 1 }}
-                maskElement={
-                    <View style={styles.centered}>
-                        <Animated.Image
-                            source={require('../assets/logo.png')}
-                            style={[{ width: 1000 }, imageScale]}
-                            resizeMode="contain"
-                        />
-                    </View>
-                }>
-                {whiteLayer}
-                <Animated.View style={[opacity, styles.centered]}>
-                    {/* <Text>Splash</Text> */}
-                </Animated.View>
-            </MaskedView>
-        </View>
-    )
-}
+  container: {
+    flex: 1
+  },
+  logo: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  stretch: {
+    width: 200,
+    height: 200,
+    resizeMode: 'stretch',
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: "bold"
+  }
+});

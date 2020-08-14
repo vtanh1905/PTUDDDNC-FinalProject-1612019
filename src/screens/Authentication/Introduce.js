@@ -26,7 +26,7 @@ function Introduce(props) {
   )
 }
 
-export default Introduce
+export default Introduce;
 
 const styles = StyleSheet.create({
   container: {

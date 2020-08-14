@@ -1,64 +1,112 @@
-import React, { useContext } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-
-import { Subheading, Title, Avatar, Divider } from 'react-native-paper';
+import React, { useContext, useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import IconFeather from 'react-native-vector-icons/Feather';
+import { Subheading, Title, Avatar, Divider, TextInput } from 'react-native-paper';
+import * as ImagePicker from 'expo-image-picker';
+import { connect } from 'react-redux';
 
 import ButtonDefault from 'components/Button/ButtonDefault'
+import ButtonClear from 'components/Button/ButtonClear'
 
-import { USER } from '../../assets/data'
 import ThemeContext from '../../contexts/ThemeContext'
+import UserContext from '../../contexts/UserContext'
+
+import { Req_User_Update_Profile } from '../../reducers/user/API_User_Update_Profile'
+import Toast from 'components/Toast';
 
 function Profile(props) {
-  const { navigation } = props;
+  const { navigation, Req_User_Update_Profile, API_User_Update_Profile } = props;
   const { themeLight } = useContext(ThemeContext)
+  const { user, setUser } = useContext(UserContext)
+  const [canEdit, setCanEdit] = useState(false)
+  const [imageURL, setImageURL] = useState(user.avatar)
+  const [textFullName, setTextFullName] = useState(user.name)
+  const [textPhone, setTextPhone] = useState(user.phone)
+
+  const handleEdit = () => {
+    setTextFullName(user.name)
+    setTextPhone(user.phone)
+    setCanEdit(!canEdit)
+  }
+
+  const handlePickImage = async () => {
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        setImageURL(result.uri)
+      }
+    } catch (E) {
+      console.log(E);
+    }
+  };
+
+  const handleSubmit = () => {
+    //"https://cdn.trochoiviet.com/wp-content/uploads/2016/08/pikachu.jpg"
+    Req_User_Update_Profile(textFullName, imageURL, textPhone).then(res => {
+      if (res.status === 200) {
+        setUser(res.data.payload)
+        setCanEdit(false)
+        Toast("Change Successfully!")
+      }
+    })
+  }
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.containerAvatar}>
-        <Avatar.Image size={100} source={{ uri: 'https://hinhnendephd.com/wp-content/uploads/2019/10/anh-avatar-dep.jpg' }} />
-        <View style={styles.containerUsername}>
-          <Text style={styles.username}>Anh Vu</Text>
-        </View>
-      </View> */}
-      <View style={{ alignItems: "center", paddingVertical: 10 }}>
-        <View>
-          <Avatar.Image size={100} source={{ uri: 'https://hinhnendephd.com/wp-content/uploads/2019/10/anh-avatar-dep.jpg' }} />
-        </View>
 
+      <View style={{ alignItems: "center", paddingVertical: 10 }}>
+        <TouchableOpacity onPress={canEdit ? handlePickImage : null}>
+          <Avatar.Image size={100} source={{ uri: imageURL }} />
+        </TouchableOpacity>
       </View>
+
+      <TouchableOpacity style={{ position: 'absolute', top: 16, right: 23, zIndex: 99 }} onPress={handleEdit}>
+        <IconFeather name="edit" size={25} style={{ color: `${canEdit ? 'gray' : '#000000'}` }} />
+      </TouchableOpacity>
+
+
       <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Full Name</Subheading>
-        <Title style={themeLight.styles.text}>{USER.fullname}</Title>
+        <TextInput label="Email" value={user.email} disabled={true} />
+      </View>
+      <Divider />
+
+      <View style={styles.fieldView}>
+        <TextInput label="Full Name" value={textFullName} disabled={!canEdit} onChangeText={(value) => setTextFullName(value)} />
       </View>
       <Divider />
       <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Birth Day</Subheading>
-        <Title style={themeLight.styles.text}>{USER.dob}</Title>
+        <TextInput label="Phone" value={textPhone} disabled={!canEdit} onChangeText={(value) => setTextPhone(value)} />
       </View>
       <Divider />
-      <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Email</Subheading>
-        <Title style={themeLight.styles.text}>{USER.email}</Title>
-      </View>
       <Divider />
       <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Phone</Subheading>
-        <Title style={themeLight.styles.text}>{USER.phone}</Title>
-      </View>
-      <Divider />
-      <View style={styles.fieldView}>
-        <Subheading style={themeLight.styles.text}>Password</Subheading>
-        <Title style={themeLight.styles.text}>***********</Title>
-      </View>
-      <Divider />
-      <View style={styles.fieldView}>
-        <ButtonDefault title="Change Password" onPress={() => navigation.navigate('Change Password')} />
+        {canEdit ?
+          <ButtonDefault loading={API_User_Update_Profile.loading} title="Confirm" onPress={handleSubmit} />
+          : <ButtonDefault title="Change Password" onPress={() => navigation.navigate('Change Password')} />}
+
       </View>
     </View>
   )
 }
 
-export default Profile
+const mapStatetoProps = state => {
+  return state;
+};
+
+const mapDispathtoProps = {
+  Req_User_Update_Profile
+};
+
+export default connect(
+  mapStatetoProps,
+  mapDispathtoProps,
+)(Profile);
+
 
 const styles = StyleSheet.create({
   container: {
