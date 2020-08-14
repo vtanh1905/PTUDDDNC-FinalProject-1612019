@@ -15,9 +15,10 @@ function ListAll(props) {
       <View>
         <View style={styles.header}>
           <Text style={{ fontWeight: "bold", fontSize: 20, color: lightTheme ? "#000000" : "#FFFFFF" }}>Courses</Text>
-          <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("COURSES")}>See all</Badge>
+          {dataCourses.length !== 0 && <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("COURSES")}>See all</Badge>}
         </View>
         <ListCourses navigation={navigation} lightTheme={lightTheme} data={dataCourses} />
+
         {/* <View style={styles.header}>
           <Text style={{ fontWeight: "bold", fontSize: 20, color: lightTheme ? "#000000" : "#FFFFFF" }}>Paths</Text>
           <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("PATHS")}>See all</Badge>
@@ -25,7 +26,7 @@ function ListAll(props) {
         <ListPaths navigation={navigation} lightTheme={lightTheme} /> */}
         <View style={styles.header}>
           <Text style={{ fontWeight: "bold", fontSize: 20, color: lightTheme ? "#000000" : "#FFFFFF" }}>Authors</Text>
-          <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("AUTHORS")}> See all</Badge>
+          {dataInstructors.length !== 0 && <Badge style={{ backgroundColor: "#6C757D", paddingHorizontal: 15 }} onPress={() => jumpTo("AUTHORS")}> See all</Badge>}
         </View>
         <ListAuthors navigation={navigation} lightTheme={lightTheme} data={dataInstructors} />
       </View>

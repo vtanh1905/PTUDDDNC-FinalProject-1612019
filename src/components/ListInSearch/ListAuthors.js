@@ -1,9 +1,20 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import { ListItem } from 'react-native-elements'
 
 function ListAuthors(props) {
   const { lightTheme, data, navigation } = props;
+
+  if (data.length === 0) {
+    return (
+      <View style={styles.centered}>
+        <Icon name="file-search-outline" size={100} color="gray" />
+        <Text style={{ fontSize: 17, fontWeight: "bold" }}>Not Found</Text>
+      </View>
+    )
+  }
 
   return (
     <View>
@@ -30,3 +41,12 @@ function ListAuthors(props) {
 }
 
 export default ListAuthors
+
+const styles = StyleSheet.create({
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5
+  },
+})

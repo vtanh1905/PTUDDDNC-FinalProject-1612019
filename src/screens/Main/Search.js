@@ -6,57 +6,6 @@ import { SearchBar, ListItem, Icon } from 'react-native-elements';
 import TabView from 'components/TabView'
 import ThemeContext from '../../contexts/ThemeContext'
 
-const dataCourses = [
-  {
-    title: "Couse 1",
-    subTitle: "Basic - 4/9/2020",
-    image: "https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg",
-    rate: 4
-  },
-  {
-    title: "Couse 2",
-    subTitle: "Basic - 4/9/2020",
-    image: "https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg",
-    rate: 4
-  },
-  {
-    title: "Couse 3",
-    subTitle: "Basic - 4/9/2020",
-    image: "https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg",
-    rate: 5
-  },
-  {
-    title: "Couse 4",
-    subTitle: "Basic - 4/9/2020",
-    image: "https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg",
-    rate: 5
-  },
-  {
-    title: "Couse 5",
-    subTitle: "Basic - 4/9/2020",
-    image: "https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg",
-    rate: 5
-  },
-  {
-    title: "Couse 6",
-    subTitle: "Basic - 4/9/2020",
-    image: "https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg",
-    rate: 5
-  },
-  {
-    title: "Couse 7",
-    subTitle: "Basic - 4/9/2020",
-    image: "https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg",
-    rate: 5
-  },
-  {
-    title: "Couse 7",
-    subTitle: "Basic - 4/9/2020",
-    image: "https://hocban.vn/wp-content/uploads/2017/06/Nhung-chen-javascript-vao-html-scaled.jpg",
-    rate: 5
-  }
-]
-
 import ListAll from 'components/ListInSearch/ListAll'
 import ListCourses from 'components/ListInSearch/ListCourses'
 import ListPaths from 'components/ListInSearch/ListPaths'
@@ -75,8 +24,6 @@ function Search(props) {
     Req_Search_Course("")
   }, [])
 
-  // console.log(API_Course_Search.data.courses.data);
-
   return (
     <View style={{ flex: 1, fontSize: 9, ...themeLight.styles.background1 }}>
       <View style={{
@@ -89,9 +36,17 @@ function Search(props) {
           // round={true}
           clearIcon={false}
           autoFocus={true}
-          onChangeText={(text) => setInputSearch(text)}
           value={inputSearch}
           showSoftInputOnFocus={true}
+          onChangeText={(text) => {
+            setInputSearch(text)
+            if (API_Course_Search.loading || API_Course_Search.data === null) {
+
+            } else {
+              Req_Search_Course(text)
+            }
+
+          }}
         />
       </View>
       {/* <View style={{ position: "absolute", top: 58, left: '2%', zIndex: 100, width: '96%' }}>
