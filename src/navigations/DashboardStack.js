@@ -26,6 +26,7 @@ import PathDetail from '../screens/Path/PathDetail'
 
 // Author
 import AuthorDetail from '../screens/Author/AuthorDetail'
+import AuthorDetailCallAPI from '../screens/Author/AuthorDetailCallAPI'
 
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity, View } from 'react-native';
@@ -84,6 +85,7 @@ function DashboardStack() {
       <Stack.Screen name="PathDetail" component={PathDetail} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
       <Stack.Screen name="ListCoursesImage" component={ListCoursesImage} options={{ headerShown: false, ...(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme) }} />
       <Stack.Screen name="AuthorDetail" component={AuthorDetail} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
+      <Stack.Screen name="AuthorDetailCallAPI" component={AuthorDetailCallAPI} options={(props) => optionStackHaveButtonBack(props, themeLight.isLightTheme)} />
     </Stack.Navigator>
 
   )

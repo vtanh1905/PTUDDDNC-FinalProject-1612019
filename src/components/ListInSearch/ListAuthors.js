@@ -2,10 +2,8 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
-import { AUTHORS } from '../../assets/data'
-
 function ListAuthors(props) {
-  const { lightTheme, data } = props;
+  const { lightTheme, data, navigation } = props;
 
   return (
     <View>
@@ -22,7 +20,7 @@ function ListAuthors(props) {
               colors: ['rgb(60, 63, 68)', "rgb(60, 63, 68)"],
             } : null}
             subtitleStyle={{ color: lightTheme ? "#000000" : "#FFFFFF" }}
-            onPress={() => console.log("123123")}
+            onPress={() => navigation.navigate('AuthorDetailCallAPI', { data: l, lightTheme: lightTheme })}
           />
         ))
       }

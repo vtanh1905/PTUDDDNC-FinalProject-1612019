@@ -23,7 +23,7 @@ import API_Category_All from './category/API_Category_All';
 import API_Category_GetCourse from './category/API_Category_GetCourse';
 
 import API_Instructor_GetAll from './instructor/API_Instructor_GetAll';
-
+import API_Instructor_GetDetail from './instructor/API_Instructor_GetDetail';
 
 import API_Register_Course from './payment/API_Register_Course';
 import API_Get_Status_Register_Course from './payment/API_Get_Status_Register_Course';
@@ -55,6 +55,7 @@ export default combineReducers({
 
     //Instructor
     API_Instructor_GetAll,
+    API_Instructor_GetDetail,
 
     //Payment
     API_Register_Course,
