@@ -17,7 +17,7 @@ import API_Course_TopRate from './course/API_Course_TopRate';
 import API_Course_Coment from './course/API_Course_Coment';
 import API_Get_Course_Download from './course/API_Get_Course_Download';
 import API_Course_Search from './course/API_Course_Search';
-
+import API_Course_Get_History_Search from './course/API_Course_Get_History_Search';
 
 import API_Category_All from './category/API_Category_All';
 import API_Category_GetCourse from './category/API_Category_GetCourse';
@@ -47,6 +47,7 @@ export default combineReducers({
     API_Course_Coment,
     API_Get_Course_Download,
     API_Course_Search,
+    API_Course_Get_History_Search,
 
     //Category
     API_Category_All,

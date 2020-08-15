@@ -12,17 +12,23 @@ import ListPaths from 'components/ListInSearch/ListPaths'
 import ListAuthors from 'components/ListInSearch/ListAuthors'
 import HistorySearch from '../../components/HistorySearch'
 import { Req_Search_Course } from '../../reducers/course/API_Course_Search'
-
+import { Req_Get_History_Search } from '../../reducers/course/API_Course_Get_History_Search'
 
 function Search(props) {
-  const { navigation, Req_Search_Course, API_Course_Search } = props;
+  const { navigation, Req_Search_Course, API_Course_Search, API_Course_Get_History_Search, Req_Get_History_Search } = props;
   const [inputSearch, setInputSearch] = useState("")
   const { themeLight } = useContext(ThemeContext)
-  const [showHistorySearch, setShowHistorySearch] = useState(false)
+  const [showHistorySearch, setShowHistorySearch] = useState(true)
 
   useEffect(() => {
     Req_Search_Course("")
+    Req_Get_History_Search()
   }, [])
+
+  const handleSearch = (text) => {
+    setInputSearch(text)
+    Req_Search_Course(text)
+  }
 
   return (
     <View style={{ flex: 1, fontSize: 9, ...themeLight.styles.background1 }}>
@@ -38,15 +44,21 @@ function Search(props) {
           autoFocus={true}
           value={inputSearch}
           showSoftInputOnFocus={true}
-          onChangeText={(text) => {
-            setInputSearch(text)
-            Req_Search_Course(text)
-          }}
+          onChangeText={(text) => handleSearch(text)}
+          onBlur={() => setShowHistorySearch(false)}
+          onFocus={() => setShowHistorySearch(true)}
         />
       </View>
-      {/* <View style={{ position: "absolute", top: 58, left: '2%', zIndex: 100, width: '96%' }}>
-        <HistorySearch visible={showHistorySearch} />
-      </View> */}
+
+      {!API_Course_Get_History_Search.loading && API_Course_Get_History_Search.data !== null &&
+        <View style={{ position: "absolute", top: 58, left: '2%', zIndex: 100, width: '96%' }}>
+          <HistorySearch textSearch={inputSearch} setTextSearch={handleSearch} visible={showHistorySearch} data={API_Course_Get_History_Search.data} />
+        </View>
+
+      }
+
+
+
       {API_Course_Search.loading || API_Course_Search.data === null ?
         <View style={{ height: '85%', justifyContent: "center", alignContent: "center" }}>
           <ActivityIndicator color="#0069D9" size={100} />
@@ -80,7 +92,8 @@ const mapStatetoProps = state => {
 };
 
 const mapDispathtoProps = {
-  Req_Search_Course
+  Req_Search_Course,
+  Req_Get_History_Search
 };
 
 export default connect(
