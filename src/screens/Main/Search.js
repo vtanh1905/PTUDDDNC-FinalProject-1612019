@@ -40,12 +40,7 @@ function Search(props) {
           showSoftInputOnFocus={true}
           onChangeText={(text) => {
             setInputSearch(text)
-            if (API_Course_Search.loading || API_Course_Search.data === null) {
-
-            } else {
-              Req_Search_Course(text)
-            }
-
+            Req_Search_Course(text)
           }}
         />
       </View>
