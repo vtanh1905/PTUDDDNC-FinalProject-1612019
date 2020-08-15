@@ -1,20 +1,21 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native';
+import React, { useState } from 'react'
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-function HistorySearch(props) {
-  const { visible, data, textSearch, setTextSearch } = props;
+import { Req_Delete_History_Search } from '../reducers/course/API_Delete_History_Search'
 
+function HistorySearch(props) {
+  const { visible, data, textSearch, setTextSearch, Req_Delete_History_Search, refetchData } = props;
+  const [dataReverse, setDataReverse] = useState(JSON.parse(JSON.stringify(data)).reverse())
   if (visible === false) {
     return <></>
   }
-  const dataReverse = JSON.parse(JSON.stringify(data)).reverse();
-  const dataResult = []
+  const dataShow = []
   let count = 0;
   for (let i = 0; i < dataReverse.length; ++i) {
     if (dataReverse[i].content.indexOf(textSearch) !== -1 && dataReverse[i].content !== textSearch) {
-      dataResult.push(dataReverse[i])
+      dataShow.push(dataReverse[i])
       ++count;
       if (count === 4) {
         break;
@@ -25,16 +26,23 @@ function HistorySearch(props) {
   return (
     <>
       {
-        dataResult.map((l, i) => (
+        dataShow.map((l, i) => (
           <ListItem
             key={i}
             title={l.content}
             bottomDivider
             chevron={
-              <Icon
-                name='clear'
-                color='gray'
-                onPress={() => console.log('hello')} />
+              <TouchableOpacity
+                onPress={() => {
+                  Req_Delete_History_Search(l.id)
+                  setDataReverse(dataReverse.filter(item => item.id !== l.id))
+                }}
+              >
+                <Icon
+                  name='clear'
+                  color='gray'
+                />
+              </TouchableOpacity>
             }
             onPress={() => setTextSearch(l.content)}
           />
@@ -49,7 +57,7 @@ const mapStatetoProps = state => {
 };
 
 const mapDispathtoProps = {
-
+  Req_Delete_History_Search
 };
 
 export default connect(

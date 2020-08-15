@@ -52,7 +52,7 @@ function Search(props) {
 
       {!API_Course_Get_History_Search.loading && API_Course_Get_History_Search.data !== null &&
         <View style={{ position: "absolute", top: 58, left: '2%', zIndex: 100, width: '96%' }}>
-          <HistorySearch textSearch={inputSearch} setTextSearch={handleSearch} visible={showHistorySearch} data={API_Course_Get_History_Search.data} />
+          <HistorySearch textSearch={inputSearch} setTextSearch={handleSearch} refetchData={Req_Get_History_Search} visible={showHistorySearch} data={API_Course_Get_History_Search.data} />
         </View>
 
       }
