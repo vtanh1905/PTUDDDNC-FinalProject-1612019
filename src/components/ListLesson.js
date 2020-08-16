@@ -17,7 +17,7 @@ function ListLesson(props) {
       {
         data.map((s, i) => (
           <>
-            <Text key={i} style={{ fontWeight: "bold", borderBottomWidth: 1, borderBottomColor: "gray", paddingHorizontal: 10, paddingVertical: 10, fontSize: 16 }}>Chương {i + 1}: {s.name}</Text>
+            <Text key={i} style={{ fontWeight: "bold", borderBottomWidth: 1, borderBottomColor: "gray", paddingHorizontal: 10, paddingVertical: 10, fontSize: 16, color: lightTheme ? "#000000" : "#FFFFFF" }}>Chương {i + 1}: {s.name}</Text>
             {
               s.lesson.map((l, j) => (
                 <ListItem

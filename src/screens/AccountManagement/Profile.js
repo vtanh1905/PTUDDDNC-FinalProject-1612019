@@ -66,7 +66,7 @@ function Profile(props) {
       </View>
 
       <TouchableOpacity style={{ position: 'absolute', top: 16, right: 23, zIndex: 99 }} onPress={handleEdit}>
-        <IconFeather name="edit" size={25} style={{ color: `${canEdit ? 'gray' : '#000000'}` }} />
+        <IconFeather name="edit" size={25} style={{ color: `${canEdit ? 'gray' : `${themeLight.isLightTheme ? "#000000" : "#FFFFFF"}`}` }} />
       </TouchableOpacity>
 
 

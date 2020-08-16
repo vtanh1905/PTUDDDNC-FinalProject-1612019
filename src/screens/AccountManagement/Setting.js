@@ -19,7 +19,7 @@ function Setting() {
         />
       </View>
 
-      <View style={styles.fieldView}>
+      {/* <View style={styles.fieldView}>
         <Subheading style={themeLight.styles.text}>Require Wifi for streamming</Subheading >
         <Switch
           value={true}
@@ -38,7 +38,7 @@ function Setting() {
         <Switch
           value={true}
         />
-      </View>
+      </View> */}
 
     </View>
   )

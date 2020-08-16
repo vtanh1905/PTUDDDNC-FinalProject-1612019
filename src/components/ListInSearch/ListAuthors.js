@@ -11,7 +11,7 @@ function ListAuthors(props) {
     return (
       <View style={styles.centered}>
         <Icon name="file-search-outline" size={100} color="gray" />
-        <Text style={{ fontSize: 17, fontWeight: "bold" }}>Not Found</Text>
+        <Text style={{ fontSize: 17, fontWeight: "bold", color: lightTheme ? "#000000" : "#FFFFFF" }}>Not Found</Text>
       </View>
     )
   }

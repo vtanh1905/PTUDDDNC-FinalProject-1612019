@@ -27,7 +27,7 @@ function Comments(props) {
                 subtitle={(
                   <View>
                     <View style={{ alignItems: "flex-start" }}>
-                      <Text>{comment.content}</Text>
+                      <Text style={{ color: lightTheme ? "#000000" : "#FFFFFF" }}>{comment.content}</Text>
                       {lightTheme ?
                         <Rating imageSize={20} readonly startingValue={comment.averagePoint} />
                         :
